@@ -1,0 +1,2009 @@
+
+Engine Controller.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000002  00800100  00000a4a  00000ade  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000a4a  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000055  00800102  00800102  00000ae0  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000ae0  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 000001a0  00000000  00000000  00000b10  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000dc1  00000000  00000000  00000cb0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000666  00000000  00000000  00001a71  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000797  00000000  00000000  000020d7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000358  00000000  00000000  00002870  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000057b  00000000  00000000  00002bc8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000006dc  00000000  00000000  00003143  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000140  00000000  00000000  0000381f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+
+#include "delay.h"
+
+void delay100us8(uint8_t t)
+{
+	while(t>0)
+   0:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__ctors_end>
+	{
+		delayus8(100); 
+   4:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+   8:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+   c:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+
+#include "delay.h"
+
+void delay100us8(uint8_t t)
+{
+	while(t>0)
+  10:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  14:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  18:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  1c:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  20:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  24:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  28:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  2c:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  30:	0c 94 00 05 	jmp	0xa00	; 0xa00 <__vector_12>
+  34:	0c 94 0a 05 	jmp	0xa14	; 0xa14 <__vector_13>
+  38:	0c 94 f6 04 	jmp	0x9ec	; 0x9ec <__vector_14>
+  3c:	0c 94 df 04 	jmp	0x9be	; 0x9be <__vector_15>
+  40:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  44:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  48:	0c 94 40 03 	jmp	0x680	; 0x680 <__vector_18>
+  4c:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  50:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  54:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  58:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  5c:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  60:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  64:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  68:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  6c:	0c 94 df 00 	jmp	0x1be	; 0x1be <__vector_27>
+  70:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  74:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+  78:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__bad_interrupt>
+
+0000007c <__ctors_end>:
+  7c:	11 24       	eor	r1, r1
+  7e:	1f be       	out	0x3f, r1	; 63
+  80:	cf ef       	ldi	r28, 0xFF	; 255
+  82:	d8 e0       	ldi	r29, 0x08	; 8
+  84:	de bf       	out	0x3e, r29	; 62
+  86:	cd bf       	out	0x3d, r28	; 61
+
+00000088 <__do_copy_data>:
+  88:	11 e0       	ldi	r17, 0x01	; 1
+  8a:	a0 e0       	ldi	r26, 0x00	; 0
+  8c:	b1 e0       	ldi	r27, 0x01	; 1
+  8e:	ea e4       	ldi	r30, 0x4A	; 74
+  90:	fa e0       	ldi	r31, 0x0A	; 10
+  92:	02 c0       	rjmp	.+4      	; 0x98 <__do_copy_data+0x10>
+  94:	05 90       	lpm	r0, Z+
+  96:	0d 92       	st	X+, r0
+  98:	a2 30       	cpi	r26, 0x02	; 2
+  9a:	b1 07       	cpc	r27, r17
+  9c:	d9 f7       	brne	.-10     	; 0x94 <__do_copy_data+0xc>
+
+0000009e <__do_clear_bss>:
+  9e:	21 e0       	ldi	r18, 0x01	; 1
+  a0:	a2 e0       	ldi	r26, 0x02	; 2
+  a2:	b1 e0       	ldi	r27, 0x01	; 1
+  a4:	01 c0       	rjmp	.+2      	; 0xa8 <.do_clear_bss_start>
+
+000000a6 <.do_clear_bss_loop>:
+  a6:	1d 92       	st	X+, r1
+
+000000a8 <.do_clear_bss_start>:
+  a8:	a7 35       	cpi	r26, 0x57	; 87
+  aa:	b2 07       	cpc	r27, r18
+  ac:	e1 f7       	brne	.-8      	; 0xa6 <.do_clear_bss_loop>
+  ae:	0e 94 2b 01 	call	0x256	; 0x256 <main>
+  b2:	0c 94 23 05 	jmp	0xa46	; 0xa46 <_exit>
+
+000000b6 <__bad_interrupt>:
+  b6:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000ba <Init_ADC>:
+SIGNAL(SIG_ADC);
+
+void Init_ADC(void){
+	
+	//Wybór Ÿród³a wyzwalania - 
+	ADCSRB |= (1<<ADHSM) | (1<<AREFEN)| (0<<ADTS3) | (0<<ADTS2) | (0<<ADTS1) | (0<<ADTS0);
+  ba:	eb e7       	ldi	r30, 0x7B	; 123
+  bc:	f0 e0       	ldi	r31, 0x00	; 0
+  be:	80 81       	ld	r24, Z
+  c0:	80 6a       	ori	r24, 0xA0	; 160
+  c2:	80 83       	st	Z, r24
+	// ADEN - aktywowanie ADC
+	// ADATE - zewnêtrzne Ÿród³o wyzwalania
+	// ADPSX - ustawienie preskalera 0 1 1 - clk/8 ->2Mhz
+	// ADIE - aktywowanie przerwania
+	// ADSC - start pomiaru
+	ADCSRA |= (1<<ADEN) | (1<<ADIE) | (1<<ADATE) | (1<<ADPS2) | (1<<ADPS1) | (1<<ADPS0);
+  c4:	ea e7       	ldi	r30, 0x7A	; 122
+  c6:	f0 e0       	ldi	r31, 0x00	; 0
+  c8:	80 81       	ld	r24, Z
+  ca:	8f 6a       	ori	r24, 0xAF	; 175
+  cc:	80 83       	st	Z, r24
+		
+	// REFS1	REFS0
+	// 0		0	-nap odniesienia z VREF
+	// 1		1	-nap odniesienia z wew referencji
+	// MUX2..0  -wybór wejscia przetwornika			
+	ADMUX |= (0<<REFS1) | (1<<REFS0);
+  ce:	ec e7       	ldi	r30, 0x7C	; 124
+  d0:	f0 e0       	ldi	r31, 0x00	; 0
+  d2:	80 81       	ld	r24, Z
+  d4:	80 64       	ori	r24, 0x40	; 64
+  d6:	80 83       	st	Z, r24
+	
+	//ustawienie portu jako wejœcie
+	DDR(POT_IN_PORT) &= ~(1<<POT_IN);
+  d8:	25 98       	cbi	0x04, 5	; 4
+  da:	08 95       	ret
+
+000000dc <ADC_get>:
+	ADCSRB = (ADCSRB & 0xF0) | ((nr + 0x07) & 0x0F);
+}
+
+//funckja zwraca uœrednion¹ wartoœæ z FILTER_SAMPELS ostaniego kana³u
+uint16_t ADC_get(){
+	return result;
+  dc:	80 91 02 01 	lds	r24, 0x0102
+  e0:	90 91 03 01 	lds	r25, 0x0103
+}
+  e4:	08 95       	ret
+
+000000e6 <ADC_switch>:
+
+void ADC_switch(uint8_t channel){
+		ADMUX = (ADMUX & 0xF0) | (channel & 0x0F);
+  e6:	ec e7       	ldi	r30, 0x7C	; 124
+  e8:	f0 e0       	ldi	r31, 0x00	; 0
+  ea:	90 81       	ld	r25, Z
+  ec:	8f 70       	andi	r24, 0x0F	; 15
+  ee:	90 7f       	andi	r25, 0xF0	; 240
+  f0:	98 2b       	or	r25, r24
+  f2:	90 83       	st	Z, r25
+  f4:	08 95       	ret
+
+000000f6 <ADC_force_conversion>:
+}
+
+void ADC_force_conversion(){
+	ADCSRA |= (1<<ADSC);
+  f6:	ea e7       	ldi	r30, 0x7A	; 122
+  f8:	f0 e0       	ldi	r31, 0x00	; 0
+  fa:	80 81       	ld	r24, Z
+  fc:	80 64       	ori	r24, 0x40	; 64
+  fe:	80 83       	st	Z, r24
+ 100:	08 95       	ret
+
+00000102 <ADC_conversion_completed>:
+}
+
+uint8_t ADC_conversion_completed(){
+	if(conversion_completed_flag >= 2){
+ 102:	80 91 04 01 	lds	r24, 0x0104
+ 106:	82 30       	cpi	r24, 0x02	; 2
+ 108:	20 f0       	brcs	.+8      	; 0x112 <ADC_conversion_completed+0x10>
+		CLEAR_CONVERSION_COMPLETED_FLAG;
+ 10a:	10 92 04 01 	sts	0x0104, r1
+		return TRUE;		
+ 10e:	81 e0       	ldi	r24, 0x01	; 1
+ 110:	08 95       	ret
+	}
+	else{
+		return FALSE;
+ 112:	80 e0       	ldi	r24, 0x00	; 0
+	}
+}
+ 114:	08 95       	ret
+
+00000116 <ADC_task>:
+
+//funckja przepisuje wartoœæ z bufora poœredniego do bufora odpowiedniej wartoœci
+void ADC_task(void){
+	
+	if(ADC_IRQ_flag){
+ 116:	80 91 19 01 	lds	r24, 0x0119
+ 11a:	88 23       	and	r24, r24
+ 11c:	f9 f0       	breq	.+62     	; 0x15c <ADC_task+0x46>
+		
+		//buf[ADC_count] = (uint16_t) ADCL;// przepisz zawartoœæ rejestrów ADC do odpowiedniego miejsca w tablicy
+		//buf[ADC_count] |= (uint16_t) (ADCH<<8);
+		buf[ADC_count] = ADC;
+ 11e:	e0 91 1a 01 	lds	r30, 0x011A
+ 122:	80 91 78 00 	lds	r24, 0x0078
+ 126:	90 91 79 00 	lds	r25, 0x0079
+ 12a:	f0 e0       	ldi	r31, 0x00	; 0
+ 12c:	ee 0f       	add	r30, r30
+ 12e:	ff 1f       	adc	r31, r31
+ 130:	eb 5f       	subi	r30, 0xFB	; 251
+ 132:	fe 4f       	sbci	r31, 0xFE	; 254
+ 134:	91 83       	std	Z+1, r25	; 0x01
+ 136:	80 83       	st	Z, r24
+			
+		CLEAR_ADC_IRQ_FLAG;
+ 138:	10 92 19 01 	sts	0x0119, r1
+		if(ADC_count>= ADC_SAMPELS-1){
+ 13c:	80 91 1a 01 	lds	r24, 0x011A
+ 140:	89 30       	cpi	r24, 0x09	; 9
+ 142:	30 f0       	brcs	.+12     	; 0x150 <ADC_task+0x3a>
+			ADC_count=0;
+ 144:	10 92 1a 01 	sts	0x011A, r1
+			SET_CONVERSION_COMPLETED_FLAG;
+ 148:	81 e0       	ldi	r24, 0x01	; 1
+ 14a:	80 93 04 01 	sts	0x0104, r24
+ 14e:	08 95       	ret
+		}
+		else{
+			ADC_count++;
+ 150:	80 91 1a 01 	lds	r24, 0x011A
+ 154:	8f 5f       	subi	r24, 0xFF	; 255
+ 156:	80 93 1a 01 	sts	0x011A, r24
+ 15a:	08 95       	ret
+		}
+	}
+	else if(conversion_completed_flag == 1){
+ 15c:	80 91 04 01 	lds	r24, 0x0104
+ 160:	81 30       	cpi	r24, 0x01	; 1
+ 162:	61 f5       	brne	.+88     	; 0x1bc <ADC_task+0xa6>
+		uint8_t i=0;
+		result=0;
+ 164:	10 92 03 01 	sts	0x0103, r1
+ 168:	10 92 02 01 	sts	0x0102, r1
+ 16c:	e5 e0       	ldi	r30, 0x05	; 5
+ 16e:	f1 e0       	ldi	r31, 0x01	; 1
+ 170:	49 e1       	ldi	r20, 0x19	; 25
+ 172:	51 e0       	ldi	r21, 0x01	; 1
+		
+		for(i=0 ;i < ADC_SAMPELS ;i++){
+			result += buf[i];
+ 174:	21 91       	ld	r18, Z+
+ 176:	31 91       	ld	r19, Z+
+ 178:	80 91 02 01 	lds	r24, 0x0102
+ 17c:	90 91 03 01 	lds	r25, 0x0103
+ 180:	82 0f       	add	r24, r18
+ 182:	93 1f       	adc	r25, r19
+ 184:	90 93 03 01 	sts	0x0103, r25
+ 188:	80 93 02 01 	sts	0x0102, r24
+	}
+	else if(conversion_completed_flag == 1){
+		uint8_t i=0;
+		result=0;
+		
+		for(i=0 ;i < ADC_SAMPELS ;i++){
+ 18c:	e4 17       	cp	r30, r20
+ 18e:	f5 07       	cpc	r31, r21
+ 190:	89 f7       	brne	.-30     	; 0x174 <ADC_task+0x5e>
+			result += buf[i];
+		}
+		result /= ADC_SAMPELS;
+ 192:	20 91 02 01 	lds	r18, 0x0102
+ 196:	30 91 03 01 	lds	r19, 0x0103
+ 19a:	ad ec       	ldi	r26, 0xCD	; 205
+ 19c:	bc ec       	ldi	r27, 0xCC	; 204
+ 19e:	0e 94 14 05 	call	0xa28	; 0xa28 <__umulhisi3>
+ 1a2:	96 95       	lsr	r25
+ 1a4:	87 95       	ror	r24
+ 1a6:	96 95       	lsr	r25
+ 1a8:	87 95       	ror	r24
+ 1aa:	96 95       	lsr	r25
+ 1ac:	87 95       	ror	r24
+ 1ae:	90 93 03 01 	sts	0x0103, r25
+ 1b2:	80 93 02 01 	sts	0x0102, r24
+		conversion_completed_flag++;
+ 1b6:	82 e0       	ldi	r24, 0x02	; 2
+ 1b8:	80 93 04 01 	sts	0x0104, r24
+ 1bc:	08 95       	ret
+
+000001be <__vector_27>:
+	}
+
+};
+
+//przewanie wywo³ywane po zakoñczeniu konwersji
+SIGNAL(ADC_vect){
+ 1be:	1f 92       	push	r1
+ 1c0:	0f 92       	push	r0
+ 1c2:	0f b6       	in	r0, 0x3f	; 63
+ 1c4:	0f 92       	push	r0
+ 1c6:	11 24       	eor	r1, r1
+ 1c8:	8f 93       	push	r24
+	//uint16_t temp=0;
+	//static uint8_t phase_prev=0;
+	
+	SET_ADC_IRQ_FLAG;
+ 1ca:	81 e0       	ldi	r24, 0x01	; 1
+ 1cc:	80 93 19 01 	sts	0x0119, r24
+		}
+	}	
+	//zdjemij flagê przerwania
+	//CLEAR_ADIF_FLAG;
+	*/
+}
+ 1d0:	8f 91       	pop	r24
+ 1d2:	0f 90       	pop	r0
+ 1d4:	0f be       	out	0x3f, r0	; 63
+ 1d6:	0f 90       	pop	r0
+ 1d8:	1f 90       	pop	r1
+ 1da:	18 95       	reti
+
+000001dc <LED_blinking>:
+		}
+		
+    }
+};
+
+void LED_blinking(uint8_t led_0, uint8_t led_1, uint8_t led_2){
+ 1dc:	1f 93       	push	r17
+ 1de:	cf 93       	push	r28
+ 1e0:	df 93       	push	r29
+ 1e2:	18 2f       	mov	r17, r24
+ 1e4:	d6 2f       	mov	r29, r22
+ 1e6:	c4 2f       	mov	r28, r20
+	static uint16_t led_time_stamp=0;
+	static uint8_t led_status=0;
+	
+		if(Time_elapsed(led_time_stamp)>LED_BLINKING_PERIOD){
+ 1e8:	80 91 1c 01 	lds	r24, 0x011C
+ 1ec:	90 91 1d 01 	lds	r25, 0x011D
+ 1f0:	0e 94 a9 04 	call	0x952	; 0x952 <Time_elapsed>
+ 1f4:	8d 32       	cpi	r24, 0x2D	; 45
+ 1f6:	91 40       	sbci	r25, 0x01	; 1
+ 1f8:	e0 f0       	brcs	.+56     	; 0x232 <LED_blinking+0x56>
+			
+			led_time_stamp = Get_timer();
+ 1fa:	0e 94 a4 04 	call	0x948	; 0x948 <Get_timer>
+ 1fe:	90 93 1d 01 	sts	0x011D, r25
+ 202:	80 93 1c 01 	sts	0x011C, r24
+			
+			if(led_status == 0){
+ 206:	80 91 1b 01 	lds	r24, 0x011B
+ 20a:	81 11       	cpse	r24, r1
+ 20c:	0a c0       	rjmp	.+20     	; 0x222 <LED_blinking+0x46>
+				if(led_0)
+ 20e:	11 11       	cpse	r17, r1
+				LED_0_ON;
+ 210:	5a 9a       	sbi	0x0b, 2	; 11
+				if(led_1)
+ 212:	d1 11       	cpse	r29, r1
+				LED_1_ON;
+ 214:	5b 9a       	sbi	0x0b, 3	; 11
+				if(led_2)
+ 216:	c1 11       	cpse	r28, r1
+				LED_2_ON;
+ 218:	2a 9a       	sbi	0x05, 2	; 5
+				led_status = 1;
+ 21a:	81 e0       	ldi	r24, 0x01	; 1
+ 21c:	80 93 1b 01 	sts	0x011B, r24
+ 220:	08 c0       	rjmp	.+16     	; 0x232 <LED_blinking+0x56>
+			}
+			else{
+				if(led_0)
+ 222:	11 11       	cpse	r17, r1
+				LED_0_OFF;
+ 224:	5a 98       	cbi	0x0b, 2	; 11
+				if(led_1)
+ 226:	d1 11       	cpse	r29, r1
+				LED_1_OFF;
+ 228:	5b 98       	cbi	0x0b, 3	; 11
+				if(led_2)
+ 22a:	c1 11       	cpse	r28, r1
+				LED_2_OFF;
+ 22c:	2a 98       	cbi	0x05, 2	; 5
+				led_status = 0;
+ 22e:	10 92 1b 01 	sts	0x011B, r1
+			}
+		}
+};
+ 232:	df 91       	pop	r29
+ 234:	cf 91       	pop	r28
+ 236:	1f 91       	pop	r17
+ 238:	08 95       	ret
+
+0000023a <LEDs_OFF>:
+
+void LEDs_OFF(void){
+	LED_0_OFF;
+ 23a:	5a 98       	cbi	0x0b, 2	; 11
+	LED_1_OFF;
+ 23c:	5b 98       	cbi	0x0b, 3	; 11
+	LED_2_OFF;
+ 23e:	2a 98       	cbi	0x05, 2	; 5
+ 240:	08 95       	ret
+
+00000242 <Init_HAL>:
+};
+
+void Init_HAL(void){
+	
+	//w³¹czenie PLL na 64MHz
+	PLLCSR |= (1<PLLF) | (1<<PLLE);
+ 242:	89 b5       	in	r24, 0x29	; 41
+ 244:	83 60       	ori	r24, 0x03	; 3
+ 246:	89 bd       	out	0x29, r24	; 41
+	
+	//ustawienie porty na wyjœciowe dla LED-ow
+	DDR(LED_PORT_0) |= (1<<LED_0);
+ 248:	52 9a       	sbi	0x0a, 2	; 10
+	DDR(LED_PORT_1) |= (1<<LED_1);
+ 24a:	53 9a       	sbi	0x0a, 3	; 10
+	DDR(LED_PORT_2) |= (1<<LED_2);
+ 24c:	22 9a       	sbi	0x04, 2	; 4
+	
+	LED_0_ON;
+ 24e:	5a 9a       	sbi	0x0b, 2	; 11
+	LED_1_ON;
+ 250:	5b 9a       	sbi	0x0b, 3	; 11
+	LED_2_ON;
+ 252:	2a 9a       	sbi	0x05, 2	; 5
+ 254:	08 95       	ret
+
+00000256 <main>:
+	uint8_t state=INIT;
+	uint16_t throttle_position=0;
+	uint16_t time_stamp=0;
+	uint16_t throttle_percentage=0;
+	
+	Init_HAL();
+ 256:	0e 94 21 01 	call	0x242	; 0x242 <Init_HAL>
+	Init_Timer();
+ 25a:	0e 94 91 04 	call	0x922	; 0x922 <Init_Timer>
+	Init_CAN();
+ 25e:	0e 94 18 02 	call	0x430	; 0x430 <Init_CAN>
+	Init_ADC();
+ 262:	0e 94 5d 00 	call	0xba	; 0xba <Init_ADC>
+	sei();
+ 266:	78 94       	sei
+	
+	//ustwienie wejœci i start konwersji
+	ADC_switch(POT_IN_ADC);
+ 268:	86 e0       	ldi	r24, 0x06	; 6
+ 26a:	0e 94 73 00 	call	0xe6	; 0xe6 <ADC_switch>
+	ADC_force_conversion();
+ 26e:	0e 94 7b 00 	call	0xf6	; 0xf6 <ADC_force_conversion>
+	
+	time_stamp=Get_timer();
+ 272:	0e 94 a4 04 	call	0x948	; 0x948 <Get_timer>
+ 276:	ec 01       	movw	r28, r24
+	
+	while(Time_elapsed(time_stamp)<10000){
+ 278:	05 c0       	rjmp	.+10     	; 0x284 <main+0x2e>
+		LED_blinking(1,1,1);
+ 27a:	41 e0       	ldi	r20, 0x01	; 1
+ 27c:	61 e0       	ldi	r22, 0x01	; 1
+ 27e:	81 e0       	ldi	r24, 0x01	; 1
+ 280:	0e 94 ee 00 	call	0x1dc	; 0x1dc <LED_blinking>
+	ADC_switch(POT_IN_ADC);
+	ADC_force_conversion();
+	
+	time_stamp=Get_timer();
+	
+	while(Time_elapsed(time_stamp)<10000){
+ 284:	ce 01       	movw	r24, r28
+ 286:	0e 94 a9 04 	call	0x952	; 0x952 <Time_elapsed>
+ 28a:	80 31       	cpi	r24, 0x10	; 16
+ 28c:	97 42       	sbci	r25, 0x27	; 39
+ 28e:	a8 f3       	brcs	.-22     	; 0x27a <main+0x24>
+		LED_blinking(1,1,1);
+	};
+		time_stamp=Get_timer();
+ 290:	0e 94 a4 04 	call	0x948	; 0x948 <Get_timer>
+int main(void)
+{
+	uint8_t state=INIT;
+	uint16_t throttle_position=0;
+	uint16_t time_stamp=0;
+	uint16_t throttle_percentage=0;
+ 294:	a1 2c       	mov	r10, r1
+ 296:	b1 2c       	mov	r11, r1
+
+
+int main(void)
+{
+	uint8_t state=INIT;
+	uint16_t throttle_position=0;
+ 298:	c1 2c       	mov	r12, r1
+ 29a:	d1 2c       	mov	r13, r1
+extern struct CAN_str CAN ;
+
+
+int main(void)
+{
+	uint8_t state=INIT;
+ 29c:	10 e0       	ldi	r17, 0x00	; 0
+		if(Timer_new_tick()){
+			
+			CAN_Task();
+			ADC_task();
+			
+			CAN.state=state;
+ 29e:	0f 2e       	mov	r0, r31
+ 2a0:	f4 e3       	ldi	r31, 0x34	; 52
+ 2a2:	ef 2e       	mov	r14, r31
+ 2a4:	f1 e0       	ldi	r31, 0x01	; 1
+ 2a6:	ff 2e       	mov	r15, r31
+ 2a8:	f0 2d       	mov	r31, r0
+				else{
+					LED_2_OFF;
+					LED_1_OFF;
+					LED_0_OFF;
+				}
+				CAN.torque=throttle_percentage;
+ 2aa:	0f 2e       	mov	r0, r31
+ 2ac:	fc e2       	ldi	r31, 0x2C	; 44
+ 2ae:	8f 2e       	mov	r8, r31
+ 2b0:	f1 e0       	ldi	r31, 0x01	; 1
+ 2b2:	9f 2e       	mov	r9, r31
+ 2b4:	f0 2d       	mov	r31, r0
+						throttle_percentage = throttle_position;
+						throttle_percentage *= 100;
+						throttle_percentage /= THROTTLE_RANGE;
+					}
+					else{//MAX RWD
+						throttle_percentage = 100;
+ 2b6:	41 2c       	mov	r4, r1
+					if(throttle_position < (CENTER + ADC_MAX)){
+					//zapal czerwon¹ diodê
+						LED_2_OFF;
+						//obliczanie procentowe wychylenia dŸwigni TBD
+						throttle_percentage = throttle_position;
+						throttle_percentage *= 100;
+ 2b8:	04 e6       	ldi	r16, 0x64	; 100
+				//NEUTRAL
+				if((throttle_position >= (CENTER - BLIND_RANGE)) && (throttle_position <= (CENTER + BLIND_RANGE))){
+					//zapal pomarañczow¹ diodê
+					LED_1_ON;
+					LED_0_OFF;
+					throttle_percentage=0;
+ 2ba:	21 2c       	mov	r2, r1
+ 2bc:	51 2c       	mov	r5, r1
+				}
+			}
+			else if(state == INV_INIT){
+				//inicjalizacja falownika
+				LED_blinking(1,1,0);
+				if((CAN.status_word & 0x00FF) == 0x0040){//warunek przeœjcia do nastêpnego stanu
+ 2be:	0f 2e       	mov	r0, r31
+ 2c0:	fa e2       	ldi	r31, 0x2A	; 42
+ 2c2:	6f 2e       	mov	r6, r31
+ 2c4:	f1 e0       	ldi	r31, 0x01	; 1
+ 2c6:	7f 2e       	mov	r7, r31
+ 2c8:	f0 2d       	mov	r31, r0
+					LED_1_OFF;
+					LED_0_OFF;
+				}
+				CAN.torque=throttle_percentage;
+			}
+			CAN.motor_speed=THROTTLE_RANGE;
+ 2ca:	c8 e6       	ldi	r28, 0x68	; 104
+ 2cc:	d1 e0       	ldi	r29, 0x01	; 1
+		time_stamp=Get_timer();
+	
+	
+    while(1)
+    {
+		if(Timer_new_tick()){
+ 2ce:	0e 94 cb 04 	call	0x996	; 0x996 <Timer_new_tick>
+ 2d2:	88 23       	and	r24, r24
+ 2d4:	e1 f3       	breq	.-8      	; 0x2ce <main+0x78>
+			
+			CAN_Task();
+ 2d6:	0e 94 4f 03 	call	0x69e	; 0x69e <CAN_Task>
+			ADC_task();
+ 2da:	0e 94 8b 00 	call	0x116	; 0x116 <ADC_task>
+			
+			CAN.state=state;
+ 2de:	f7 01       	movw	r30, r14
+ 2e0:	10 83       	st	Z, r17
+			
+			if(ADC_conversion_completed()){
+ 2e2:	0e 94 81 00 	call	0x102	; 0x102 <ADC_conversion_completed>
+ 2e6:	88 23       	and	r24, r24
+ 2e8:	19 f0       	breq	.+6      	; 0x2f0 <main+0x9a>
+				throttle_position=ADC_get();
+ 2ea:	0e 94 6e 00 	call	0xdc	; 0xdc <ADC_get>
+ 2ee:	6c 01       	movw	r12, r24
+			}
+			
+			if(state == INIT){
+ 2f0:	11 11       	cpse	r17, r1
+ 2f2:	0d c0       	rjmp	.+26     	; 0x30e <main+0xb8>
+				//oczekuj na falownik
+								
+				//warunek przejscia do nastepnego stanu
+				if(CAN_Heart_Beat_received()){
+ 2f4:	0e 94 87 04 	call	0x90e	; 0x90e <CAN_Heart_Beat_received>
+ 2f8:	88 23       	and	r24, r24
+ 2fa:	09 f4       	brne	.+2      	; 0x2fe <main+0xa8>
+ 2fc:	94 c0       	rjmp	.+296    	; 0x426 <main+0x1d0>
+					time_stamp=Get_timer();
+ 2fe:	0e 94 a4 04 	call	0x948	; 0x948 <Get_timer>
+					state = INV_INIT;
+					Set_NMT_flag();
+ 302:	0e 94 8a 04 	call	0x914	; 0x914 <Set_NMT_flag>
+					LEDs_OFF();
+ 306:	0e 94 1d 01 	call	0x23a	; 0x23a <LEDs_OFF>
+				//oczekuj na falownik
+								
+				//warunek przejscia do nastepnego stanu
+				if(CAN_Heart_Beat_received()){
+					time_stamp=Get_timer();
+					state = INV_INIT;
+ 30a:	11 e0       	ldi	r17, 0x01	; 1
+ 30c:	8c c0       	rjmp	.+280    	; 0x426 <main+0x1d0>
+					Set_NMT_flag();
+					LEDs_OFF();
+				}
+			}
+			else if(state == INV_INIT){
+ 30e:	11 30       	cpi	r17, 0x01	; 1
+ 310:	91 f4       	brne	.+36     	; 0x336 <main+0xe0>
+				//inicjalizacja falownika
+				LED_blinking(1,1,0);
+ 312:	40 e0       	ldi	r20, 0x00	; 0
+ 314:	61 e0       	ldi	r22, 0x01	; 1
+ 316:	81 e0       	ldi	r24, 0x01	; 1
+ 318:	0e 94 ee 00 	call	0x1dc	; 0x1dc <LED_blinking>
+				if((CAN.status_word & 0x00FF) == 0x0040){//warunek przeœjcia do nastêpnego stanu
+ 31c:	f3 01       	movw	r30, r6
+ 31e:	80 81       	ld	r24, Z
+ 320:	80 34       	cpi	r24, 0x40	; 64
+ 322:	09 f0       	breq	.+2      	; 0x326 <main+0xd0>
+ 324:	80 c0       	rjmp	.+256    	; 0x426 <main+0x1d0>
+					Clear_NMT_flag();
+ 326:	0e 94 8e 04 	call	0x91c	; 0x91c <Clear_NMT_flag>
+					time_stamp=Get_timer();
+ 32a:	0e 94 a4 04 	call	0x948	; 0x948 <Get_timer>
+					state = WAITING_FOR_ZERO;
+					LEDs_OFF();
+ 32e:	0e 94 1d 01 	call	0x23a	; 0x23a <LEDs_OFF>
+				//inicjalizacja falownika
+				LED_blinking(1,1,0);
+				if((CAN.status_word & 0x00FF) == 0x0040){//warunek przeœjcia do nastêpnego stanu
+					Clear_NMT_flag();
+					time_stamp=Get_timer();
+					state = WAITING_FOR_ZERO;
+ 332:	12 e0       	ldi	r17, 0x02	; 2
+ 334:	78 c0       	rjmp	.+240    	; 0x426 <main+0x1d0>
+					LEDs_OFF();
+				}
+			}
+			else if(state == WAITING_FOR_ZERO){
+ 336:	12 30       	cpi	r17, 0x02	; 2
+ 338:	79 f4       	brne	.+30     	; 0x358 <main+0x102>
+				//oczekuj na zero potencjometru
+				//migaj zielon¹ diod¹
+				LED_blinking(1,0,0);
+ 33a:	40 e0       	ldi	r20, 0x00	; 0
+ 33c:	60 e0       	ldi	r22, 0x00	; 0
+ 33e:	81 e0       	ldi	r24, 0x01	; 1
+ 340:	0e 94 ee 00 	call	0x1dc	; 0x1dc <LED_blinking>
+				//jeœli w zakresie zera to idŸ dalej
+				if((throttle_position >= (CENTER - BLIND_RANGE)) && (throttle_position <= (CENTER + BLIND_RANGE))){
+ 344:	c6 01       	movw	r24, r12
+ 346:	87 5d       	subi	r24, 0xD7	; 215
+ 348:	91 40       	sbci	r25, 0x01	; 1
+ 34a:	81 35       	cpi	r24, 0x51	; 81
+ 34c:	91 05       	cpc	r25, r1
+ 34e:	08 f0       	brcs	.+2      	; 0x352 <main+0xfc>
+ 350:	6a c0       	rjmp	.+212    	; 0x426 <main+0x1d0>
+					state = RUN;
+					//zapal pomarañczow¹ diodê
+					LED_1_ON;
+ 352:	5b 9a       	sbi	0x0b, 3	; 11
+				//oczekuj na zero potencjometru
+				//migaj zielon¹ diod¹
+				LED_blinking(1,0,0);
+				//jeœli w zakresie zera to idŸ dalej
+				if((throttle_position >= (CENTER - BLIND_RANGE)) && (throttle_position <= (CENTER + BLIND_RANGE))){
+					state = RUN;
+ 354:	13 e0       	ldi	r17, 0x03	; 3
+ 356:	67 c0       	rjmp	.+206    	; 0x426 <main+0x1d0>
+					//zapal pomarañczow¹ diodê
+					LED_1_ON;
+				}
+			}
+			else if(state == RUN){
+ 358:	13 30       	cpi	r17, 0x03	; 3
+ 35a:	09 f0       	breq	.+2      	; 0x35e <main+0x108>
+ 35c:	64 c0       	rjmp	.+200    	; 0x426 <main+0x1d0>
+				//tyb pracy
+				//NEUTRAL
+				if((throttle_position >= (CENTER - BLIND_RANGE)) && (throttle_position <= (CENTER + BLIND_RANGE))){
+ 35e:	c6 01       	movw	r24, r12
+ 360:	87 5d       	subi	r24, 0xD7	; 215
+ 362:	91 40       	sbci	r25, 0x01	; 1
+ 364:	81 35       	cpi	r24, 0x51	; 81
+ 366:	91 05       	cpc	r25, r1
+ 368:	28 f4       	brcc	.+10     	; 0x374 <main+0x11e>
+					//zapal pomarañczow¹ diodê
+					LED_1_ON;
+ 36a:	5b 9a       	sbi	0x0b, 3	; 11
+					LED_0_OFF;
+ 36c:	5a 98       	cbi	0x0b, 2	; 11
+					throttle_percentage=0;
+ 36e:	a2 2c       	mov	r10, r2
+ 370:	b5 2c       	mov	r11, r5
+ 372:	56 c0       	rjmp	.+172    	; 0x420 <main+0x1ca>
+				}
+				//FWD
+				else if(throttle_position < (CENTER - BLIND_RANGE)){
+ 374:	f7 ed       	ldi	r31, 0xD7	; 215
+ 376:	cf 16       	cp	r12, r31
+ 378:	f1 e0       	ldi	r31, 0x01	; 1
+ 37a:	df 06       	cpc	r13, r31
+ 37c:	28 f5       	brcc	.+74     	; 0x3c8 <main+0x172>
+					LED_1_OFF;
+ 37e:	5b 98       	cbi	0x0b, 3	; 11
+					if(throttle_position > (CENTER - ADC_MAX)){
+ 380:	20 e7       	ldi	r18, 0x70	; 112
+ 382:	c2 16       	cp	r12, r18
+ 384:	d1 04       	cpc	r13, r1
+ 386:	c8 f0       	brcs	.+50     	; 0x3ba <main+0x164>
+					//zapal czerwon¹ diodê
+						LED_2_OFF;
+ 388:	2a 98       	cbi	0x05, 2	; 5
+						//obliczanie procentowe wychylenia dŸwigni
+						throttle_percentage = THROTTLE_RANGE - (throttle_position -(ADC_RESOLUTION/2 - ADC_MAX));
+ 38a:	87 ed       	ldi	r24, 0xD7	; 215
+ 38c:	91 e0       	ldi	r25, 0x01	; 1
+ 38e:	8c 19       	sub	r24, r12
+ 390:	9d 09       	sbc	r25, r13
+						throttle_percentage *= 100;
+ 392:	08 9f       	mul	r16, r24
+ 394:	90 01       	movw	r18, r0
+ 396:	09 9f       	mul	r16, r25
+ 398:	30 0d       	add	r19, r0
+ 39a:	11 24       	eor	r1, r1
+						throttle_percentage /= THROTTLE_RANGE;
+ 39c:	a3 e8       	ldi	r26, 0x83	; 131
+ 39e:	bd e2       	ldi	r27, 0x2D	; 45
+ 3a0:	0e 94 14 05 	call	0xa28	; 0xa28 <__umulhisi3>
+ 3a4:	5c 01       	movw	r10, r24
+ 3a6:	00 24       	eor	r0, r0
+ 3a8:	aa 0c       	add	r10, r10
+ 3aa:	bb 1c       	adc	r11, r11
+ 3ac:	00 1c       	adc	r0, r0
+ 3ae:	aa 0c       	add	r10, r10
+ 3b0:	bb 1c       	adc	r11, r11
+ 3b2:	00 1c       	adc	r0, r0
+ 3b4:	ab 2c       	mov	r10, r11
+ 3b6:	b0 2c       	mov	r11, r0
+ 3b8:	33 c0       	rjmp	.+102    	; 0x420 <main+0x1ca>
+					}
+					else{//MAX FWD
+						throttle_percentage = 100;
+						LED_2_ON;
+ 3ba:	2a 9a       	sbi	0x05, 2	; 5
+						throttle_percentage = THROTTLE_RANGE - (throttle_position -(ADC_RESOLUTION/2 - ADC_MAX));
+						throttle_percentage *= 100;
+						throttle_percentage /= THROTTLE_RANGE;
+					}
+					else{//MAX FWD
+						throttle_percentage = 100;
+ 3bc:	0f 2e       	mov	r0, r31
+ 3be:	f4 e6       	ldi	r31, 0x64	; 100
+ 3c0:	af 2e       	mov	r10, r31
+ 3c2:	f0 2d       	mov	r31, r0
+ 3c4:	b4 2c       	mov	r11, r4
+ 3c6:	2c c0       	rjmp	.+88     	; 0x420 <main+0x1ca>
+						LED_2_ON;
+					}
+					
+				}
+				//RWD
+				else if(throttle_position > (CENTER + BLIND_RANGE)){
+ 3c8:	88 e2       	ldi	r24, 0x28	; 40
+ 3ca:	c8 16       	cp	r12, r24
+ 3cc:	82 e0       	ldi	r24, 0x02	; 2
+ 3ce:	d8 06       	cpc	r13, r24
+ 3d0:	20 f1       	brcs	.+72     	; 0x41a <main+0x1c4>
+					//zapal zielon¹ diodê
+					LED_1_OFF;
+ 3d2:	5b 98       	cbi	0x0b, 3	; 11
+					LED_0_ON;
+ 3d4:	5a 9a       	sbi	0x0b, 2	; 11
+					
+					LED_2_OFF;
+ 3d6:	2a 98       	cbi	0x05, 2	; 5
+					//MAX_RWD
+					if(throttle_position < (CENTER + ADC_MAX)){
+ 3d8:	ef e8       	ldi	r30, 0x8F	; 143
+ 3da:	ce 16       	cp	r12, r30
+ 3dc:	e3 e0       	ldi	r30, 0x03	; 3
+ 3de:	de 06       	cpc	r13, r30
+ 3e0:	a8 f4       	brcc	.+42     	; 0x40c <main+0x1b6>
+					//zapal czerwon¹ diodê
+						LED_2_OFF;
+ 3e2:	2a 98       	cbi	0x05, 2	; 5
+						//obliczanie procentowe wychylenia dŸwigni TBD
+						throttle_percentage = throttle_position;
+						throttle_percentage *= 100;
+ 3e4:	0c 9d       	mul	r16, r12
+ 3e6:	90 01       	movw	r18, r0
+ 3e8:	0d 9d       	mul	r16, r13
+ 3ea:	30 0d       	add	r19, r0
+ 3ec:	11 24       	eor	r1, r1
+						throttle_percentage /= THROTTLE_RANGE;
+ 3ee:	a3 e8       	ldi	r26, 0x83	; 131
+ 3f0:	bd e2       	ldi	r27, 0x2D	; 45
+ 3f2:	0e 94 14 05 	call	0xa28	; 0xa28 <__umulhisi3>
+ 3f6:	5c 01       	movw	r10, r24
+ 3f8:	00 24       	eor	r0, r0
+ 3fa:	aa 0c       	add	r10, r10
+ 3fc:	bb 1c       	adc	r11, r11
+ 3fe:	00 1c       	adc	r0, r0
+ 400:	aa 0c       	add	r10, r10
+ 402:	bb 1c       	adc	r11, r11
+ 404:	00 1c       	adc	r0, r0
+ 406:	ab 2c       	mov	r10, r11
+ 408:	b0 2c       	mov	r11, r0
+ 40a:	0a c0       	rjmp	.+20     	; 0x420 <main+0x1ca>
+					}
+					else{//MAX RWD
+						throttle_percentage = 100;
+						LED_2_ON;
+ 40c:	2a 9a       	sbi	0x05, 2	; 5
+						throttle_percentage = throttle_position;
+						throttle_percentage *= 100;
+						throttle_percentage /= THROTTLE_RANGE;
+					}
+					else{//MAX RWD
+						throttle_percentage = 100;
+ 40e:	0f 2e       	mov	r0, r31
+ 410:	f4 e6       	ldi	r31, 0x64	; 100
+ 412:	af 2e       	mov	r10, r31
+ 414:	f0 2d       	mov	r31, r0
+ 416:	b4 2c       	mov	r11, r4
+ 418:	03 c0       	rjmp	.+6      	; 0x420 <main+0x1ca>
+						LED_2_ON;
+					}
+				}
+				//OUT OF RANGE
+				else{
+					LED_2_OFF;
+ 41a:	2a 98       	cbi	0x05, 2	; 5
+					LED_1_OFF;
+ 41c:	5b 98       	cbi	0x0b, 3	; 11
+					LED_0_OFF;
+ 41e:	5a 98       	cbi	0x0b, 2	; 11
+				}
+				CAN.torque=throttle_percentage;
+ 420:	f4 01       	movw	r30, r8
+ 422:	b1 82       	std	Z+1, r11	; 0x01
+ 424:	a0 82       	st	Z, r10
+			}
+			CAN.motor_speed=THROTTLE_RANGE;
+ 426:	e2 e3       	ldi	r30, 0x32	; 50
+ 428:	f1 e0       	ldi	r31, 0x01	; 1
+ 42a:	d1 83       	std	Z+1, r29	; 0x01
+ 42c:	c0 83       	st	Z, r28
+ 42e:	4f cf       	rjmp	.-354    	; 0x2ce <main+0x78>
+
+00000430 <Init_CAN>:
+
+struct CAN_str CAN;
+
+
+//Inicjalizacja CAN
+void Init_CAN(){
+ 430:	2f 92       	push	r2
+ 432:	3f 92       	push	r3
+ 434:	5f 92       	push	r5
+ 436:	6f 92       	push	r6
+ 438:	7f 92       	push	r7
+ 43a:	8f 92       	push	r8
+ 43c:	9f 92       	push	r9
+ 43e:	af 92       	push	r10
+ 440:	bf 92       	push	r11
+ 442:	cf 92       	push	r12
+ 444:	df 92       	push	r13
+ 446:	ef 92       	push	r14
+ 448:	ff 92       	push	r15
+ 44a:	0f 93       	push	r16
+ 44c:	1f 93       	push	r17
+ 44e:	cf 93       	push	r28
+ 450:	df 93       	push	r29
+	
+	CANGCON = ( 1 << SWRES );   // Software reset
+ 452:	81 e0       	ldi	r24, 0x01	; 1
+ 454:	80 93 d8 00 	sts	0x00D8, r24
+	CANTCON = 0x00;         // CAN timing prescaler set to 0
+ 458:	10 92 e5 00 	sts	0x00E5, r1
+	
+	CANBT1	|= 0x0E; //CAN Baud set 125kbit
+ 45c:	e2 ee       	ldi	r30, 0xE2	; 226
+ 45e:	f0 e0       	ldi	r31, 0x00	; 0
+ 460:	80 81       	ld	r24, Z
+ 462:	8e 60       	ori	r24, 0x0E	; 14
+ 464:	80 83       	st	Z, r24
+	CANBT2	|= 0x0C; //CAN Baud set 125kbit
+ 466:	e3 ee       	ldi	r30, 0xE3	; 227
+ 468:	f0 e0       	ldi	r31, 0x00	; 0
+ 46a:	80 81       	ld	r24, Z
+ 46c:	8c 60       	ori	r24, 0x0C	; 12
+ 46e:	80 83       	st	Z, r24
+	CANBT3	|= 0x37; //CAN Baud set 125kbit
+ 470:	e4 ee       	ldi	r30, 0xE4	; 228
+ 472:	f0 e0       	ldi	r31, 0x00	; 0
+ 474:	80 81       	ld	r24, Z
+ 476:	87 63       	ori	r24, 0x37	; 55
+ 478:	80 83       	st	Z, r24
+	
+	for ( int8_t mob=0; mob<6; mob++ ) {
+ 47a:	80 e0       	ldi	r24, 0x00	; 0
+		CANPAGE = ( mob << 4 );        // Selects Message Object 0-5
+ 47c:	cd ee       	ldi	r28, 0xED	; 237
+ 47e:	d0 e0       	ldi	r29, 0x00	; 0
+		CANCDMOB = 0x00;             // Disable mob
+ 480:	af ee       	ldi	r26, 0xEF	; 239
+ 482:	b0 e0       	ldi	r27, 0x00	; 0
+		CANSTMOB = 0x00;           // Clear mob status register;
+ 484:	ee ee       	ldi	r30, 0xEE	; 238
+ 486:	f0 e0       	ldi	r31, 0x00	; 0
+	CANBT1	|= 0x0E; //CAN Baud set 125kbit
+	CANBT2	|= 0x0C; //CAN Baud set 125kbit
+	CANBT3	|= 0x37; //CAN Baud set 125kbit
+	
+	for ( int8_t mob=0; mob<6; mob++ ) {
+		CANPAGE = ( mob << 4 );        // Selects Message Object 0-5
+ 488:	98 2f       	mov	r25, r24
+ 48a:	92 95       	swap	r25
+ 48c:	90 7f       	andi	r25, 0xF0	; 240
+ 48e:	98 83       	st	Y, r25
+		CANCDMOB = 0x00;             // Disable mob
+ 490:	1c 92       	st	X, r1
+		CANSTMOB = 0x00;           // Clear mob status register;
+ 492:	10 82       	st	Z, r1
+	
+	CANBT1	|= 0x0E; //CAN Baud set 125kbit
+	CANBT2	|= 0x0C; //CAN Baud set 125kbit
+	CANBT3	|= 0x37; //CAN Baud set 125kbit
+	
+	for ( int8_t mob=0; mob<6; mob++ ) {
+ 494:	8f 5f       	subi	r24, 0xFF	; 255
+ 496:	86 30       	cpi	r24, 0x06	; 6
+ 498:	b9 f7       	brne	.-18     	; 0x488 <Init_CAN+0x58>
+		CANPAGE = ( mob << 4 );        // Selects Message Object 0-5
+		CANCDMOB = 0x00;             // Disable mob
+		CANSTMOB = 0x00;           // Clear mob status register;
+	}
+			
+	CANGIE	|= ( 1 << ENIT ) | (1<<ENRX); //Enable Receive Interrupt
+ 49a:	eb ed       	ldi	r30, 0xDB	; 219
+ 49c:	f0 e0       	ldi	r31, 0x00	; 0
+ 49e:	80 81       	ld	r24, Z
+ 4a0:	80 6a       	ori	r24, 0xA0	; 160
+ 4a2:	80 83       	st	Z, r24
+	
+	//MOb 0 configuration SYNC
+	CANPAGE	 = (MOb_0<<4);
+ 4a4:	0f 2e       	mov	r0, r31
+ 4a6:	fd ee       	ldi	r31, 0xED	; 237
+ 4a8:	cf 2e       	mov	r12, r31
+ 4aa:	d1 2c       	mov	r13, r1
+ 4ac:	f0 2d       	mov	r31, r0
+ 4ae:	d6 01       	movw	r26, r12
+ 4b0:	1c 92       	st	X, r1
+	
+	CANIDM4 = 0x00; //full mask setting
+ 4b2:	0f 2e       	mov	r0, r31
+ 4b4:	f4 ef       	ldi	r31, 0xF4	; 244
+ 4b6:	ef 2e       	mov	r14, r31
+ 4b8:	f1 2c       	mov	r15, r1
+ 4ba:	f0 2d       	mov	r31, r0
+ 4bc:	e7 01       	movw	r28, r14
+ 4be:	18 82       	st	Y, r1
+	CANIDM3 = 0x00; //full mask setting
+ 4c0:	05 ef       	ldi	r16, 0xF5	; 245
+ 4c2:	10 e0       	ldi	r17, 0x00	; 0
+ 4c4:	f8 01       	movw	r30, r16
+ 4c6:	10 82       	st	Z, r1
+	//CANIDM2 = 0x00; //full mask setting
+	//CANIDM1 = 0x00; //full mask setting
+	CANIDM2 = 0xFF; //full mask setting
+ 4c8:	66 ef       	ldi	r22, 0xF6	; 246
+ 4ca:	70 e0       	ldi	r23, 0x00	; 0
+ 4cc:	99 24       	eor	r9, r9
+ 4ce:	9a 94       	dec	r9
+ 4d0:	db 01       	movw	r26, r22
+ 4d2:	9c 92       	st	X, r9
+	CANIDM1 = 0xFF; //full mask setting
+ 4d4:	47 ef       	ldi	r20, 0xF7	; 247
+ 4d6:	50 e0       	ldi	r21, 0x00	; 0
+ 4d8:	ea 01       	movw	r28, r20
+ 4da:	98 82       	st	Y, r9
+	CANCDMOB = 0x00;
+ 4dc:	af ee       	ldi	r26, 0xEF	; 239
+ 4de:	b0 e0       	ldi	r27, 0x00	; 0
+ 4e0:	1c 92       	st	X, r1
+	CANCDMOB |= RECEPTION;
+ 4e2:	8c 91       	ld	r24, X
+ 4e4:	80 68       	ori	r24, 0x80	; 128
+ 4e6:	8c 93       	st	X, r24
+	CANIDT4 = 0x00;
+ 4e8:	20 ef       	ldi	r18, 0xF0	; 240
+ 4ea:	30 e0       	ldi	r19, 0x00	; 0
+ 4ec:	f9 01       	movw	r30, r18
+ 4ee:	10 82       	st	Z, r1
+	CANIDT3 = 0x00;
+ 4f0:	0f 2e       	mov	r0, r31
+ 4f2:	f1 ef       	ldi	r31, 0xF1	; 241
+ 4f4:	2f 2e       	mov	r2, r31
+ 4f6:	31 2c       	mov	r3, r1
+ 4f8:	f0 2d       	mov	r31, r0
+ 4fa:	e1 01       	movw	r28, r2
+ 4fc:	18 82       	st	Y, r1
+	CANIDT2 = ((MOb_0_ID & 0x07) << 5);
+ 4fe:	e2 ef       	ldi	r30, 0xF2	; 242
+ 500:	f0 e0       	ldi	r31, 0x00	; 0
+ 502:	10 82       	st	Z, r1
+	CANIDT1 = (MOb_0_ID >> 3);
+ 504:	0f 2e       	mov	r0, r31
+ 506:	f3 ef       	ldi	r31, 0xF3	; 243
+ 508:	af 2e       	mov	r10, r31
+ 50a:	b1 2c       	mov	r11, r1
+ 50c:	f0 2d       	mov	r31, r0
+ 50e:	68 94       	set
+ 510:	88 24       	eor	r8, r8
+ 512:	84 f8       	bld	r8, 4
+ 514:	e5 01       	movw	r28, r10
+ 516:	88 82       	st	Y, r8
+	CANIE2	|= (1<<IEMOB0); //Enable Interrupt MOb 0
+ 518:	ee ed       	ldi	r30, 0xDE	; 222
+ 51a:	f0 e0       	ldi	r31, 0x00	; 0
+ 51c:	70 80       	ld	r7, Z
+ 51e:	d7 2d       	mov	r29, r7
+ 520:	d1 60       	ori	r29, 0x01	; 1
+ 522:	d0 83       	st	Z, r29
+	
+	//MOb 1 configuration control message
+	CANPAGE	 = (MOb_1<<4);
+ 524:	e6 01       	movw	r28, r12
+ 526:	88 82       	st	Y, r8
+	
+	CANIDM4 = 0x00; //full mask setting
+ 528:	e7 01       	movw	r28, r14
+ 52a:	18 82       	st	Y, r1
+	CANIDM3 = 0x00; //full mask setting
+ 52c:	e8 01       	movw	r28, r16
+ 52e:	18 82       	st	Y, r1
+	CANIDM2 = 0xFF; //full mask setting
+ 530:	eb 01       	movw	r28, r22
+ 532:	98 82       	st	Y, r9
+	CANIDM1 = 0xFF; //full mask setting
+ 534:	ea 01       	movw	r28, r20
+ 536:	98 82       	st	Y, r9
+	CANCDMOB = 0x00;
+ 538:	1c 92       	st	X, r1
+	CANCDMOB |= RECEPTION | ( 8 << DLC0);
+ 53a:	8c 90       	ld	r8, X
+ 53c:	d8 2d       	mov	r29, r8
+ 53e:	d8 68       	ori	r29, 0x88	; 136
+ 540:	dc 93       	st	X, r29
+	CANIDT4 = 0x00;
+ 542:	e9 01       	movw	r28, r18
+ 544:	18 82       	st	Y, r1
+	CANIDT3 = 0x00;
+ 546:	e1 01       	movw	r28, r2
+ 548:	18 82       	st	Y, r1
+	CANIDT2 = ((MOb_1_ID & 0x07) << 5);
+ 54a:	68 94       	set
+ 54c:	66 24       	eor	r6, r6
+ 54e:	66 f8       	bld	r6, 6
+ 550:	c2 ef       	ldi	r28, 0xF2	; 242
+ 552:	d0 e0       	ldi	r29, 0x00	; 0
+ 554:	68 82       	st	Y, r6
+	CANIDT1 = (MOb_1_ID >> 3);
+ 556:	0f 2e       	mov	r0, r31
+ 558:	f0 ee       	ldi	r31, 0xE0	; 224
+ 55a:	8f 2e       	mov	r8, r31
+ 55c:	f0 2d       	mov	r31, r0
+ 55e:	e5 01       	movw	r28, r10
+ 560:	88 82       	st	Y, r8
+	CANIE2	|= (1<<IEMOB1); //Enable Interrupt MOb 1
+ 562:	70 80       	ld	r7, Z
+ 564:	d7 2d       	mov	r29, r7
+ 566:	d2 60       	ori	r29, 0x02	; 2
+ 568:	d0 83       	st	Z, r29
+	
+	//MOb 2 configuration
+	CANPAGE	 = (MOb_2<<4);
+ 56a:	68 94       	set
+ 56c:	77 24       	eor	r7, r7
+ 56e:	75 f8       	bld	r7, 5
+ 570:	e6 01       	movw	r28, r12
+ 572:	78 82       	st	Y, r7
+	
+	CANIDM4 = 0x00; //full mask setting
+ 574:	e7 01       	movw	r28, r14
+ 576:	18 82       	st	Y, r1
+	CANIDM3 = 0x00; //full mask setting
+ 578:	e8 01       	movw	r28, r16
+ 57a:	18 82       	st	Y, r1
+	CANIDM2 = (0x07 <<5); //full mask setting
+ 57c:	eb 01       	movw	r28, r22
+ 57e:	88 82       	st	Y, r8
+	CANIDM1 = 0xFF; //full mask setting
+ 580:	ea 01       	movw	r28, r20
+ 582:	98 82       	st	Y, r9
+	CANCDMOB = 0x00;
+ 584:	1c 92       	st	X, r1
+	CANCDMOB |= RECEPTION | ( 8 << DLC0);
+ 586:	7c 90       	ld	r7, X
+ 588:	d7 2d       	mov	r29, r7
+ 58a:	d8 68       	ori	r29, 0x88	; 136
+ 58c:	dc 93       	st	X, r29
+	//CANCDMOB |= RECEPTION;
+	CANIDT4 = 0x00;
+ 58e:	e9 01       	movw	r28, r18
+ 590:	18 82       	st	Y, r1
+	CANIDT3 = 0x00;
+ 592:	e1 01       	movw	r28, r2
+ 594:	18 82       	st	Y, r1
+	CANIDT2 = ((MOb_2_ID & 0x07) << 5);
+ 596:	c2 ef       	ldi	r28, 0xF2	; 242
+ 598:	d0 e0       	ldi	r29, 0x00	; 0
+ 59a:	18 82       	st	Y, r1
+	CANIDT1 = (MOb_2_ID >> 3);
+ 59c:	0f 2e       	mov	r0, r31
+ 59e:	f0 e3       	ldi	r31, 0x30	; 48
+ 5a0:	7f 2e       	mov	r7, r31
+ 5a2:	f0 2d       	mov	r31, r0
+ 5a4:	e5 01       	movw	r28, r10
+ 5a6:	78 82       	st	Y, r7
+	CANIE2	|= (1<<IEMOB2); //Enable Interrupt MOb 2
+ 5a8:	50 80       	ld	r5, Z
+ 5aa:	d5 2d       	mov	r29, r5
+ 5ac:	d4 60       	ori	r29, 0x04	; 4
+ 5ae:	d0 83       	st	Z, r29
+	
+	//MOb 3 configuration
+	CANPAGE	 = (MOb_3<<4);
+ 5b0:	e6 01       	movw	r28, r12
+ 5b2:	78 82       	st	Y, r7
+	
+	CANIDM4 = 0x00; //full mask setting
+ 5b4:	e7 01       	movw	r28, r14
+ 5b6:	18 82       	st	Y, r1
+	CANIDM3 = 0x00; //full mask setting
+ 5b8:	e8 01       	movw	r28, r16
+ 5ba:	18 82       	st	Y, r1
+	CANIDM2 = (0x07 <<5); //full mask setting
+ 5bc:	eb 01       	movw	r28, r22
+ 5be:	88 82       	st	Y, r8
+	CANIDM1 = 0xFF; //full mask setting
+ 5c0:	ea 01       	movw	r28, r20
+ 5c2:	98 82       	st	Y, r9
+	CANCDMOB = 0x00;
+ 5c4:	1c 92       	st	X, r1
+	//CANCDMOB |= TRANSMISSION;
+	CANIDT4 = 0x00;
+ 5c6:	e9 01       	movw	r28, r18
+ 5c8:	18 82       	st	Y, r1
+	CANIDT3 = 0x00;
+ 5ca:	e1 01       	movw	r28, r2
+ 5cc:	18 82       	st	Y, r1
+	CANIDT2 = ((MOb_3_ID & 0x07) << 5);
+ 5ce:	c2 ef       	ldi	r28, 0xF2	; 242
+ 5d0:	d0 e0       	ldi	r29, 0x00	; 0
+ 5d2:	18 82       	st	Y, r1
+	CANIDT1 = (MOb_3_ID >> 3);
+ 5d4:	e5 01       	movw	r28, r10
+ 5d6:	68 82       	st	Y, r6
+	CANIE2	|= (1<<IEMOB3); //Enable Interrupt MOb 3
+ 5d8:	50 80       	ld	r5, Z
+ 5da:	d5 2d       	mov	r29, r5
+ 5dc:	d8 60       	ori	r29, 0x08	; 8
+ 5de:	d0 83       	st	Z, r29
+	
+	//MOb 4 configuration
+	CANPAGE	 = (MOb_4<<4);
+ 5e0:	e6 01       	movw	r28, r12
+ 5e2:	68 82       	st	Y, r6
+	
+	CANIDM4 = 0x00; //full mask setting
+ 5e4:	e7 01       	movw	r28, r14
+ 5e6:	18 82       	st	Y, r1
+	CANIDM3 = 0x00; //full mask setting
+ 5e8:	e8 01       	movw	r28, r16
+ 5ea:	18 82       	st	Y, r1
+	CANIDM2 = (0x07 <<5); //full mask setting
+ 5ec:	eb 01       	movw	r28, r22
+ 5ee:	88 82       	st	Y, r8
+	CANIDM1 = 0xFF; //full mask setting
+ 5f0:	ea 01       	movw	r28, r20
+ 5f2:	98 82       	st	Y, r9
+	CANCDMOB = 0x00;
+ 5f4:	1c 92       	st	X, r1
+	//CANCDMOB |= TRANSMISSION;
+	CANIDT4 = 0x00;
+ 5f6:	e9 01       	movw	r28, r18
+ 5f8:	18 82       	st	Y, r1
+	CANIDT3 = 0x00;
+ 5fa:	e1 01       	movw	r28, r2
+ 5fc:	18 82       	st	Y, r1
+	CANIDT2 = ((MOb_4_ID & 0x07) << 5);
+ 5fe:	0f 2e       	mov	r0, r31
+ 600:	f0 e6       	ldi	r31, 0x60	; 96
+ 602:	6f 2e       	mov	r6, r31
+ 604:	f0 2d       	mov	r31, r0
+ 606:	c2 ef       	ldi	r28, 0xF2	; 242
+ 608:	d0 e0       	ldi	r29, 0x00	; 0
+ 60a:	68 82       	st	Y, r6
+	CANIDT1 = (MOb_4_ID >> 3);
+ 60c:	e5 01       	movw	r28, r10
+ 60e:	78 82       	st	Y, r7
+	CANIE2	|= (1<<IEMOB4); //Enable Interrupt MOb 4
+ 610:	70 80       	ld	r7, Z
+ 612:	d7 2d       	mov	r29, r7
+ 614:	d0 61       	ori	r29, 0x10	; 16
+ 616:	d0 83       	st	Z, r29
+	
+	//MOb 5 configuration
+	CANPAGE	 = (MOb_5<<4);
+ 618:	0f 2e       	mov	r0, r31
+ 61a:	f0 e5       	ldi	r31, 0x50	; 80
+ 61c:	7f 2e       	mov	r7, r31
+ 61e:	f0 2d       	mov	r31, r0
+ 620:	e6 01       	movw	r28, r12
+ 622:	78 82       	st	Y, r7
+	
+	CANIDM4 = 0x00; //full mask setting
+ 624:	e7 01       	movw	r28, r14
+ 626:	18 82       	st	Y, r1
+	CANIDM3 = 0x00; //full mask setting
+ 628:	e8 01       	movw	r28, r16
+ 62a:	18 82       	st	Y, r1
+	CANIDM2 = (0x07 <<5); //full mask setting
+ 62c:	eb 01       	movw	r28, r22
+ 62e:	88 82       	st	Y, r8
+	CANIDM1 = 0xFF; //full mask setting
+ 630:	ea 01       	movw	r28, r20
+ 632:	98 82       	st	Y, r9
+	CANCDMOB = 0x00;
+ 634:	1c 92       	st	X, r1
+	//CANCDMOB |= TRANSMISSION;
+	CANIDT4 = 0x00;
+ 636:	d9 01       	movw	r26, r18
+ 638:	1c 92       	st	X, r1
+	CANIDT3 = 0x00;
+ 63a:	e1 01       	movw	r28, r2
+ 63c:	18 82       	st	Y, r1
+	CANIDT2 = ((MOb_5_ID & 0x07) << 5);
+ 63e:	a2 ef       	ldi	r26, 0xF2	; 242
+ 640:	b0 e0       	ldi	r27, 0x00	; 0
+ 642:	1c 92       	st	X, r1
+	CANIDT1 = (MOb_5_ID >> 3);
+ 644:	e5 01       	movw	r28, r10
+ 646:	18 82       	st	Y, r1
+	CANIE2	|= (1<<IEMOB5); //Enable Interrupt MOb 5
+ 648:	80 81       	ld	r24, Z
+ 64a:	80 62       	ori	r24, 0x20	; 32
+ 64c:	80 83       	st	Z, r24
+	
+	CLEAR_CAN_interrupt_flag
+ 64e:	10 92 23 01 	sts	0x0123, r1
+	
+	CANGCON |= (1<<ENASTB); //Enable controller
+ 652:	e8 ed       	ldi	r30, 0xD8	; 216
+ 654:	f0 e0       	ldi	r31, 0x00	; 0
+ 656:	80 81       	ld	r24, Z
+ 658:	82 60       	ori	r24, 0x02	; 2
+ 65a:	80 83       	st	Z, r24
+}
+ 65c:	df 91       	pop	r29
+ 65e:	cf 91       	pop	r28
+ 660:	1f 91       	pop	r17
+ 662:	0f 91       	pop	r16
+ 664:	ff 90       	pop	r15
+ 666:	ef 90       	pop	r14
+ 668:	df 90       	pop	r13
+ 66a:	cf 90       	pop	r12
+ 66c:	bf 90       	pop	r11
+ 66e:	af 90       	pop	r10
+ 670:	9f 90       	pop	r9
+ 672:	8f 90       	pop	r8
+ 674:	7f 90       	pop	r7
+ 676:	6f 90       	pop	r6
+ 678:	5f 90       	pop	r5
+ 67a:	3f 90       	pop	r3
+ 67c:	2f 90       	pop	r2
+ 67e:	08 95       	ret
+
+00000680 <__vector_18>:
+
+//Obs³uga przerwania
+SIGNAL ( CAN_INT_vect ){              // use interrupts
+ 680:	1f 92       	push	r1
+ 682:	0f 92       	push	r0
+ 684:	0f b6       	in	r0, 0x3f	; 63
+ 686:	0f 92       	push	r0
+ 688:	11 24       	eor	r1, r1
+ 68a:	8f 93       	push	r24
+	
+	SET_CAN_interrupt_flag
+ 68c:	81 e0       	ldi	r24, 0x01	; 1
+ 68e:	80 93 23 01 	sts	0x0123, r24
+
+} 
+ 692:	8f 91       	pop	r24
+ 694:	0f 90       	pop	r0
+ 696:	0f be       	out	0x3f, r0	; 63
+ 698:	0f 90       	pop	r0
+ 69a:	1f 90       	pop	r1
+ 69c:	18 95       	reti
+
+0000069e <CAN_Task>:
+}*/
+
+void CAN_Task(){
+	static uint8_t Update_data_flag=0;
+	
+	if(CAN_interrupt_flag !=0){	//Jeœli zg³oszone przerwanie
+ 69e:	80 91 23 01 	lds	r24, 0x0123
+ 6a2:	88 23       	and	r24, r24
+ 6a4:	09 f4       	brne	.+2      	; 0x6a8 <CAN_Task+0xa>
+ 6a6:	6e c0       	rjmp	.+220    	; 0x784 <CAN_Task+0xe6>
+		CLEAR_CAN_interrupt_flag
+ 6a8:	10 92 23 01 	sts	0x0123, r1
+		CANPAGE = CANHPMOB & 0xF0;      // Selects MOB with highest priority interrupt 
+ 6ac:	80 91 ec 00 	lds	r24, 0x00EC
+ 6b0:	80 7f       	andi	r24, 0xF0	; 240
+ 6b2:	ed ee       	ldi	r30, 0xED	; 237
+ 6b4:	f0 e0       	ldi	r31, 0x00	; 0
+ 6b6:	80 83       	st	Z, r24
+		
+		
+		if((CANPAGE>>4) == MOb_0){ //sync - odbiera
+ 6b8:	80 81       	ld	r24, Z
+ 6ba:	82 95       	swap	r24
+ 6bc:	8f 70       	andi	r24, 0x0F	; 15
+ 6be:	81 f4       	brne	.+32     	; 0x6e0 <CAN_Task+0x42>
+			if(CANSTMOB & ( 1 << RXOK)){	//obiór SYNC-a
+ 6c0:	80 91 ee 00 	lds	r24, 0x00EE
+ 6c4:	85 ff       	sbrs	r24, 5
+ 6c6:	03 c0       	rjmp	.+6      	; 0x6ce <CAN_Task+0x30>
+				SET_SYNC_flag				//ustaw flagê ob³sugi synca
+ 6c8:	81 e0       	ldi	r24, 0x01	; 1
+ 6ca:	80 93 22 01 	sts	0x0122, r24
+			}
+			CANSTMOB=0x00;
+ 6ce:	10 92 ee 00 	sts	0x00EE, r1
+			CANCDMOB = 0x00;			//restart MOB-a
+ 6d2:	ef ee       	ldi	r30, 0xEF	; 239
+ 6d4:	f0 e0       	ldi	r31, 0x00	; 0
+ 6d6:	10 82       	st	Z, r1
+			CANCDMOB |= RECEPTION;		
+ 6d8:	80 81       	ld	r24, Z
+ 6da:	80 68       	ori	r24, 0x80	; 128
+ 6dc:	80 83       	st	Z, r24
+ 6de:	08 95       	ret
+		}
+		
+		
+		else if((CANPAGE>>4) == MOb_1){ //Heartbeat - odbiera
+ 6e0:	80 91 ed 00 	lds	r24, 0x00ED
+ 6e4:	82 95       	swap	r24
+ 6e6:	8f 70       	andi	r24, 0x0F	; 15
+ 6e8:	81 30       	cpi	r24, 0x01	; 1
+ 6ea:	81 f4       	brne	.+32     	; 0x70c <CAN_Task+0x6e>
+			if(CANSTMOB & ( 1 << RXOK)){	
+ 6ec:	80 91 ee 00 	lds	r24, 0x00EE
+ 6f0:	85 ff       	sbrs	r24, 5
+ 6f2:	03 c0       	rjmp	.+6      	; 0x6fa <CAN_Task+0x5c>
+				SET_HB_flag;
+ 6f4:	81 e0       	ldi	r24, 0x01	; 1
+ 6f6:	80 93 21 01 	sts	0x0121, r24
+			}
+			CANSTMOB=0x00;
+ 6fa:	10 92 ee 00 	sts	0x00EE, r1
+			CANCDMOB = 0x00;			//restart MOB-a
+ 6fe:	ef ee       	ldi	r30, 0xEF	; 239
+ 700:	f0 e0       	ldi	r31, 0x00	; 0
+ 702:	10 82       	st	Z, r1
+			CANCDMOB |= RECEPTION | ( 8 << DLC0) ;		
+ 704:	80 81       	ld	r24, Z
+ 706:	88 68       	ori	r24, 0x88	; 136
+ 708:	80 83       	st	Z, r24
+ 70a:	08 95       	ret
+		}
+		
+		else if((CANPAGE>>4) == MOb_2){//paczka zwrotne z falownika - odbiera
+ 70c:	80 91 ed 00 	lds	r24, 0x00ED
+ 710:	82 95       	swap	r24
+ 712:	8f 70       	andi	r24, 0x0F	; 15
+ 714:	82 30       	cpi	r24, 0x02	; 2
+ 716:	d1 f4       	brne	.+52     	; 0x74c <CAN_Task+0xae>
+			if(CANSTMOB & ( 1 << RXOK)){
+ 718:	80 91 ee 00 	lds	r24, 0x00EE
+ 71c:	85 ff       	sbrs	r24, 5
+ 71e:	0d c0       	rjmp	.+26     	; 0x73a <CAN_Task+0x9c>
+ 720:	80 e0       	ldi	r24, 0x00	; 0
+ 722:	90 e0       	ldi	r25, 0x00	; 0
+				for(uint8_t byte_nr=0; byte_nr<8; byte_nr++ ){
+					MOb_data[0][byte_nr] = CANMSG;
+ 724:	aa ef       	ldi	r26, 0xFA	; 250
+ 726:	b0 e0       	ldi	r27, 0x00	; 0
+ 728:	2c 91       	ld	r18, X
+ 72a:	fc 01       	movw	r30, r24
+ 72c:	e9 5c       	subi	r30, 0xC9	; 201
+ 72e:	fe 4f       	sbci	r31, 0xFE	; 254
+ 730:	20 83       	st	Z, r18
+ 732:	01 96       	adiw	r24, 0x01	; 1
+			CANCDMOB |= RECEPTION | ( 8 << DLC0) ;		
+		}
+		
+		else if((CANPAGE>>4) == MOb_2){//paczka zwrotne z falownika - odbiera
+			if(CANSTMOB & ( 1 << RXOK)){
+				for(uint8_t byte_nr=0; byte_nr<8; byte_nr++ ){
+ 734:	88 30       	cpi	r24, 0x08	; 8
+ 736:	91 05       	cpc	r25, r1
+ 738:	b9 f7       	brne	.-18     	; 0x728 <CAN_Task+0x8a>
+					MOb_data[0][byte_nr] = CANMSG;
+				}
+			}
+			CANSTMOB=0x00;
+ 73a:	10 92 ee 00 	sts	0x00EE, r1
+			CANCDMOB = 0x00;			//restart MOB-a
+ 73e:	ef ee       	ldi	r30, 0xEF	; 239
+ 740:	f0 e0       	ldi	r31, 0x00	; 0
+ 742:	10 82       	st	Z, r1
+			CANCDMOB |= RECEPTION | ( 8 << DLC0) ;
+ 744:	80 81       	ld	r24, Z
+ 746:	88 68       	ori	r24, 0x88	; 136
+ 748:	80 83       	st	Z, r24
+ 74a:	08 95       	ret
+		}
+		else if((CANPAGE>>4) == MOb_3){//paczka steruj¹ca falownikiem - nadaje
+ 74c:	80 91 ed 00 	lds	r24, 0x00ED
+ 750:	82 95       	swap	r24
+ 752:	8f 70       	andi	r24, 0x0F	; 15
+ 754:	83 30       	cpi	r24, 0x03	; 3
+ 756:	19 f4       	brne	.+6      	; 0x75e <CAN_Task+0xc0>
+			CANSTMOB=0x00;
+ 758:	10 92 ee 00 	sts	0x00EE, r1
+ 75c:	08 95       	ret
+		}
+		else if((CANPAGE>>4) == MOb_4){//paczka debuguj¹ca - nadaje
+ 75e:	80 91 ed 00 	lds	r24, 0x00ED
+ 762:	82 95       	swap	r24
+ 764:	8f 70       	andi	r24, 0x0F	; 15
+ 766:	84 30       	cpi	r24, 0x04	; 4
+ 768:	19 f4       	brne	.+6      	; 0x770 <CAN_Task+0xd2>
+			CANSTMOB=0x00;
+ 76a:	10 92 ee 00 	sts	0x00EE, r1
+ 76e:	08 95       	ret
+		}
+		else if((CANPAGE>>4) == MOb_5){//NMT - nadaje
+ 770:	80 91 ed 00 	lds	r24, 0x00ED
+ 774:	82 95       	swap	r24
+ 776:	8f 70       	andi	r24, 0x0F	; 15
+ 778:	85 30       	cpi	r24, 0x05	; 5
+ 77a:	09 f0       	breq	.+2      	; 0x77e <CAN_Task+0xe0>
+ 77c:	c7 c0       	rjmp	.+398    	; 0x90c <__stack+0xd>
+			CANSTMOB=0x00;
+ 77e:	10 92 ee 00 	sts	0x00EE, r1
+ 782:	08 95       	ret
+		}
+	}
+											
+	else if(CAN_SYNC_flag){ //Zleæ transmisjê po koleji transmisjê kolejnych paczek
+ 784:	80 91 22 01 	lds	r24, 0x0122
+ 788:	88 23       	and	r24, r24
+ 78a:	09 f4       	brne	.+2      	; 0x78e <CAN_Task+0xf0>
+ 78c:	52 c0       	rjmp	.+164    	; 0x832 <CAN_Task+0x194>
+		static uint8_t mob=3;
+		CANPAGE = ( mob << 4 );						// Selects Message Object 0-5
+ 78e:	80 91 00 01 	lds	r24, 0x0100
+ 792:	82 95       	swap	r24
+ 794:	80 7f       	andi	r24, 0xF0	; 240
+ 796:	80 93 ed 00 	sts	0x00ED, r24
+		if((CANEN2 & ( 1 << mob )) == 0){		//Jeœli MOb jest wolny
+ 79a:	80 91 dc 00 	lds	r24, 0x00DC
+ 79e:	90 e0       	ldi	r25, 0x00	; 0
+ 7a0:	00 90 00 01 	lds	r0, 0x0100
+ 7a4:	02 c0       	rjmp	.+4      	; 0x7aa <CAN_Task+0x10c>
+ 7a6:	95 95       	asr	r25
+ 7a8:	87 95       	ror	r24
+ 7aa:	0a 94       	dec	r0
+ 7ac:	e2 f7       	brpl	.-8      	; 0x7a6 <CAN_Task+0x108>
+ 7ae:	80 fd       	sbrc	r24, 0
+ 7b0:	25 c0       	rjmp	.+74     	; 0x7fc <CAN_Task+0x15e>
+ 7b2:	80 e0       	ldi	r24, 0x00	; 0
+ 7b4:	90 e0       	ldi	r25, 0x00	; 0
+			for(uint8_t byte_nr=0; byte_nr<8; byte_nr++  ){
+				CANMSG = MOb_data[mob-2][byte_nr];
+ 7b6:	aa ef       	ldi	r26, 0xFA	; 250
+ 7b8:	b0 e0       	ldi	r27, 0x00	; 0
+ 7ba:	e0 91 00 01 	lds	r30, 0x0100
+ 7be:	f0 e0       	ldi	r31, 0x00	; 0
+ 7c0:	32 97       	sbiw	r30, 0x02	; 2
+ 7c2:	ee 0f       	add	r30, r30
+ 7c4:	ff 1f       	adc	r31, r31
+ 7c6:	ee 0f       	add	r30, r30
+ 7c8:	ff 1f       	adc	r31, r31
+ 7ca:	ee 0f       	add	r30, r30
+ 7cc:	ff 1f       	adc	r31, r31
+ 7ce:	e8 0f       	add	r30, r24
+ 7d0:	f9 1f       	adc	r31, r25
+ 7d2:	e9 5c       	subi	r30, 0xC9	; 201
+ 7d4:	fe 4f       	sbci	r31, 0xFE	; 254
+ 7d6:	20 81       	ld	r18, Z
+ 7d8:	2c 93       	st	X, r18
+ 7da:	01 96       	adiw	r24, 0x01	; 1
+											
+	else if(CAN_SYNC_flag){ //Zleæ transmisjê po koleji transmisjê kolejnych paczek
+		static uint8_t mob=3;
+		CANPAGE = ( mob << 4 );						// Selects Message Object 0-5
+		if((CANEN2 & ( 1 << mob )) == 0){		//Jeœli MOb jest wolny
+			for(uint8_t byte_nr=0; byte_nr<8; byte_nr++  ){
+ 7dc:	88 30       	cpi	r24, 0x08	; 8
+ 7de:	91 05       	cpc	r25, r1
+ 7e0:	61 f7       	brne	.-40     	; 0x7ba <CAN_Task+0x11c>
+				CANMSG = MOb_data[mob-2][byte_nr];
+			}
+			CANSTMOB = 0x00;
+ 7e2:	10 92 ee 00 	sts	0x00EE, r1
+			if(mob==5){//jeœli NMT
+ 7e6:	80 91 00 01 	lds	r24, 0x0100
+ 7ea:	85 30       	cpi	r24, 0x05	; 5
+ 7ec:	21 f4       	brne	.+8      	; 0x7f6 <CAN_Task+0x158>
+				CANCDMOB = TRANSMISSION | ( 2 << DLC0);//zleæ transmisjê 8 bajtów	
+ 7ee:	82 e4       	ldi	r24, 0x42	; 66
+ 7f0:	80 93 ef 00 	sts	0x00EF, r24
+ 7f4:	03 c0       	rjmp	.+6      	; 0x7fc <CAN_Task+0x15e>
+			}							//wyczyœæ status
+			else{
+				CANCDMOB = TRANSMISSION | ( 8 << DLC0);//zleæ transmisjê 8 bajtów
+ 7f6:	88 e4       	ldi	r24, 0x48	; 72
+ 7f8:	80 93 ef 00 	sts	0x00EF, r24
+			}
+		}
+		if((mob >= 4 && !CAN_NMT_flag) || (mob >= 5 && CAN_NMT_flag)){
+ 7fc:	80 91 00 01 	lds	r24, 0x0100
+ 800:	84 30       	cpi	r24, 0x04	; 4
+ 802:	20 f0       	brcs	.+8      	; 0x80c <CAN_Task+0x16e>
+ 804:	90 91 20 01 	lds	r25, 0x0120
+ 808:	99 23       	and	r25, r25
+ 80a:	31 f0       	breq	.+12     	; 0x818 <CAN_Task+0x17a>
+ 80c:	85 30       	cpi	r24, 0x05	; 5
+ 80e:	68 f0       	brcs	.+26     	; 0x82a <CAN_Task+0x18c>
+ 810:	90 91 20 01 	lds	r25, 0x0120
+ 814:	99 23       	and	r25, r25
+ 816:	49 f0       	breq	.+18     	; 0x82a <CAN_Task+0x18c>
+			 mob=2;
+ 818:	82 e0       	ldi	r24, 0x02	; 2
+ 81a:	80 93 00 01 	sts	0x0100, r24
+			 CLEAR_SYNC_flag
+ 81e:	10 92 22 01 	sts	0x0122, r1
+			 SET_update_data_flag
+ 822:	81 e0       	ldi	r24, 0x01	; 1
+ 824:	80 93 1f 01 	sts	0x011F, r24
+ 828:	08 95       	ret
+		}		
+		else mob++;
+ 82a:	8f 5f       	subi	r24, 0xFF	; 255
+ 82c:	80 93 00 01 	sts	0x0100, r24
+ 830:	08 95       	ret
+	}
+	else if(Update_data_flag){
+ 832:	80 91 1f 01 	lds	r24, 0x011F
+ 836:	88 23       	and	r24, r24
+ 838:	09 f4       	brne	.+2      	; 0x83c <CAN_Task+0x19e>
+ 83a:	68 c0       	rjmp	.+208    	; 0x90c <__stack+0xd>
+		static uint8_t frame=0;
+		if(frame == 0 ){ //paczka zwrotne z falownika - odbiera
+ 83c:	80 91 1e 01 	lds	r24, 0x011E
+ 840:	81 11       	cpse	r24, r1
+ 842:	22 c0       	rjmp	.+68     	; 0x888 <CAN_Task+0x1ea>
+			CAN.status_word = MOb_data[frame][1]<<8 | MOb_data[frame][0];
+ 844:	20 91 38 01 	lds	r18, 0x0138
+ 848:	80 91 37 01 	lds	r24, 0x0137
+ 84c:	90 e0       	ldi	r25, 0x00	; 0
+ 84e:	92 2b       	or	r25, r18
+ 850:	90 93 2b 01 	sts	0x012B, r25
+ 854:	80 93 2a 01 	sts	0x012A, r24
+			CAN.torque = MOb_data[frame][5]<<8 | MOb_data[frame][4];
+ 858:	20 91 3c 01 	lds	r18, 0x013C
+ 85c:	80 91 3b 01 	lds	r24, 0x013B
+ 860:	90 e0       	ldi	r25, 0x00	; 0
+ 862:	92 2b       	or	r25, r18
+ 864:	90 93 2d 01 	sts	0x012D, r25
+ 868:	80 93 2c 01 	sts	0x012C, r24
+			CAN.speed = MOb_data[frame][7]<<8 | MOb_data[frame][6];
+ 86c:	20 91 3e 01 	lds	r18, 0x013E
+ 870:	80 91 3d 01 	lds	r24, 0x013D
+ 874:	90 e0       	ldi	r25, 0x00	; 0
+ 876:	92 2b       	or	r25, r18
+ 878:	90 93 2f 01 	sts	0x012F, r25
+ 87c:	80 93 2e 01 	sts	0x012E, r24
+			frame++;
+ 880:	81 e0       	ldi	r24, 0x01	; 1
+ 882:	80 93 1e 01 	sts	0x011E, r24
+ 886:	08 95       	ret
+		}
+		else if(frame == 1 ){ //paczka steruj¹ca falownikiem - nadaje
+ 888:	81 30       	cpi	r24, 0x01	; 1
+ 88a:	e1 f4       	brne	.+56     	; 0x8c4 <CAN_Task+0x226>
+			MOb_data[frame][0] = CAN.control_word;
+ 88c:	e8 e2       	ldi	r30, 0x28	; 40
+ 88e:	f1 e0       	ldi	r31, 0x01	; 1
+ 890:	90 81       	ld	r25, Z
+ 892:	81 81       	ldd	r24, Z+1	; 0x01
+ 894:	90 93 3f 01 	sts	0x013F, r25
+			MOb_data[frame][1] = CAN.control_word>>8;
+ 898:	80 93 40 01 	sts	0x0140, r24
+			MOb_data[frame][2] = CAN.torque;;
+ 89c:	ec e2       	ldi	r30, 0x2C	; 44
+ 89e:	f1 e0       	ldi	r31, 0x01	; 1
+ 8a0:	90 81       	ld	r25, Z
+ 8a2:	81 81       	ldd	r24, Z+1	; 0x01
+ 8a4:	90 93 41 01 	sts	0x0141, r25
+			MOb_data[frame][3] = CAN.torque>>8;
+ 8a8:	80 93 42 01 	sts	0x0142, r24
+			MOb_data[frame][4] = 0x00;
+ 8ac:	10 92 43 01 	sts	0x0143, r1
+			MOb_data[frame][5] = 0x00;
+ 8b0:	10 92 44 01 	sts	0x0144, r1
+			MOb_data[frame][6] = 0x00;
+ 8b4:	10 92 45 01 	sts	0x0145, r1
+			MOb_data[frame][7] = 0x00;
+ 8b8:	10 92 46 01 	sts	0x0146, r1
+			frame++;
+ 8bc:	82 e0       	ldi	r24, 0x02	; 2
+ 8be:	80 93 1e 01 	sts	0x011E, r24
+ 8c2:	08 95       	ret
+		}
+		else if(frame == 2 ){ //paczka debuguj¹ca - nadaje
+ 8c4:	82 30       	cpi	r24, 0x02	; 2
+ 8c6:	b1 f4       	brne	.+44     	; 0x8f4 <CAN_Task+0x256>
+			MOb_data[frame][0] = CAN.state;
+ 8c8:	80 91 34 01 	lds	r24, 0x0134
+ 8cc:	80 93 47 01 	sts	0x0147, r24
+			MOb_data[frame][1] = 0x00;
+ 8d0:	10 92 48 01 	sts	0x0148, r1
+			MOb_data[frame][2] = 0x00;
+ 8d4:	10 92 49 01 	sts	0x0149, r1
+			MOb_data[frame][3] = 0x00;
+ 8d8:	10 92 4a 01 	sts	0x014A, r1
+			MOb_data[frame][4] = 0x00;
+ 8dc:	10 92 4b 01 	sts	0x014B, r1
+			MOb_data[frame][5] = 0x00;
+ 8e0:	10 92 4c 01 	sts	0x014C, r1
+			MOb_data[frame][6] = 0x00;
+ 8e4:	10 92 4d 01 	sts	0x014D, r1
+			MOb_data[frame][7] = 0x00;
+ 8e8:	10 92 4e 01 	sts	0x014E, r1
+			frame++;
+ 8ec:	83 e0       	ldi	r24, 0x03	; 3
+ 8ee:	80 93 1e 01 	sts	0x011E, r24
+ 8f2:	08 95       	ret
+		}
+		else if(frame == 3 ){ //NMT - nadaje
+ 8f4:	83 30       	cpi	r24, 0x03	; 3
+ 8f6:	51 f4       	brne	.+20     	; 0x90c <__stack+0xd>
+			MOb_data[frame][0] = 0x01;
+ 8f8:	81 e0       	ldi	r24, 0x01	; 1
+ 8fa:	80 93 4f 01 	sts	0x014F, r24
+			MOb_data[frame][1] = INV_ID;
+ 8fe:	82 e0       	ldi	r24, 0x02	; 2
+ 900:	80 93 50 01 	sts	0x0150, r24
+			CLEAR_update_data_flag
+ 904:	10 92 1f 01 	sts	0x011F, r1
+			frame = 0;
+ 908:	10 92 1e 01 	sts	0x011E, r1
+ 90c:	08 95       	ret
+
+0000090e <CAN_Heart_Beat_received>:
+		}
+	
+}
+
+uint8_t	CAN_Heart_Beat_received(void){
+	return CAN_HB_flag;
+ 90e:	80 91 21 01 	lds	r24, 0x0121
+}
+ 912:	08 95       	ret
+
+00000914 <Set_NMT_flag>:
+
+void Set_NMT_flag(void){
+	CAN_NMT_flag=1;
+ 914:	81 e0       	ldi	r24, 0x01	; 1
+ 916:	80 93 20 01 	sts	0x0120, r24
+ 91a:	08 95       	ret
+
+0000091c <Clear_NMT_flag>:
+}
+
+void Clear_NMT_flag(void){
+	CAN_NMT_flag=0;
+ 91c:	10 92 20 01 	sts	0x0120, r1
+ 920:	08 95       	ret
+
+00000922 <Init_Timer>:
+
+void Init_Timer(void){ //real time clock
+
+	//Timer0
+	//CTC Mode
+	TCCR0A |= (1<<WGM01);
+ 922:	84 b5       	in	r24, 0x24	; 36
+ 924:	82 60       	ori	r24, 0x02	; 2
+ 926:	84 bd       	out	0x24, r24	; 36
+	OCR0A = 249;
+ 928:	89 ef       	ldi	r24, 0xF9	; 249
+ 92a:	87 bd       	out	0x27, r24	; 39
+	//w³aczenie zg³aszania przerwania przy przepe³nieniu
+    TIMSK0 |= (1<<OCIE0A);
+ 92c:	ee e6       	ldi	r30, 0x6E	; 110
+ 92e:	f0 e0       	ldi	r31, 0x00	; 0
+ 930:	80 81       	ld	r24, Z
+ 932:	82 60       	ori	r24, 0x02	; 2
+ 934:	80 83       	st	Z, r24
+	//Prescaler 64
+	TCCR0B |= (0<<CS12)|(1<<CS11)|(1<<CS10);
+ 936:	85 b5       	in	r24, 0x25	; 37
+ 938:	83 60       	ori	r24, 0x03	; 3
+ 93a:	85 bd       	out	0x25, r24	; 37
+	
+	//Timer1
+	//w³¹czenie przerwania
+	//TIMSK1 |= (1<<TOIE1);
+	//Prescaler 64
+	TCCR1B |= (0<<CS12)|(1<<CS11)|(1<<CS10);
+ 93c:	e1 e8       	ldi	r30, 0x81	; 129
+ 93e:	f0 e0       	ldi	r31, 0x00	; 0
+ 940:	80 81       	ld	r24, Z
+ 942:	83 60       	ori	r24, 0x03	; 3
+ 944:	80 83       	st	Z, r24
+ 946:	08 95       	ret
+
+00000948 <Get_timer>:
+		
+		
+};
+//funkcja zwraca akutaln¹ wartoœc timera RTC
+inline uint16_t Get_timer(){
+	return timer;
+ 948:	80 91 26 01 	lds	r24, 0x0126
+ 94c:	90 91 27 01 	lds	r25, 0x0127
+}
+ 950:	08 95       	ret
+
+00000952 <Time_elapsed>:
+		
+		
+};
+//funkcja zwraca akutaln¹ wartoœc timera RTC
+inline uint16_t Get_timer(){
+	return timer;
+ 952:	20 91 26 01 	lds	r18, 0x0126
+ 956:	30 91 27 01 	lds	r19, 0x0127
+//zwraca czas w ms jaki czas up³yn¹³ od wartoœci podanej jako argument (argument czas timera)
+//Mierzy czas do 1 minuty!! potem siê przewija licznik!!
+uint16_t Time_elapsed(uint16_t time_stamp){
+	uint16_t current_timer=Get_timer();
+	
+	if( current_timer >= time_stamp){
+ 95a:	28 17       	cp	r18, r24
+ 95c:	39 07       	cpc	r19, r25
+ 95e:	28 f0       	brcs	.+10     	; 0x96a <Time_elapsed+0x18>
+		return (current_timer-time_stamp);
+ 960:	a9 01       	movw	r20, r18
+ 962:	48 1b       	sub	r20, r24
+ 964:	59 0b       	sbc	r21, r25
+ 966:	ca 01       	movw	r24, r20
+ 968:	08 95       	ret
+	}
+	else{
+		return (current_timer+(0xFFFF-time_stamp));
+ 96a:	28 1b       	sub	r18, r24
+ 96c:	39 0b       	sbc	r19, r25
+ 96e:	c9 01       	movw	r24, r18
+ 970:	01 97       	sbiw	r24, 0x01	; 1
+	}
+};
+ 972:	08 95       	ret
+
+00000974 <Time_elapsed_us>:
+}
+
+//zwraca czas licznika liczy w 4us jednostkach
+uint16_t Get_timer_us(){
+	//return (TCNT1H<<8 | TCNT1L);
+	return TCNT1;
+ 974:	20 91 84 00 	lds	r18, 0x0084
+ 978:	30 91 85 00 	lds	r19, 0x0085
+//zwraca czas w 4us jaki czas up³yn¹³ od wartoœci podanej jako argument (argument czas timera)
+//Mierzy czas do 262ms!! potem siê przewija licznik!!
+uint16_t Time_elapsed_us(uint16_t time_stamp){
+	uint16_t current_timer=Get_timer_us();
+	
+	if( current_timer >= time_stamp){
+ 97c:	28 17       	cp	r18, r24
+ 97e:	39 07       	cpc	r19, r25
+ 980:	28 f0       	brcs	.+10     	; 0x98c <Time_elapsed_us+0x18>
+		return (current_timer-time_stamp);
+ 982:	a9 01       	movw	r20, r18
+ 984:	48 1b       	sub	r20, r24
+ 986:	59 0b       	sbc	r21, r25
+ 988:	ca 01       	movw	r24, r20
+ 98a:	08 95       	ret
+	}
+	else{
+		return (current_timer+(0xFFFF-time_stamp));
+ 98c:	28 1b       	sub	r18, r24
+ 98e:	39 0b       	sbc	r19, r25
+ 990:	c9 01       	movw	r24, r18
+ 992:	01 97       	sbiw	r24, 0x01	; 1
+	}
+};
+ 994:	08 95       	ret
+
+00000996 <Timer_new_tick>:
+  
+//funckje zwraca TRUE jeœli od jej ostatniego wywo³ania up³yne³o 7,8125ms
+uint8_t Timer_new_tick(void){
+	static uint16_t time_stamp=0;
+
+	if(Time_elapsed_us(time_stamp) < MAIN_LOOP_PERIOD){
+ 996:	80 91 24 01 	lds	r24, 0x0124
+ 99a:	90 91 25 01 	lds	r25, 0x0125
+ 99e:	0e 94 ba 04 	call	0x974	; 0x974 <Time_elapsed_us>
+ 9a2:	49 97       	sbiw	r24, 0x19	; 25
+ 9a4:	50 f0       	brcs	.+20     	; 0x9ba <Timer_new_tick+0x24>
+}
+
+//zwraca czas licznika liczy w 4us jednostkach
+uint16_t Get_timer_us(){
+	//return (TCNT1H<<8 | TCNT1L);
+	return TCNT1;
+ 9a6:	80 91 84 00 	lds	r24, 0x0084
+ 9aa:	90 91 85 00 	lds	r25, 0x0085
+
+	if(Time_elapsed_us(time_stamp) < MAIN_LOOP_PERIOD){
+			return 0;
+		}
+		else{
+			time_stamp = Get_timer_us();
+ 9ae:	90 93 25 01 	sts	0x0125, r25
+ 9b2:	80 93 24 01 	sts	0x0124, r24
+			return 1;
+ 9b6:	81 e0       	ldi	r24, 0x01	; 1
+ 9b8:	08 95       	ret
+//funckje zwraca TRUE jeœli od jej ostatniego wywo³ania up³yne³o 7,8125ms
+uint8_t Timer_new_tick(void){
+	static uint16_t time_stamp=0;
+
+	if(Time_elapsed_us(time_stamp) < MAIN_LOOP_PERIOD){
+			return 0;
+ 9ba:	80 e0       	ldi	r24, 0x00	; 0
+			time_stamp = Get_timer_us();
+			return 1;
+		}
+		
+		
+};
+ 9bc:	08 95       	ret
+
+000009be <__vector_15>:
+
+
+
+
+//Przepe³nienie linika 0
+SIGNAL(TIMER0_COMPA_vect) {
+ 9be:	1f 92       	push	r1
+ 9c0:	0f 92       	push	r0
+ 9c2:	0f b6       	in	r0, 0x3f	; 63
+ 9c4:	0f 92       	push	r0
+ 9c6:	11 24       	eor	r1, r1
+ 9c8:	8f 93       	push	r24
+ 9ca:	9f 93       	push	r25
+	//zwiêksz TIMER
+	timer++;
+ 9cc:	80 91 26 01 	lds	r24, 0x0126
+ 9d0:	90 91 27 01 	lds	r25, 0x0127
+ 9d4:	01 96       	adiw	r24, 0x01	; 1
+ 9d6:	90 93 27 01 	sts	0x0127, r25
+ 9da:	80 93 26 01 	sts	0x0126, r24
+}
+ 9de:	9f 91       	pop	r25
+ 9e0:	8f 91       	pop	r24
+ 9e2:	0f 90       	pop	r0
+ 9e4:	0f be       	out	0x3f, r0	; 63
+ 9e6:	0f 90       	pop	r0
+ 9e8:	1f 90       	pop	r1
+ 9ea:	18 95       	reti
+
+000009ec <__vector_14>:
+
+//Przepe³nienie linika 1
+SIGNAL(TIMER1_OVF_vect){
+ 9ec:	1f 92       	push	r1
+ 9ee:	0f 92       	push	r0
+ 9f0:	0f b6       	in	r0, 0x3f	; 63
+ 9f2:	0f 92       	push	r0
+ 9f4:	11 24       	eor	r1, r1
+
+}
+ 9f6:	0f 90       	pop	r0
+ 9f8:	0f be       	out	0x3f, r0	; 63
+ 9fa:	0f 90       	pop	r0
+ 9fc:	1f 90       	pop	r1
+ 9fe:	18 95       	reti
+
+00000a00 <__vector_12>:
+//Comapare A Timer1
+SIGNAL(TIMER1_COMPA_vect){
+ a00:	1f 92       	push	r1
+ a02:	0f 92       	push	r0
+ a04:	0f b6       	in	r0, 0x3f	; 63
+ a06:	0f 92       	push	r0
+ a08:	11 24       	eor	r1, r1
+		
+}
+ a0a:	0f 90       	pop	r0
+ a0c:	0f be       	out	0x3f, r0	; 63
+ a0e:	0f 90       	pop	r0
+ a10:	1f 90       	pop	r1
+ a12:	18 95       	reti
+
+00000a14 <__vector_13>:
+//Comapare B Timer1
+SIGNAL(TIMER1_COMPB_vect ){
+ a14:	1f 92       	push	r1
+ a16:	0f 92       	push	r0
+ a18:	0f b6       	in	r0, 0x3f	; 63
+ a1a:	0f 92       	push	r0
+ a1c:	11 24       	eor	r1, r1
+	
+}
+ a1e:	0f 90       	pop	r0
+ a20:	0f be       	out	0x3f, r0	; 63
+ a22:	0f 90       	pop	r0
+ a24:	1f 90       	pop	r1
+ a26:	18 95       	reti
+
+00000a28 <__umulhisi3>:
+ a28:	a2 9f       	mul	r26, r18
+ a2a:	b0 01       	movw	r22, r0
+ a2c:	b3 9f       	mul	r27, r19
+ a2e:	c0 01       	movw	r24, r0
+ a30:	a3 9f       	mul	r26, r19
+ a32:	70 0d       	add	r23, r0
+ a34:	81 1d       	adc	r24, r1
+ a36:	11 24       	eor	r1, r1
+ a38:	91 1d       	adc	r25, r1
+ a3a:	b2 9f       	mul	r27, r18
+ a3c:	70 0d       	add	r23, r0
+ a3e:	81 1d       	adc	r24, r1
+ a40:	11 24       	eor	r1, r1
+ a42:	91 1d       	adc	r25, r1
+ a44:	08 95       	ret
+
+00000a46 <_exit>:
+ a46:	f8 94       	cli
+
+00000a48 <__stop_program>:
+ a48:	ff cf       	rjmp	.-2      	; 0xa48 <__stop_program>
