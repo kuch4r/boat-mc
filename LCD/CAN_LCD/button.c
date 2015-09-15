@@ -11,10 +11,12 @@
 #include "makra.h"
 #include "harddef.h"
 #include "button.h"
+#include "display.h"
 
-volatile int8_t button_state;
+volatile uint8_t button_state;
+volatile uint8_t screen_line=0;
 
-void Init_Buttons(void){
+void Buttons_Init(void){
 	//Inicjalizacja portu jako wej�cie
 	DDR(BTN_1_PORT) &= ~(1<<BTN_1);
 	DDR(BTN_2_PORT) &= ~(1<<BTN_2);
@@ -41,33 +43,45 @@ void Init_Buttons(void){
 	button_state=0;
 };
 
+uint8_t Buttons_get_screen_line(){
+	return screen_line;
+}
+
 //Przerwanie od BTN_1
 SIGNAL(SIG_INTERRUPT0) {
-	//LED_1_ON;
-	button_state++;
+	if(screen_line < (SCREEN_LINES_COUNT * 2) - 1){
+		screen_line++;
+	}
+	else{
+		screen_line = 0;
+	}
 };
 
 //Przerwanie od BTN_2
 SIGNAL(SIG_INTERRUPT1) {
 	//LED_1_ON;
-	button_state++;
+	//button_state++;
 };
 
 //Przerwanie od BTN_3
 SIGNAL(SIG_INTERRUPT2) {
 	//LED_1_ON;
-	button_state++;
+	//button_state++;
 };
 
 //Przerwanie od BTN_4
 SIGNAL(SIG_INTERRUPT3) {
-	LED_1_ON;
-	button_state++;
+	//LED_1_ON;
+	//button_state++;
 };
 
-//Przerwanie od BTN_5 - przy ka�dej zmianie stanu
+//Przerwanie od BTN_5
 SIGNAL(SIG_INPUT_CAPTURE1) {
-	//LED_1_ON;
-	 button_state++;	 
+	if(screen_line > 0){
+		screen_line--;
+	}
+	else{
+		screen_line = (SCREEN_LINES_COUNT * 2) - 1;
+	}
 
 };

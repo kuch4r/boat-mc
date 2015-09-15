@@ -24,7 +24,7 @@
 #define BTN_5_PORT D
 #define BTN_5 4
 
-volatile int8_t button_state;
-void Init_Buttons(void);
 
+void Buttons_Init(void);
+uint8_t Buttons_get_screen_line();
 #endif /* INCFILE1_H_ */

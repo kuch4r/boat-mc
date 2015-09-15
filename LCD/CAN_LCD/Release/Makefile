@@ -29,6 +29,7 @@ QUOTE := "
 ADDITIONAL_DEPENDENCIES:=
 OUTPUT_FILE_DEP:=
 LIB_DEP:=
+LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := 
@@ -38,10 +39,12 @@ SUBDIRS :=
 C_SRCS +=  \
 ../ADC.c \
 ../button.c \
+../CAN.c \
 ../can_drv.c \
 ../CAN_LCD.c \
 ../can_lib.c \
 ../delay.c \
+../Display.c \
 ../graphic.c \
 ../pwm001.c \
 ../SPLC501C-AVR.c \
@@ -58,10 +61,12 @@ ASM_SRCS +=
 OBJS +=  \
 ADC.o \
 button.o \
+CAN.o \
 can_drv.o \
 CAN_LCD.o \
 can_lib.o \
 delay.o \
+Display.o \
 graphic.o \
 pwm001.o \
 SPLC501C-AVR.o \
@@ -71,10 +76,12 @@ timer.o
 OBJS_AS_ARGS +=  \
 ADC.o \
 button.o \
+CAN.o \
 can_drv.o \
 CAN_LCD.o \
 can_lib.o \
 delay.o \
+Display.o \
 graphic.o \
 pwm001.o \
 SPLC501C-AVR.o \
@@ -84,10 +91,12 @@ timer.o
 C_DEPS +=  \
 ADC.d \
 button.d \
+CAN.d \
 can_drv.d \
 CAN_LCD.d \
 can_lib.d \
 delay.d \
+Display.d \
 graphic.d \
 pwm001.d \
 SPLC501C-AVR.d \
@@ -97,10 +106,12 @@ timer.d
 C_DEPS_AS_ARGS +=  \
 ADC.d \
 button.d \
+CAN.d \
 can_drv.d \
 CAN_LCD.d \
 can_lib.d \
 delay.d \
+Display.d \
 graphic.d \
 pwm001.d \
 SPLC501C-AVR.d \
@@ -117,7 +128,14 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 
 LIB_DEP+= 
 
+LINKER_SCRIPT_DEP+= 
+
+
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 
@@ -144,7 +162,7 @@ LIB_DEP+=
 ./%.o: .././%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
-	$(QUOTE)C:\Program Files\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DF_CPU=12000000  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=at90can32 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DF_CPU=12000000  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=at90can64 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
@@ -170,16 +188,16 @@ endif
 # All Target
 all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 
-$(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP)
+$(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR/GNU Linker : 4.8.1
-	$(QUOTE)C:\Program Files\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="CAN_LCD.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=at90can32  
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="CAN_LCD.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=at90can64  
 	@echo Finished building target: $@
-	"C:\Program Files\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "CAN_LCD.elf" "CAN_LCD.hex"
-	"C:\Program Files\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "CAN_LCD.elf" "CAN_LCD.eep" || exit 0
-	"C:\Program Files\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "CAN_LCD.elf" > "CAN_LCD.lss"
-	"C:\Program Files\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "CAN_LCD.elf" "CAN_LCD.srec"
-	"C:\Program Files\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-size.exe" "CAN_LCD.elf"
+	"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "CAN_LCD.elf" "CAN_LCD.hex"
+	"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "CAN_LCD.elf" "CAN_LCD.eep" || exit 0
+	"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "CAN_LCD.elf" > "CAN_LCD.lss"
+	"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "CAN_LCD.elf" "CAN_LCD.srec"
+	"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-size.exe" "CAN_LCD.elf"
 	
 	
 

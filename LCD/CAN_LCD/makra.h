@@ -20,16 +20,16 @@
 // NOPek
 #define NOP() {asm volatile("nop"::);}
 
-#define LED_L_ON PORT(LED_L_PORT) &= ~(_BV(LED_L))
-#define LED_L_OFF PORT(LED_L_PORT) |= _BV(LED_L)
+#define LCD_RESET_ON PORT(LCD_RESET_PORT) &= ~(_BV(LCD_RESET))
+#define LCD_RESET_OFF PORT(LCD_RESET_PORT) |= _BV(LCD_RESET)
 
 
 #define LED_1_ON PORT(LED_PORT) |= _BV(LED_1)
 #define LED_1_OFF PORT(LED_PORT) &= ~(_BV(LED_1))
 
 
-#define LED_H_OFF PORT(LED_H_PORT) &= ~(_BV(LED_H))
-#define LED_H_ON PORT(LED_H_PORT) |= _BV(LED_H)
+#define LED_H_ON PORT(LED_H_PORT) &= ~(_BV(LED_H))
+#define LED_H_OFF PORT(LED_H_PORT) |= _BV(LED_H)
 
 
 

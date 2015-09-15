@@ -29,8 +29,8 @@
 #define LED_H_PORT B
 #define LED_H 7
 
-#define LED_L_PORT G
-#define LED_L 0
+#define LCD_RESET_PORT G
+#define LCD_RESET 0
 
 #define ADC_6_PORT F
 #define ADC_6 6
@@ -43,7 +43,17 @@
 #define LED_1 4
 
 //czas co który wywo³ywana jest g³ówna pêtla
-#define MAIN_LOOP_PERIOD 580
+#define MAIN_LOOP_PERIOD 58
+
+//czas co który wywo³ywana jest g³ówna pêtla
+#define DISPLAY_REFRESH_PERIOD 200
+
+//czas co który wysy³any jest sync
+#define SYNC_PERIOD 580
+
+//czas co który wysy³any jest sync
+#define SPI_TRANSMIT_TIME_OUT 20
+
 
 
 #endif //HARDDEF_H_INCLUDED

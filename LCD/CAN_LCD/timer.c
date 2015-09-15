@@ -49,10 +49,10 @@ void init_rtc(void){ //real time clock
 
 };
 
-void timer_init_0(void){
+void Timer0_Init(void){
 	// WGM normal 16 bit mode
-	TCCR0A |= (0<<WGM11) | (1<<WGM10) | (1<<COM0A1)| (0<<COM0A0) | (1<<CS02) | (0<<CS01) | (1<<CS00);
-    
+	TCCR0A |= (0<<WGM11) | (0<<WGM10) | (0<<COM0A1)| (0<<COM0A0) | (0<<CS02) | (1<<CS01) | (0<<CS00);
+	
 	//CS preskaler 64 f=93750Hz
 	//ICNC1 w³¹czenie noise canceler
 	//WGM normal mode
@@ -61,8 +61,17 @@ void timer_init_0(void){
 	
 	//TICIE1 - w³¹czenie przerwania Input Capture
 	//TOIE1 - w³¹czenie przerwania od przepe³nienia licznika jeden - potrzebne do wykrywania predkoœci 0
-	//TIMSK1 |= (1<<ICIE1) | (1<<TOIE1);
+	TIMSK0 |= (1<<TOIE0);
+
 };
+
+void Timer1_Init(){
+	TCCR1B = (1<<CS02) | (0<<CS01) | (1<<CS00);
+	
+	TIMSK1 = (1<<TOIE1);
+	
+	
+}
   
 
 //funckje zwraca TRUE jeœli od jej ostatniego wywo³ania up³yne³o 7,8125ms
@@ -104,6 +113,16 @@ uint16_t timer_time_elapsed(uint16_t time_stamp){
 
 //przerwanie przepe³niania Timer2
 SIGNAL(SIG_OUTPUT_COMPARE2) {
+	//zwiêksz TIMER
+	timer++;
+}
+
+SIGNAL(SIG_OVERFLOW1) {
+	//zwiêksz TIMER
+	timer++;
+}
+
+SIGNAL(SIG_OVERFLOW0) {
 	//zwiêksz TIMER
 	timer++;
 }

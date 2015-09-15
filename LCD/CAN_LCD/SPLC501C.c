@@ -214,7 +214,7 @@ void GLCD_clear(uint8_t clear){
 	uint8_t i;
 	for(i=0 ; i<clear ; i++)
 		GLCD_WriteString(" ");
-	GLCD_GoTo(GLCD_Get_x()-(clear*7), GLCD_Get_y());
+	GLCD_GoTo(GLCD_Get_x()-(clear*6), GLCD_Get_y());
 }
 
 //-------------------------------------------------------------------------------------------------

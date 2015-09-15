@@ -4,6 +4,9 @@
 #define CS_HIGH PORT(SPI_CS_PORT) |= (_BV(SPI_CS))
 #define CS_LOW PORT(SPI_CS_PORT) &= ~(_BV(SPI_CS))
 
+//#define CS_STATUS (PORT(SPI_CS_PORT) & (_BV(SPI_CS)))
+#define CS_STATUS (PINB & 0x01)
+
 #define A0_HIGH PORT(SPI_A0_PORT) |= (_BV(SPI_A0))
 #define A0_LOW PORT(SPI_A0_PORT) &= ~(_BV(SPI_A0))
 

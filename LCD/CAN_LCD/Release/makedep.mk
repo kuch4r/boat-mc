@@ -6,6 +6,8 @@ ADC.c
 
 button.c
 
+CAN.c
+
 can_drv.c
 
 CAN_LCD.c
@@ -13,6 +15,8 @@ CAN_LCD.c
 can_lib.c
 
 delay.c
+
+Display.c
 
 graphic.c
 

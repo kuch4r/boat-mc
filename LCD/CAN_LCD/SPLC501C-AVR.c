@@ -1,16 +1,20 @@
 
-
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
 #include "harddef.h"
 #include "SPLC501C-AVR.h"
-#include <avr/io.h>
 #include "makra.h"
 #include "delay.h"
-#include <util\delay.h>
+
 
 
 volatile unsigned char LCD[1056]={0};
 //volatile unsigned char LCD[1]={0};
 volatile uint16_t xs,ys;
+
+volatile uint8_t SPI_transmision_start=1;
+
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -28,7 +32,11 @@ void GLCD_InitializePorts(void)
 	CS_HIGH;
 	
 	
-	SPCR |= (1<<SPE) | (0<<DORD) |(1<<MSTR) | (1<<CPOL) |(1<<CPHA) | (1<<SPR1) |(0<<SPR0) | (0<<SPIE);
+	SPCR |= (1<<SPE) | (0<<DORD) |(1<<MSTR) | (1<<CPOL) |(1<<CPHA) | (0<<SPR1) |(1<<SPR0) | (0<<SPIE);
+	
+	SPDR = 0x00;
+	while((SPSR & _BV(SPIF)) == 0);
+	CS_LOW;
 	
 	
 	
@@ -45,15 +53,20 @@ void GLCD_InitializePorts(void)
 //-------------------------------------------------------------------------------------------------
 void GLCD_WriteData(uint8_t dataToWrite)
 {
+	
+	
+	while((SPSR & _BV(SPIF)) == 0);
 	A0_HIGH;
-	CS_LOW;
+	//CS_LOW;
 	//_delay_us(50);
 	SPDR = dataToWrite;
-	while((SPSR & _BV(SPIF)) == 0);
-	CS_HIGH;
+	
 	LCD[(ys*132)+(xs)]=dataToWrite;
     if(xs<132)
         xs++;
+		
+	//while((SPSR & _BV(SPIF)) == 0);
+	//CS_HIGH;
 
 
 }
@@ -62,12 +75,14 @@ void GLCD_WriteData(uint8_t dataToWrite)
 //-------------------------------------------------------------------------------------------------
 void GLCD_WriteCommand(uint8_t commandToWrite)
 {
+	
+	while((SPSR & _BV(SPIF)) == 0);
 	A0_LOW;
-	CS_LOW;
+	//CS_LOW;
 	//_delay_us(50);
 	SPDR = commandToWrite;
-	while((SPSR & _BV(SPIF)) == 0);
-	CS_HIGH;
+	//while((SPSR & _BV(SPIF)) == 0);
+	//CS_HIGH;
 
 
 }
@@ -91,4 +106,12 @@ uint16_t GLCD_Get_x(void){
 
 uint16_t GLCD_Get_y(void){
 	return ys;
+}
+
+//Obs³uga przerwania
+SIGNAL ( SPI_STC_vect ){         // use interrupts
+	//_delay_us(80);
+	CS_HIGH;
+	//SPI_interrupt_flag=1;
+	//LED_1_ON;
 }
