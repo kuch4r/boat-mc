@@ -42,6 +42,9 @@ void CAN_Send_Sync();
 #define BMS_TPDO_1 0
 #define BMS_TPDO_2 1
 #define BMS_TPDO_3 2
+#define WINCH_CTRL_TPDO_1 3
+#define INV_TPDO_3 4
+
 
 
 
@@ -54,10 +57,10 @@ void CAN_Send_Sync();
 //BMS_TPDO_3 - odbiera
 #define MOb_3_ID 0x286
 
-//paczka debuguj¹ca - nadaje
-#define MOb_4_ID 0x187
-//NMT - nadaje
-#define MOb_5_ID 0x000
+//WINCH_CTRL_TPDO_1
+#define MOb_4_ID 0x190
+//INV TPDO
+#define MOb_5_ID 0x383
 
 #define INV_ID 0x01
 
@@ -77,6 +80,12 @@ struct CAN_str {
 	uint8_t BMS_T_max;
 	uint8_t BMS_T_max_nr;
 	uint8_t BMC_DMCC_p;
+	
+	uint8_t WINCH_CTRL_water_level;
+	uint8_t WINCH_CTRL_supply_voltage;
+	
+	int32_t INV_RPMs;
+	int16_t INV_torque;
 	
 	uint16_t status_word;
 	int16_t torque;

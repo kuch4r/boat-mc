@@ -27,8 +27,8 @@ Allocating common symbols
 Common symbol       size              file
 
 ys                  0x2               SPLC501C-AVR.o
-CAN                 0x26              CAN.o
-MOb_data            0x20              CAN.o
+CAN                 0x2e              CAN.o
+MOb_data            0x28              CAN.o
 button_state        0x1               button.o
 xs                  0x2               SPLC501C-AVR.o
 
@@ -403,7 +403,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x13be
+.text           0x00000000     0x1570
  *(.vectors)
  .vectors       0x00000000       0x94 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtcan64.o
                 0x00000000                __vector_default
@@ -417,110 +417,125 @@ END GROUP
  *(.trampolines*)
                 0x00000094                __trampolines_end = .
  *(.progmem*)
- .progmem.data.__c.1936
+ .progmem.data.__c.1954
                 0x00000094        0x2 Display.o
+ .progmem.data.__c.1952
+                0x00000096        0xa Display.o
+ .progmem.data.__c.1950
+                0x000000a0        0x9 Display.o
+ .progmem.data.__c.1948
+                0x000000a9        0x2 Display.o
+ .progmem.data.__c.1946
+                0x000000ab        0x9 Display.o
+ .progmem.data.__c.1944
+                0x000000b4        0x2 Display.o
+ .progmem.data.__c.1942
+                0x000000b6        0x7 Display.o
+ .progmem.data.__c.1940
+                0x000000bd        0x2 Display.o
+ .progmem.data.__c.1938
+                0x000000bf        0x6 Display.o
+ .progmem.data.__c.1936
+                0x000000c5        0x4 Display.o
  .progmem.data.__c.1934
-                0x00000096        0x6 Display.o
+                0x000000c9        0x6 Display.o
  .progmem.data.__c.1932
-                0x0000009c        0x4 Display.o
+                0x000000cf        0x4 Display.o
  .progmem.data.__c.1930
-                0x000000a0        0x6 Display.o
+                0x000000d3        0x6 Display.o
  .progmem.data.__c.1928
-                0x000000a6        0x4 Display.o
+                0x000000d9        0x3 Display.o
  .progmem.data.__c.1926
-                0x000000aa        0x6 Display.o
+                0x000000dc        0x7 Display.o
  .progmem.data.__c.1924
-                0x000000b0        0x3 Display.o
+                0x000000e3        0x6 Display.o
  .progmem.data.__c.1922
-                0x000000b3        0x7 Display.o
+                0x000000e9        0x6 Display.o
  .progmem.data.__c.1920
-                0x000000ba        0x6 Display.o
+                0x000000ef        0x6 Display.o
  .progmem.data.__c.1918
-                0x000000c0        0x6 Display.o
+                0x000000f5        0x6 Display.o
  .progmem.data.__c.1916
-                0x000000c6        0x6 Display.o
+                0x000000fb        0x2 Display.o
  .progmem.data.__c.1914
-                0x000000cc        0x6 Display.o
+                0x000000fd        0x5 Display.o
  .progmem.data.__c.1912
-                0x000000d2        0x2 Display.o
+                0x00000102        0x2 Display.o
  .progmem.data.__c.1910
-                0x000000d4        0x5 Display.o
+                0x00000104        0x9 Display.o
  .progmem.data.__c.1908
-                0x000000d9        0x2 Display.o
+                0x0000010d        0x2 Display.o
  .progmem.data.__c.1906
-                0x000000db        0x9 Display.o
+                0x0000010f        0x9 Display.o
  .progmem.data.__c.1904
-                0x000000e4        0x2 Display.o
- .progmem.data.__c.1902
-                0x000000e6        0x9 Display.o
- .progmem.data.__c.1900
-                0x000000ef        0x8 Display.o
- .progmem.data.__c.1897
-                0x000000f7        0x6 Display.o
- .progmem.data.__c.1894
-                0x000000fd        0x9 Display.o
- .progmem.data.__c.1891
-                0x00000106        0x8 Display.o
- .progmem.data.__c.1888
-                0x0000010e        0xa Display.o
- .progmem.data.__c.1885
-                0x00000118        0xa Display.o
- .progmem.data.__c.1882
-                0x00000122        0xa Display.o
- .progmem.data.__c.1879
-                0x0000012c        0x9 Display.o
- .progmem.data.__c.1876
-                0x00000135        0x6 Display.o
- .progmem.data.__c.1873
-                0x0000013b        0x6 Display.o
- .progmem.data.__c.1870
+                0x00000118        0x8 Display.o
+ .progmem.data.__c.1901
+                0x00000120        0x6 Display.o
+ .progmem.data.__c.1898
+                0x00000126        0x9 Display.o
+ .progmem.data.__c.1895
+                0x0000012f        0x8 Display.o
+ .progmem.data.__c.1892
+                0x00000137        0xa Display.o
+ .progmem.data.__c.1889
                 0x00000141        0xa Display.o
- .progmem.data.__c.1867
+ .progmem.data.__c.1886
                 0x0000014b        0xa Display.o
- .progmem.data.__c.1864
+ .progmem.data.__c.1883
                 0x00000155        0x9 Display.o
- .progmem.data.__c.1861
-                0x0000015e        0xb Display.o
- .progmem.data.__c.1858
-                0x00000169        0x9 Display.o
+ .progmem.data.__c.1880
+                0x0000015e        0x6 Display.o
+ .progmem.data.__c.1877
+                0x00000164        0x6 Display.o
+ .progmem.data.__c.1874
+                0x0000016a        0xa Display.o
+ .progmem.data.__c.1871
+                0x00000174        0xa Display.o
+ .progmem.data.__c.1868
+                0x0000017e        0x9 Display.o
+ .progmem.data.__c.1865
+                0x00000187        0xb Display.o
+ .progmem.data.__c.1862
+                0x00000192        0x9 Display.o
+ .progmem.data.__c.1859
+                0x0000019b        0xa Display.o
  .progmem.data.__c.1855
-                0x00000172        0xa Display.o
- .progmem.data.__c.1851
-                0x0000017c        0x5 Display.o
- .progmem.data.__c.1848
-                0x00000181        0x7 Display.o
+                0x000001a5        0x5 Display.o
+ .progmem.data.__c.1852
+                0x000001aa        0x7 Display.o
  .progmem.data.font5x7
-                0x00000188      0x1e0 SPLC501C.o
-                0x00000188                font5x7
-                0x00000368                . = ALIGN (0x2)
+                0x000001b1      0x1e0 SPLC501C.o
+                0x000001b1                font5x7
+                0x00000392                . = ALIGN (0x2)
+ *fill*         0x00000391        0x1 
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x00000368                __ctors_start = .
+                0x00000392                __ctors_start = .
  *(.ctors)
-                0x00000368                __ctors_end = .
-                0x00000368                __dtors_start = .
+                0x00000392                __ctors_end = .
+                0x00000392                __dtors_start = .
  *(.dtors)
-                0x00000368                __dtors_end = .
+                0x00000392                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000368        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtcan64.o
-                0x00000368                __init
+ .init0         0x00000392        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtcan64.o
+                0x00000392                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000368        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtcan64.o
+ .init2         0x00000392        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtcan64.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000374       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
-                0x00000374                __do_copy_data
- .init4         0x0000038a       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
-                0x0000038a                __do_clear_bss
+ .init4         0x0000039e       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+                0x0000039e                __do_copy_data
+ .init4         0x000003b4       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
+                0x000003b4                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -531,193 +546,193 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x0000039a        0x8 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtcan64.o
+ .init9         0x000003c4        0x8 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtcan64.o
  *(.init9)
  *(.text)
- .text          0x000003a2        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtcan64.o
-                0x000003a2                __vector_22
-                0x000003a2                __vector_28
-                0x000003a2                __vector_32
-                0x000003a2                __vector_34
-                0x000003a2                __vector_24
-                0x000003a2                __vector_12
-                0x000003a2                __bad_interrupt
-                0x000003a2                __vector_6
-                0x000003a2                __vector_31
-                0x000003a2                __vector_35
-                0x000003a2                __vector_23
-                0x000003a2                __vector_30
-                0x000003a2                __vector_13
-                0x000003a2                __vector_19
-                0x000003a2                __vector_7
-                0x000003a2                __vector_27
-                0x000003a2                __vector_5
-                0x000003a2                __vector_33
-                0x000003a2                __vector_21
-                0x000003a2                __vector_36
-                0x000003a2                __vector_29
-                0x000003a2                __vector_8
-                0x000003a2                __vector_26
-                0x000003a2                __vector_14
-                0x000003a2                __vector_10
-                0x000003a2                __vector_16
-                0x000003a6                . = ALIGN (0x2)
+ .text          0x000003cc        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtcan64.o
+                0x000003cc                __vector_22
+                0x000003cc                __vector_28
+                0x000003cc                __vector_32
+                0x000003cc                __vector_34
+                0x000003cc                __vector_24
+                0x000003cc                __vector_12
+                0x000003cc                __bad_interrupt
+                0x000003cc                __vector_6
+                0x000003cc                __vector_31
+                0x000003cc                __vector_35
+                0x000003cc                __vector_23
+                0x000003cc                __vector_30
+                0x000003cc                __vector_13
+                0x000003cc                __vector_19
+                0x000003cc                __vector_7
+                0x000003cc                __vector_27
+                0x000003cc                __vector_5
+                0x000003cc                __vector_33
+                0x000003cc                __vector_21
+                0x000003cc                __vector_36
+                0x000003cc                __vector_29
+                0x000003cc                __vector_8
+                0x000003cc                __vector_26
+                0x000003cc                __vector_14
+                0x000003cc                __vector_10
+                0x000003cc                __vector_16
+                0x000003d0                . = ALIGN (0x2)
  *(.text.*)
  .text.__vector_25
-                0x000003a6       0x36 ADC.o
-                0x000003a6                __vector_25
+                0x000003d0       0x36 ADC.o
+                0x000003d0                __vector_25
  .text.Buttons_Init
-                0x000003dc       0x34 button.o
-                0x000003dc                Buttons_Init
+                0x00000406       0x34 button.o
+                0x00000406                Buttons_Init
  .text.Buttons_get_screen_line
-                0x00000410        0x6 button.o
-                0x00000410                Buttons_get_screen_line
+                0x0000043a        0x6 button.o
+                0x0000043a                Buttons_get_screen_line
  .text.__vector_1
-                0x00000416       0x30 button.o
-                0x00000416                __vector_1
+                0x00000440       0x30 button.o
+                0x00000440                __vector_1
  .text.__vector_2
-                0x00000446       0x14 button.o
-                0x00000446                __vector_2
+                0x00000470       0x14 button.o
+                0x00000470                __vector_2
  .text.__vector_3
-                0x0000045a       0x14 button.o
-                0x0000045a                __vector_3
+                0x00000484       0x14 button.o
+                0x00000484                __vector_3
  .text.__vector_4
-                0x0000046e       0x14 button.o
-                0x0000046e                __vector_4
+                0x00000498       0x14 button.o
+                0x00000498                __vector_4
  .text.__vector_11
-                0x00000482       0x2e button.o
-                0x00000482                __vector_11
+                0x000004ac       0x2e button.o
+                0x000004ac                __vector_11
  .text.CAN_Init
-                0x000004b0      0x194 CAN.o
-                0x000004b0                CAN_Init
+                0x000004da      0x1c4 CAN.o
+                0x000004da                CAN_Init
  .text.__vector_18
-                0x00000644       0x1e CAN.o
-                0x00000644                __vector_18
+                0x0000069e       0x1e CAN.o
+                0x0000069e                __vector_18
  .text.CAN_Task
-                0x00000662      0x20a CAN.o
-                0x00000662                CAN_Task
+                0x000006bc      0x29a CAN.o
+                0x000006bc                CAN_Task
  .text.startup.main
-                0x0000086c       0x64 CAN_LCD.o
-                0x0000086c                main
+                0x00000956       0x64 CAN_LCD.o
+                0x00000956                main
  .text.Display_Init
-                0x000008d0       0x46 Display.o
-                0x000008d0                Display_Init
+                0x000009ba       0x46 Display.o
+                0x000009ba                Display_Init
  .text.Display_Task
-                0x00000916      0x392 Display.o
-                0x00000916                Display_Task
+                0x00000a00      0x45a Display.o
+                0x00000a00                Display_Task
  .text.GLCD_Rectangle
-                0x00000ca8       0x84 graphic.o
-                0x00000ca8                GLCD_Rectangle
+                0x00000e5a       0x84 graphic.o
+                0x00000e5a                GLCD_Rectangle
  .text.GLCD_Rectangle_Full
-                0x00000d2c       0x4c graphic.o
-                0x00000d2c                GLCD_Rectangle_Full
+                0x00000ede       0x4c graphic.o
+                0x00000ede                GLCD_Rectangle_Full
  .text.GLCD_Rectangle_Clear
-                0x00000d78       0x52 graphic.o
-                0x00000d78                GLCD_Rectangle_Clear
+                0x00000f2a       0x52 graphic.o
+                0x00000f2a                GLCD_Rectangle_Clear
  .text.GLCD_InitializePorts
-                0x00000dca       0x2e SPLC501C-AVR.o
-                0x00000dca                GLCD_InitializePorts
+                0x00000f7c       0x2e SPLC501C-AVR.o
+                0x00000f7c                GLCD_InitializePorts
  .text.GLCD_WriteData
-                0x00000df8       0x52 SPLC501C-AVR.o
-                0x00000df8                GLCD_WriteData
+                0x00000faa       0x52 SPLC501C-AVR.o
+                0x00000faa                GLCD_WriteData
  .text.GLCD_WriteCommand
-                0x00000e4a        0xc SPLC501C-AVR.o
-                0x00000e4a                GLCD_WriteCommand
+                0x00000ffc        0xc SPLC501C-AVR.o
+                0x00000ffc                GLCD_WriteCommand
  .text.Tab_GoTo
-                0x00000e56       0x16 SPLC501C-AVR.o
-                0x00000e56                Tab_GoTo
+                0x00001008       0x16 SPLC501C-AVR.o
+                0x00001008                Tab_GoTo
  .text.GLCD_ReadData
-                0x00000e6c       0x28 SPLC501C-AVR.o
-                0x00000e6c                GLCD_ReadData
+                0x0000101e       0x28 SPLC501C-AVR.o
+                0x0000101e                GLCD_ReadData
  .text.GLCD_Get_x
-                0x00000e94        0xa SPLC501C-AVR.o
-                0x00000e94                GLCD_Get_x
+                0x00001046        0xa SPLC501C-AVR.o
+                0x00001046                GLCD_Get_x
  .text.GLCD_Get_y
-                0x00000e9e        0xa SPLC501C-AVR.o
-                0x00000e9e                GLCD_Get_y
+                0x00001050        0xa SPLC501C-AVR.o
+                0x00001050                GLCD_Get_y
  .text.__vector_20
-                0x00000ea8       0x16 SPLC501C-AVR.o
-                0x00000ea8                __vector_20
+                0x0000105a       0x16 SPLC501C-AVR.o
+                0x0000105a                __vector_20
  .text.GLCD_Initialize
-                0x00000ebe       0x8e SPLC501C.o
-                0x00000ebe                GLCD_Initialize
+                0x00001070       0x8e SPLC501C.o
+                0x00001070                GLCD_Initialize
  .text.GLCD_GoTo
-                0x00000f4c       0x3c SPLC501C.o
-                0x00000f4c                GLCD_GoTo
+                0x000010fe       0x3c SPLC501C.o
+                0x000010fe                GLCD_GoTo
  .text.GLCD_ClearScreen
-                0x00000f88       0x26 SPLC501C.o
-                0x00000f88                GLCD_ClearScreen
+                0x0000113a       0x26 SPLC501C.o
+                0x0000113a                GLCD_ClearScreen
  .text.GLCD_WriteChar
-                0x00000fae       0x42 SPLC501C.o
-                0x00000fae                GLCD_WriteChar
+                0x00001160       0x42 SPLC501C.o
+                0x00001160                GLCD_WriteChar
  .text.GLCD_WriteString_progmem
-                0x00000ff0       0x1e SPLC501C.o
-                0x00000ff0                GLCD_WriteString_progmem
+                0x000011a2       0x1e SPLC501C.o
+                0x000011a2                GLCD_WriteString_progmem
  .text.GLCD_WriteString
-                0x0000100e       0x18 SPLC501C.o
-                0x0000100e                GLCD_WriteString
+                0x000011c0       0x18 SPLC501C.o
+                0x000011c0                GLCD_WriteString
  .text.GLCD_SetPixel
-                0x00001026       0x8e SPLC501C.o
-                0x00001026                GLCD_SetPixel
+                0x000011d8       0x8e SPLC501C.o
+                0x000011d8                GLCD_SetPixel
  .text.GLCD_voltage
-                0x000010b4       0xbe SPLC501C.o
-                0x000010b4                GLCD_voltage
+                0x00001266       0xbe SPLC501C.o
+                0x00001266                GLCD_voltage
  .text.GLCD_dec
-                0x00001172       0x36 SPLC501C.o
-                0x00001172                GLCD_dec
+                0x00001324       0x36 SPLC501C.o
+                0x00001324                GLCD_dec
  .text.GLCD_clear
-                0x000011a8       0x44 SPLC501C.o
-                0x000011a8                GLCD_clear
+                0x0000135a       0x44 SPLC501C.o
+                0x0000135a                GLCD_clear
  .text.Timer0_Init
-                0x000011ec       0x12 timer.o
-                0x000011ec                Timer0_Init
+                0x0000139e       0x12 timer.o
+                0x0000139e                Timer0_Init
  .text.timer_get
-                0x000011fe        0xa timer.o
-                0x000011fe                timer_get
+                0x000013b0        0xa timer.o
+                0x000013b0                timer_get
  .text.timer_time_elapsed
-                0x00001208       0x1a timer.o
-                0x00001208                timer_time_elapsed
+                0x000013ba       0x1a timer.o
+                0x000013ba                timer_time_elapsed
  .text.timer_new_tick
-                0x00001222       0x28 timer.o
-                0x00001222                timer_new_tick
+                0x000013d4       0x28 timer.o
+                0x000013d4                timer_new_tick
  .text.__vector_9
-                0x0000124a       0x2e timer.o
-                0x0000124a                __vector_9
+                0x000013fc       0x2e timer.o
+                0x000013fc                __vector_9
  .text.__vector_15
-                0x00001278       0x2e timer.o
-                0x00001278                __vector_15
+                0x0000142a       0x2e timer.o
+                0x0000142a                __vector_15
  .text.__vector_17
-                0x000012a6       0x2e timer.o
-                0x000012a6                __vector_17
+                0x00001458       0x2e timer.o
+                0x00001458                __vector_17
  .text.libgcc.div
-                0x000012d4       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_udivmodhi4.o)
-                0x000012d4                __udivmodhi4
+                0x00001486       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_udivmodhi4.o)
+                0x00001486                __udivmodhi4
  .text.libgcc.div
-                0x000012fc       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodhi4.o)
-                0x000012fc                _div
-                0x000012fc                __divmodhi4
+                0x000014ae       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodhi4.o)
+                0x000014ae                _div
+                0x000014ae                __divmodhi4
  .text.libgcc.mul
-                0x00001324       0x1e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_umulhisi3.o)
-                0x00001324                __umulhisi3
+                0x000014d6       0x1e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_umulhisi3.o)
+                0x000014d6                __umulhisi3
  .text.libgcc.mul
-                0x00001342        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_usmulhisi3.o)
-                0x00001342                __usmulhisi3
-                0x00001346                __usmulhisi3_tail
+                0x000014f4        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_usmulhisi3.o)
+                0x000014f4                __usmulhisi3
+                0x000014f8                __usmulhisi3_tail
  .text.avr-libc
-                0x00001350       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
-                0x00001350                __itoa_ncheck
+                0x00001502       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
+                0x00001502                __itoa_ncheck
  .text.avr-libc
-                0x00001366       0x34 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
-                0x00001366                __utoa_ncheck
-                0x00001368                __utoa_common
+                0x00001518       0x34 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
+                0x00001518                __utoa_ncheck
+                0x0000151a                __utoa_common
  .text.avr-libc
-                0x0000139a       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libc.a(strrev.o)
-                0x0000139a                strrev
-                0x000013ba                . = ALIGN (0x2)
+                0x0000154c       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x0000154c                strrev
+                0x0000156c                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000013ba        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
-                0x000013ba                _exit
-                0x000013ba                exit
+ .fini9         0x0000156c        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+                0x0000156c                _exit
+                0x0000156c                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -736,11 +751,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000013ba        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000156c        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000013be                _etext = .
+                0x00001570                _etext = .
 
-.data           0x00800100        0x2 load address 0x000013be
+.data           0x00800100        0x2 load address 0x00001570
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -753,7 +768,7 @@ END GROUP
                 0x00800102                _edata = .
                 0x00800102                PROVIDE (__data_end, .)
 
-.bss            0x00800102      0x47f
+.bss            0x00800102      0x48f
                 0x00800102                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
@@ -764,11 +779,11 @@ END GROUP
  .bss.screen_line
                 0x00800104        0x1 button.o
                 0x00800104                screen_line
- .bss.frame.1547
+ .bss.frame.1559
                 0x00800105        0x1 CAN.o
- .bss.Update_data_flag.1533
+ .bss.Update_data_flag.1537
                 0x00800106        0x1 CAN.o
- .bss.sync_timer.1534
+ .bss.sync_timer.1538
                 0x00800107        0x2 CAN.o
  .bss.CAN_interrupt_flag
                 0x00800109        0x1 CAN.o
@@ -776,17 +791,17 @@ END GROUP
  .bss.led_state
                 0x0080010a        0x1 CAN_LCD.o
                 0x0080010a                led_state
- .bss.temp.1845
+ .bss.temp.1849
                 0x0080010b        0x2 Display.o
- .bss.SOC_prev.1844
+ .bss.SOC_prev.1848
                 0x0080010d        0x1 Display.o
- .bss.line_clear_iteration.1847
+ .bss.line_clear_iteration.1851
                 0x0080010e        0x1 Display.o
- .bss.line_shift_prev.1846
+ .bss.line_shift_prev.1850
                 0x0080010f        0x1 Display.o
- .bss.line_refresh_nr.1843
+ .bss.line_refresh_nr.1847
                 0x00800110        0x1 Display.o
- .bss.line_shift.1842
+ .bss.line_shift.1846
                 0x00800111        0x1 Display.o
  .bss.LCD       0x00800112      0x420 SPLC501C-AVR.o
                 0x00800112                LCD
@@ -796,22 +811,22 @@ END GROUP
  *(COMMON)
  COMMON         0x00800536        0x1 button.o
                 0x00800536                button_state
- COMMON         0x00800537       0x46 CAN.o
+ COMMON         0x00800537       0x56 CAN.o
                 0x00800537                CAN
-                0x0080055d                MOb_data
- COMMON         0x0080057d        0x4 SPLC501C-AVR.o
-                0x0080057d                ys
-                0x0080057f                xs
-                0x00800581                PROVIDE (__bss_end, .)
-                0x000013be                __data_load_start = LOADADDR (.data)
-                0x000013c0                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800565                MOb_data
+ COMMON         0x0080058d        0x4 SPLC501C-AVR.o
+                0x0080058d                ys
+                0x0080058f                xs
+                0x00800591                PROVIDE (__bss_end, .)
+                0x00001570                __data_load_start = LOADADDR (.data)
+                0x00001572                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800581        0x0
-                0x00800581                PROVIDE (__noinit_start, .)
+.noinit         0x00800591        0x0
+                0x00800591                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800581                PROVIDE (__noinit_end, .)
-                0x00800581                _end = .
-                0x00800581                PROVIDE (__heap_start, .)
+                0x00800591                PROVIDE (__noinit_end, .)
+                0x00800591                _end = .
+                0x00800591                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)

@@ -10,7 +10,7 @@
 void Display_Init();
 void Display_Task();
 
-#define SCREEN_LINES_COUNT 10
+#define SCREEN_LINES_COUNT 14
 #define DISPLAY_LINES_COUNT 8
 
 #define DISPLAY_H_

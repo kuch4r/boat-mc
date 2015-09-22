@@ -194,6 +194,34 @@ void Display_Task(){
 		GLCD_WriteString_progmem(PSTR("%"));
 	}
 	
+	else if(line_refresh_nr == (10 + line_shift) % SCREEN_LINES_COUNT){
+		GLCD_WriteString_progmem(PSTR("Water:"));
+		GLCD_clear(6);
+		GLCD_dec(CAN.WINCH_CTRL_water_level);
+		GLCD_WriteString_progmem(PSTR("L"));
+	}
+	
+	else if(line_refresh_nr == (11 + line_shift) % SCREEN_LINES_COUNT){
+		GLCD_WriteString_progmem(PSTR("12V Bat:"));
+		GLCD_clear(6);
+		GLCD_voltage(CAN.WINCH_CTRL_supply_voltage*10);
+		GLCD_WriteString_progmem(PSTR("V"));
+	}
+	
+	else if(line_refresh_nr == (12 + line_shift) % SCREEN_LINES_COUNT){
+		GLCD_WriteString_progmem(PSTR("Mot RPM:"));
+		GLCD_clear(6);
+		GLCD_dec((int16_t)CAN.INV_RPMs);
+		//GLCD_WriteString_progmem(PSTR(" "));
+	}
+	
+	else if(line_refresh_nr == (13 + line_shift) % SCREEN_LINES_COUNT){
+		GLCD_WriteString_progmem(PSTR("Mot torq:"));
+		GLCD_clear(6);
+		GLCD_dec(CAN.INV_torque / 10);
+		GLCD_WriteString_progmem(PSTR("%"));
+	}
+	
 	if(line_refresh_nr == 0 ){
 		
 		if(CAN.BMS_SOC != SOC_prev){
