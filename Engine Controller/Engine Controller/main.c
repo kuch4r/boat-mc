@@ -37,6 +37,7 @@ int main(void)
 	uint16_t throttle_position=0;
 	int16_t throttle_percentage=0;
 	uint8_t init_counter=0;
+	uint8_t zero_position_flag=0;
 	
 	Init_HAL();
 	Init_Timer();
@@ -66,9 +67,18 @@ int main(void)
 				throttle_position=ADC_get();
 			}
 			
+			CAN.throttle_position = throttle_position;
+			CAN.throttle_percentage = throttle_percentage;
+			CAN.init_counter = init_counter;
+			CAN.direction = direction;
+			CAN.throttle_direction = throttle_direction;
+			
 			if(state == INIT){
-				//oczekuj na falownik
-								
+				//wjeœli zerowa pozycja dŸwigni ustaw flagê
+				if((throttle_position >= (CENTER - BLIND_RANGE)) && (throttle_position <= (CENTER + BLIND_RANGE))){
+					zero_position_flag = TRUE;
+				}
+				//oczekuj na falownik		
 				//warunek przejscia do nastepnego stanu
 				if(CAN_Heart_Beat_received()){
 					time_stamp=Get_timer();
@@ -78,6 +88,10 @@ int main(void)
 				}
 			}
 			else if(state == INV_INIT){
+				//wjeœli zerowa pozycja dŸwigni ustaw flagê
+				if((throttle_position >= (CENTER - BLIND_RANGE)) && (throttle_position <= (CENTER + BLIND_RANGE))){
+					zero_position_flag = TRUE;
+				}
 				//inicjalizacja falownika
 				LED_blinking(1,1,0);
 				if((CAN.status_word & 0x0040) == 0x0040 && init_counter == 0){
@@ -104,7 +118,7 @@ int main(void)
 				//migaj zielon¹ diod¹
 				LED_blinking(1,0,0);
 				//jeœli w zakresie zera to idŸ dalej
-				if((throttle_position >= (CENTER - BLIND_RANGE)) && (throttle_position <= (CENTER + BLIND_RANGE))){
+				if(((throttle_position >= (CENTER - BLIND_RANGE)) && (throttle_position <= (CENTER + BLIND_RANGE))) || zero_position_flag == TRUE){
 					state = RUN;
 					time_stamp=Get_timer();
 					//zapal pomarañczow¹ diodê

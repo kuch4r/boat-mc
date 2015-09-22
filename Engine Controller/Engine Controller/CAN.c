@@ -233,13 +233,13 @@ void CAN_Task(){
 		}
 		else if(frame == 2 ){ //paczka debuguj¹ca - nadaje
 			MOb_data[frame][0] = CAN.state;
-			MOb_data[frame][1] = CAN.motor_speed;
-			MOb_data[frame][2] = CAN.motor_speed>>8;
-			MOb_data[frame][3] = 0x00;
-			MOb_data[frame][4] = 0x00;
-			MOb_data[frame][5] = 0x00;
-			MOb_data[frame][6] = 0x00;
-			MOb_data[frame][7] = 0x00;
+			MOb_data[frame][1] = CAN.throttle_position;
+			MOb_data[frame][2] = CAN.throttle_position>>8;
+			MOb_data[frame][3] = CAN.throttle_percentage;
+			MOb_data[frame][4] = CAN.throttle_percentage>>8;
+			MOb_data[frame][5] = CAN.init_counter;
+			MOb_data[frame][6] = CAN.direction;
+			MOb_data[frame][7] = CAN.throttle_direction;
 			frame++;
 		}
 		else if(frame == 3 ){ //NMT - nadaje

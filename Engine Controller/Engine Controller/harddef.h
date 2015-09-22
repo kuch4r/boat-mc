@@ -36,7 +36,7 @@
 #define ADC_MAX 300
 
 //Zakres przy ktróym poziom gazu =0 [0-511 ADC] - liczony od CENTER w obie storny (w sumie gaz zero przez BLIND_RANGE*2)
-#define BLIND_RANGE 80
+#define BLIND_RANGE 100
 
 #define THROTTLE_RANGE ADC_MAX - BLIND_RANGE
 

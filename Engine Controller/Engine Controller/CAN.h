@@ -62,7 +62,11 @@ struct CAN_str {
 	int32_t motor_speed;
 	uint8_t state;
 	uint8_t diag_1;
-	uint8_t diag_2;	
+	uint16_t throttle_position;
+	int16_t	throttle_percentage;
+	uint8_t init_counter;
+	uint8_t direction;
+	uint8_t throttle_direction;
 };
 
 
