@@ -7,9 +7,7 @@
 
 volatile uint8_t CAN_interrupt_flag=0;
 volatile uint8_t CAN_SYNC_flag=0;
-volatile uint8_t CAN_HB_flag=0;
-volatile uint8_t CAN_NMT_flag=0;
-volatile uint8_t MOb_data[4][8];
+volatile uint8_t MOb_data[6][8];
 volatile uint8_t device_id;
 
 struct CAN_str CAN;
@@ -17,13 +15,19 @@ struct CAN_str CAN;
 
 //Inicjalizacja CAN
 void CAN_init(uint8_t dip_sw){
-	uint16_t mob_1_id = 0x200 + BASE_ID; //odbiera
-	uint16_t mob_2_id = 0x180 + BASE_ID; //nadaje
-	uint16_t mob_3_id = 0x280 + BASE_ID; //nadaje
+	uint16_t mob_0_id = SYNC_ID;		//SYNC
+	uint16_t mob_1_id = 0x200 + BASE_ID; //RPDO 1
+	uint16_t mob_2_id = 0x180 + BASE_ID; //TPDO 1
+	uint16_t mob_3_id = 0x280 + BASE_ID; //TPDO 2
+	uint16_t mob_4_id = 0x580 + BASE_ID; //SDO TX
+	uint16_t mob_5_id = 0x600 + BASE_ID; //SDO RX
 	
+	//dodwania do adresu ustawienia z DIP switchy
 	mob_1_id += dip_sw & 0x07;
 	mob_2_id += dip_sw & 0x07;
 	mob_3_id += dip_sw & 0x07;
+	mob_4_id += dip_sw & 0x07;
+	mob_5_id += dip_sw & 0x07;
 	
 	CANGCON = ( 1 << SWRES );   // Software reset
 	CANTCON = 0x00;             // CAN timing prescaler set to 0
@@ -50,11 +54,11 @@ void CAN_init(uint8_t dip_sw){
 	CANCDMOB |= RECEPTION;
 	CANIDT4 = 0x00;
 	CANIDT3 = 0x00;
-	CANIDT2 = ((SYNC_ID & 0x07) << 5);
-	CANIDT1 = (SYNC_ID >> 3);
+	CANIDT2 = ((mob_0_id & 0x07) << 5);
+	CANIDT1 = (mob_0_id >> 3);
 	CANIE2	|= (1<<IEMOB0); //Enable Interrupt MOb 0
 	
-	//MOb 1 configuration control message
+	//MOb 1 configuration odbierana paczka RPDO 1 0x200+
 	CANPAGE	 = (MOb_1<<4);
 	CANIDM4 = 0x00; //full mask setting
 	CANIDM3 = 0x00; //full mask setting
@@ -68,42 +72,8 @@ void CAN_init(uint8_t dip_sw){
 	CANIDT1 = (mob_1_id >> 3);
 	CANIE2	|= (1<<IEMOB1); //Enable Interrupt MOb 1
 	
-	/*
-	//MOb 2 configuration
+	//MOb 2 configuration nadawana paczka TPDO 1 0x180+
 	CANPAGE	 = (MOb_2<<4);
-	
-	CANIDM4 = 0x00; //full mask setting
-	CANIDM3 = 0x00; //full mask setting
-	CANIDM2 = (0x07 <<5); //full mask setting
-	CANIDM1 = 0xFF; //full mask setting
-	CANCDMOB = 0x00;
-	CANCDMOB |= RECEPTION | ( 8 << DLC0);
-	//CANCDMOB |= RECEPTION;
-	CANIDT4 = 0x00;
-	CANIDT3 = 0x00;
-	CANIDT2 = ((MOb_2_ID & 0x07) << 5);
-	CANIDT1 = (MOb_2_ID >> 3);
-	CANIE2	|= (1<<IEMOB2); //Enable Interrupt MOb 2
-	*/
-	
-	//MOb 3 configuration
-	CANPAGE	 = (MOb_3<<4);
-	
-	CANIDM4 = 0x00; //full mask setting
-	CANIDM3 = 0x00; //full mask setting
-	CANIDM2 = (0x07 <<5); //full mask setting
-	CANIDM1 = 0xFF; //full mask setting
-	CANCDMOB = 0x00;
-	//CANCDMOB |= TRANSMISSION;
-	CANIDT4 = 0x00;
-	CANIDT3 = 0x00;
-	CANIDT2 = ((mob_3_id & 0x07) << 5);
-	CANIDT1 = (mob_3_id >> 3);
-	CANIE2	|= (1<<IEMOB3); //Enable Interrupt MOb 3
-	
-	//MOb 4 configuration
-	CANPAGE	 = (MOb_2<<4);
-	
 	CANIDM4 = 0x00; //full mask setting
 	CANIDM3 = 0x00; //full mask setting
 	CANIDM2 = (0x07 <<5); //full mask setting
@@ -116,10 +86,9 @@ void CAN_init(uint8_t dip_sw){
 	CANIDT1 = (mob_2_id >> 3);
 	CANIE2	|= (1<<IEMOB2); //Enable Interrupt MOb 4
 	
-	/*
-	//MOb 5 configuration
-	CANPAGE	 = (MOb_5<<4);
 	
+	//MOb 3 configuration nadawana paczka TPDO 2 0x280+
+	CANPAGE	 = (MOb_3<<4);
 	CANIDM4 = 0x00; //full mask setting
 	CANIDM3 = 0x00; //full mask setting
 	CANIDM2 = (0x07 <<5); //full mask setting
@@ -128,10 +97,38 @@ void CAN_init(uint8_t dip_sw){
 	//CANCDMOB |= TRANSMISSION;
 	CANIDT4 = 0x00;
 	CANIDT3 = 0x00;
-	CANIDT2 = ((MOb_5_ID & 0x07) << 5);
-	CANIDT1 = (MOb_5_ID >> 3);
-	CANIE2	|= (1<<IEMOB5); //Enable Interrupt MOb 5
-	*/
+	CANIDT2 = ((mob_3_id & 0x07) << 5);
+	CANIDT1 = (mob_3_id >> 3);
+	CANIE2	|= (1<<IEMOB3); //Enable Interrupt MOb 3
+	
+	//MOb 4 configuration nadawana paczka SDO TX
+	CANPAGE	 = (MOb_4<<4);
+	CANIDM4 = 0x00; //full mask setting
+	CANIDM3 = 0x00; //full mask setting
+	CANIDM2 = (0x07 <<5); //full mask setting
+	CANIDM1 = 0xFF; //full mask setting
+	CANCDMOB = 0x00;
+	//CANCDMOB |= TRANSMISSION;
+	CANIDT4 = 0x00;
+	CANIDT3 = 0x00;
+	CANIDT2 = ((mob_4_id & 0x07) << 5);
+	CANIDT1 = (mob_4_id >> 3);
+	CANIE2	|= (1<<IEMOB4); //Enable Interrupt MOb 3
+	
+	//MOb 5 configuration odbierana paczka SDO RX
+	CANPAGE	 = (MOb_5<<4);
+	CANIDM4 = 0x00; //full mask setting
+	CANIDM3 = 0x00; //full mask setting
+	CANIDM2 = 0xFF; //full mask setting
+	CANIDM1 = 0xFF; //full mask setting
+	CANCDMOB = 0x00;
+	CANCDMOB |= RECEPTION | ( 8 << DLC0);
+	CANIDT4 = 0x00;
+	CANIDT3 = 0x00;
+	CANIDT2 = ((mob_5_id & 0x07) << 5);
+	CANIDT1 = (mob_5_id >> 3);
+	CANIE2	|= (1<<IEMOB5); //Enable Interrupt MOb 1
+	
 	
 	CLEAR_CAN_interrupt_flag
 	
@@ -152,75 +149,63 @@ SIGNAL ( CAN_INT_vect ){              // use interrupts
 
 void CAN_task(){
 	static uint8_t Update_data_flag=0;
-	/*
-	if( adc_ready_to_send > 100 ){
-		MOb_data[2][0] = CAN.state;
-		MOb_data[2][1] = CAN.water;
-		MOb_data[2][2] = CAN.water >>8;
-		MOb_data[2][3] = CAN.current_raw ;
-		MOb_data[2][4] = CAN.current_raw >> 8;
-		MOb_data[2][5] = CAN.current ;
-		MOb_data[2][6] = CAN.current >> 8;
-		MOb_data[2][7] = 0x00 | (uint8_t)(CAN.current > 256);
-		
-		SET_SYNC_flag;
-		adc_ready_to_send = 0;
-	}*/
 	
 	if(CAN_interrupt_flag !=0){	//Jeœli zg³oszone przerwanie
 		CLEAR_CAN_interrupt_flag
 		CANPAGE = CANHPMOB & 0xF0;      // Selects MOB with highest priority interrupt 
 		
 		
-		if((CANPAGE>>4) == MOb_0){ //sync - odbiera
+		if((CANPAGE>>4) == MOb_0){ //SYNC - odbiera
 			if(CANSTMOB & ( 1 << RXOK)){	//obiór SYNC-a
-				SET_SYNC_flag				//ustaw flagê ob³sugi synca
+				SET_SYNC_flag;				//ustaw flagê ob³sugi synca
 			}
 			CANSTMOB=0x00;
 			CANCDMOB = 0x00;			//restart MOB-a
 			CANCDMOB |= RECEPTION;		
 		}
 		
-		
-		/*else if((CANPAGE>>4) == MOb_1){ //Heartbeat - odbiera
-			if(CANSTMOB & ( 1 << RXOK)){	
-				SET_HB_flag;
+		else if((CANPAGE>>4) == MOb_1){ //RPDO 1 - odbiera
+			if(CANSTMOB & ( 1 << RXOK)){	//obiór SYNC-a
+				for(uint8_t byte_nr=0; byte_nr<8; byte_nr++ ){//przepisanie danych z rejestru do tablicy
+					MOb_data[MOb_1][byte_nr] = CANMSG;
+				}				
 			}
 			CANSTMOB=0x00;
 			CANCDMOB = 0x00;			//restart MOB-a
-			CANCDMOB |= RECEPTION | ( 8 << DLC0) ;		
+			CANCDMOB |= RECEPTION;
 		}
 		
-		else if((CANPAGE>>4) == MOb_2){//paczka zwrotne z falownika - odbiera
-			if(CANSTMOB & ( 1 << RXOK)){
-				for(uint8_t byte_nr=0; byte_nr<8; byte_nr++ ){
-					MOb_data[0][byte_nr] = CANMSG;
+		//czyszczenie flag przerwania dla paczek nadaj¹cych
+		else if((CANPAGE>>4) == MOb_2){//TPDO 1
+			CANSTMOB=0x00;
+		}
+		
+		else if((CANPAGE>>4) == MOb_3){//TPDO 2
+			CANSTMOB=0x00;
+		}
+		
+		else if((CANPAGE>>4) == MOb_3){//SDO TX
+			CANSTMOB=0x00;
+		}
+		
+		else if((CANPAGE>>4) == MOb_5){ //SDO RX - odbiera
+			if(CANSTMOB & ( 1 << RXOK)){	
+				for(uint8_t byte_nr=0; byte_nr<8; byte_nr++ ){//przepisanie danych z rejestru do tablicy
+					MOb_data[MOb_5][byte_nr] = CANMSG;
 				}
 			}
 			CANSTMOB=0x00;
 			CANCDMOB = 0x00;			//restart MOB-a
-			CANCDMOB |= RECEPTION | ( 8 << DLC0) ;
-		}*/
-		else if((CANPAGE>>4) == MOb_3){//paczka steruj¹ca falownikiem - nadaje
-			CANSTMOB=0x00;
+			CANCDMOB |= RECEPTION;
 		}
-		else if((CANPAGE>>4) == MOb_2){//paczka debuguj¹ca - nadaje
-			CANSTMOB=0x00;
-		}
-		/*
-		else if((CANPAGE>>4) == MOb_5){//NMT - nadaje
-			CANSTMOB=0x00;
-		}*/
 	}
-	else if(Update_data_flag){
+	else if(Update_data_flag){//mechanizm przepisywania danych PDO - po ka¿dym sync przepisywane s¹ œwie¿e dane
 		static uint8_t frame=0;
-		if(frame == 0 ){ //paczka zwrotne z falownika - odbiera
+		if(frame == MOb_1 ){ //RPDO 1
 			//CAN.status_word = MOb_data[frame][1]<<8 | MOb_data[frame][0];
-			//CAN.torque = MOb_data[frame][5]<<8 | MOb_data[frame][4];
-			//CAN.speed = MOb_data[frame][7]<<8 | MOb_data[frame][6];
 			frame++;
 		}
-		else if(frame == 1 ){ //paczka wysy³ana - nadaje
+		else if(frame == MOb_2 ){ //TPDO 1 - nadaje
 			MOb_data[frame][0] = CAN.state;
 			MOb_data[frame][1] = CAN.water;
 			MOb_data[frame][2] = CAN.supply_voltage;
@@ -231,7 +216,7 @@ void CAN_task(){
 			MOb_data[frame][7] = 0x00;
 			frame++;
 		}
-		else if(frame == 2 ){ //paczka debuguj¹ca - nadaje
+		else if(frame == MOb_3 ){ //TPDO 2 nadaje
 			MOb_data[frame][0] = CAN.state;
 			MOb_data[frame][1] = CAN.water;
 			MOb_data[frame][2] = CAN.water >>8;
@@ -240,27 +225,24 @@ void CAN_task(){
 			MOb_data[frame][5] = CAN.current ;
 			MOb_data[frame][6] = CAN.current >> 8;
 			MOb_data[frame][7] = 0x00 | (uint8_t)(CAN.current > 256);
-			frame++;
-		}
-		else if(frame == 3 ){ //NMT - nadaje
-			MOb_data[frame][0] = 0x01;
-			MOb_data[frame][1] = 0;
-			CLEAR_update_data_flag
+			CLEAR_update_data_flag;
 			frame = 0;
-		}										
+		}						
 	}
 	else if( CAN_SYNC_flag  ){ //){ //Zleæ transmisjê po koleji transmisjê kolejnych paczek
-		static uint8_t mob=2;
+		static uint8_t mob=MOb_2; //pierwszy MOb odbieraj¹cy
 		CANPAGE = ( mob << 4 );						// Selects Message Object 0-5
 		if((CANEN2 & ( 1 << mob )) == 0){		//Jeœli MOb jest wolny
 			for(uint8_t byte_nr=0; byte_nr<8; byte_nr++  ){
-				CANMSG = MOb_data[mob-1][byte_nr];
+				CANMSG = MOb_data[mob][byte_nr];
 			}
+			//czyszczenie rejestru statusu
 			CANSTMOB = 0x00;
+			//komenda nadania
 			CANCDMOB = TRANSMISSION | ( 8 << DLC0);//zleæ transmisjê 8 bajtów
 		}
-		if(mob >= 3 ){
-			 mob=2;
+		if(mob >= MOb_3 ){
+			 mob=MOb_2;
 			 CLEAR_SYNC_flag
 			 SET_update_data_flag
 		}		
@@ -301,14 +283,3 @@ void CAN_send_temp(uint16_t value, uint16_t value2){
 	}
 }
 */
-uint8_t	CAN_Heart_Beat_received(void){
-	return CAN_HB_flag;
-}
-
-void Set_NMT_flag(void){
-	CAN_NMT_flag=1;
-}
-
-void Clear_NMT_flag(void){
-	CAN_NMT_flag=0;
-}

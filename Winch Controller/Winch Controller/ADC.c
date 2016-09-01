@@ -83,13 +83,14 @@ void ADC_task(void){
 		/* voltage result */
 		if((adc_results.raw_voltage + ADC_VOLTAGE_OFFSET) < 1024 && (ADC_VOLTAGE_OFFSET+adc_results.raw_voltage) > 0){
 			adc_results.voltage = ((((uint32_t)adc_results.raw_voltage + ADC_VOLTAGE_OFFSET))*ADC_VOLTAGE_SCALE) / 1024;
+		}
 		else {
 			adc_results.voltage = 0;
 		}
 		
 		/* current result */
-		if(((adc_results.raw_current + I_OFFSET) < 1024) && ((I_OFFSET + adc_results.raw_current) > 0)){
-			adc_results.current=((((uint32_t)adc_results.raw_current + I_OFFSET))*I_SCALE) / 1024; //przeliczanie ADU na pr¹d (ADU*I_SCALE)/1024 i wyliczanie œredniej z poprzednim pomiarem
+		if(((adc_results.raw_current + ADC_CURRENT_OFFSET) < 1024) && ((ADC_CURRENT_SCALE + adc_results.raw_current) > 0)){
+			adc_results.current=((((uint32_t)adc_results.raw_current + ADC_CURRENT_OFFSET))*ADC_CURRENT_SCALE) / 1024; //przeliczanie ADU na pr¹d (ADU*I_SCALE)/1024 i wyliczanie œredniej z poprzednim pomiarem
 		} else {
 			adc_results.current = 0;
 		}
