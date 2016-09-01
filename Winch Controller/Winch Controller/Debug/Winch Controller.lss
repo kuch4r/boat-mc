@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000180  00000000  00000000  00001164  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001084  00000000  00000000  000012e4  2**0
+  6 .debug_info   00001098  00000000  00000000  000012e4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000006e1  00000000  00000000  00002368  2**0
+  7 .debug_abbrev 000006db  00000000  00000000  0000237c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000010d8  00000000  00000000  00002a49  2**0
+  8 .debug_line   000010e0  00000000  00000000  00002a57  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000043c  00000000  00000000  00003b24  2**2
+  9 .debug_frame  0000043c  00000000  00000000  00003b38  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000005a7  00000000  00000000  00003f60  2**0
+ 10 .debug_str    000005a7  00000000  00000000  00003f74  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000928  00000000  00000000  00004507  2**0
+ 11 .debug_loc    0000095f  00000000  00000000  0000451b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000130  00000000  00000000  00004e2f  2**0
+ 12 .debug_ranges 00000130  00000000  00000000  00004e7a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1893,11 +1893,11 @@ void CAN_task(){
      c18:	08 95       	ret
 		}
 		
-		else if((CANPAGE>>4) == MOb_3){//SDO TX
+		else if((CANPAGE>>4) == MOb_4){//SDO TX
      c1a:	80 91 ed 00 	lds	r24, 0x00ED	; 0x8000ed <__TEXT_REGION_LENGTH__+0x7e00ed>
      c1e:	82 95       	swap	r24
      c20:	8f 70       	andi	r24, 0x0F	; 15
-     c22:	83 30       	cpi	r24, 0x03	; 3
+     c22:	84 30       	cpi	r24, 0x04	; 4
      c24:	19 f4       	brne	.+6      	; 0xc2c <CAN_task+0xb8>
 			CANSTMOB=0x00;
      c26:	10 92 ee 00 	sts	0x00EE, r1	; 0x8000ee <__TEXT_REGION_LENGTH__+0x7e00ee>

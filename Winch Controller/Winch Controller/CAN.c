@@ -184,7 +184,7 @@ void CAN_task(){
 			CANSTMOB=0x00;
 		}
 		
-		else if((CANPAGE>>4) == MOb_3){//SDO TX
+		else if((CANPAGE>>4) == MOb_4){//SDO TX
 			CANSTMOB=0x00;
 		}
 		
@@ -250,36 +250,19 @@ void CAN_task(){
 	}
 }
 
-void CAN_send(uint16_t value, uint8_t phase){
-		uint8_t mob=2;
-		MOb_data[mob-1][0] = (value & 0x00FF);
-		MOb_data[mob-1][1] = value >> 8;
-		MOb_data[mob-1][2] = phase;
+void CAN_send_SDO(uint8_t *payload){
+		uint8_t mob=MOb_4;
+		for(uint8_t i=0 ; i < 8 ; i++){
+			MOb_data[mob][i] = payload[i];
+		}
+				
 		CANPAGE = ( mob << 4 );						// Selects Message Object 0-5
 		if((CANEN2 & ( 1 << mob )) == 0){		//Jeœli MOb jest wolny
-			for(uint8_t byte_nr=0; byte_nr<3; byte_nr++  ){
-				CANMSG = MOb_data[mob-1][byte_nr];
+			for(uint8_t byte_nr=0; byte_nr < 8; byte_nr++  ){
+				CANMSG = MOb_data[mob][byte_nr];
 			}
 			CANSTMOB = 0x00;						//wyczyœæ status
-			CANCDMOB = TRANSMISSION | ( 3 << DLC0);//zleæ transmisjê 8 bajtów
+			CANCDMOB = TRANSMISSION | ( 8 << DLC0);//zleæ transmisjê 8 bajtów
 		}
 }
-/*
-void CAN_send_temp(uint16_t value, uint16_t value2){
-	uint8_t mob=4;
-	MOb_data[mob-1][0] = (value & 0x00FF);
-	MOb_data[mob-1][1] = value >> 8;
-	MOb_data[mob-1][3] = (value & 0x00FF);
-	MOb_data[mob-1][4] = value >> 8;
-	MOb_data[mob-1][5] = 0xFF
-	MOb_data[mob-1][6] = 0xFF
-	CANPAGE = ( mob << 4 );						// Selects Message Object 0-5
-	if((CANEN2 & ( 1 << mob )) == 0){		//Jeœli MOb jest wolny
-		for(uint8_t byte_nr=0; byte_nr<6; byte_nr++  ){
-			CANMSG = MOb_data[mob-1][byte_nr];
-		}
-		CANSTMOB = 0x00;						//wyczyœæ status
-		CANCDMOB = TRANSMISSION | ( 3 << DLC0);//zleæ transmisjê 8 bajtów
-	}
-}
-*/
+

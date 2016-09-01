@@ -53,8 +53,8 @@ Discarded input sections
  .text          0x00000000        0x0 CAN.o
  .data          0x00000000        0x0 CAN.o
  .bss           0x00000000        0x0 CAN.o
- .text.CAN_send
-                0x00000000       0x3c CAN.o
+ .text.CAN_send_SDO
+                0x00000000       0x54 CAN.o
  .text          0x00000000        0x0 delay.o
  .data          0x00000000        0x0 delay.o
  .bss           0x00000000        0x0 delay.o
@@ -700,29 +700,29 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1084
+.debug_info     0x00000000     0x1098
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x2d7 ADC.o
  .debug_info    0x000002d7      0x5f2 main.o
- .debug_info    0x000008c9      0x363 CAN.o
- .debug_info    0x00000c2c      0x1e0 PSC.o
- .debug_info    0x00000e0c      0x278 timer.o
+ .debug_info    0x000008c9      0x377 CAN.o
+ .debug_info    0x00000c40      0x1e0 PSC.o
+ .debug_info    0x00000e20      0x278 timer.o
 
-.debug_abbrev   0x00000000      0x6e1
+.debug_abbrev   0x00000000      0x6db
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x11b ADC.o
  .debug_abbrev  0x0000011b      0x245 main.o
- .debug_abbrev  0x00000360      0x191 CAN.o
- .debug_abbrev  0x000004f1       0xfc PSC.o
- .debug_abbrev  0x000005ed       0xf4 timer.o
+ .debug_abbrev  0x00000360      0x18b CAN.o
+ .debug_abbrev  0x000004eb       0xfc PSC.o
+ .debug_abbrev  0x000005e7       0xf4 timer.o
 
-.debug_line     0x00000000     0x10d8
+.debug_line     0x00000000     0x10e0
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x20b ADC.o
  .debug_line    0x0000020b      0x64e main.o
- .debug_line    0x00000859      0x504 CAN.o
- .debug_line    0x00000d5d      0x16d PSC.o
- .debug_line    0x00000eca      0x20e timer.o
+ .debug_line    0x00000859      0x50c CAN.o
+ .debug_line    0x00000d65      0x16d PSC.o
+ .debug_line    0x00000ed2      0x20e timer.o
 
 .debug_frame    0x00000000      0x43c
  *(.debug_frame)
@@ -745,13 +745,13 @@ END GROUP
  .debug_str     0x00000508       0x9f timer.o
                                 0x269 (size before relaxing)
 
-.debug_loc      0x00000000      0x928
+.debug_loc      0x00000000      0x95f
  *(.debug_loc)
  .debug_loc     0x00000000      0x187 ADC.o
  .debug_loc     0x00000187      0x284 main.o
- .debug_loc     0x0000040b      0x2ff CAN.o
- .debug_loc     0x0000070a       0x56 PSC.o
- .debug_loc     0x00000760      0x1c8 timer.o
+ .debug_loc     0x0000040b      0x336 CAN.o
+ .debug_loc     0x00000741       0x56 PSC.o
+ .debug_loc     0x00000797      0x1c8 timer.o
 
 .debug_macinfo
  *(.debug_macinfo)
