@@ -35,7 +35,7 @@ void timer_init(void){ //real time clock
 	//TCCR1B |= (1<<CS12)|(0<<CS11)|(1<<CS10);
 };
   
-//funckje zwraca TRUE jeœli od jej ostatniego wywo³ania up³yne³o 7,8125ms
+//funckje zwraca TRUE jeœli od jej ostatniego wywo³ania up³yne³o 
 uint8_t timer_new_tick(void){
 	static uint16_t time_stamp=0;
 

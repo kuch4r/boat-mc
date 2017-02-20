@@ -2,8 +2,15 @@
 #ifndef HARDDEF_H_INCLUDED
 #define HARDDEF_H_INCLUDED
 
+//warning debug disables autopower off feature!!
+#define DEBUG
+
+//console baud	
+#define BAUD 57600
+
+
 //czas co który wykonywana jest pêtla g³owna [4us]
-#define MAIN_LOOP_PERIOD 25 //0,1ms
+#define MAIN_LOOP_PERIOD 25 //4us*25=0,1ms
 
 
 //Wejœcia
@@ -28,8 +35,8 @@
 #define LED_0_PORT D
 #define LED_0 2
 
-#define LED_1_PORT D
-#define LED_1 3
+#define LED_1_PORT B
+#define LED_1 4
 
 
 //DIP SW
@@ -65,6 +72,10 @@
 #define WINCH_DOWN_PORT C
 #define WINCH_DOWN 4
 
+#define WINCH_SET_PIN_PORT B
+#define WINCH_SET_PIN 5
+
+
 //Podtrzymanie zasilania
 #define PWR_PORT B
 #define PWR 3
@@ -98,10 +109,10 @@
 #define INITIAL_DELAY 15
 
 //maksymalna wartosæ pr¹du wyci¹graki [0,5A]
-#define MAX_CURRENT_WINCH (52*2)
+#define OVERCURRENT_WINCH (52*2)
 
 //maksymalna wartosæ pr¹du wyci¹graki [0,5A]
-#define MAX_CURRENT_BOARD (25*2)
+#define OVERCURRENT_BOARD (25*2)
 
 //czas nieczu³oœci [ms]
 #define CURRENT_BLIND_TIME 75
@@ -114,9 +125,9 @@
 #define ADC_CURRENT_SCALE 800
 #define ADC_CURRENT_OFFSET (-511)
 
-//wskazania wody
-#define ADC_WATER_MAX 0x2B
-#define ADC_WATER_MIN 0x1C
+//wskazania miecza
+#define ADC_BOARD_POSITION_MAX 725
+#define ADC_BOARD_POSITION_MIN 7
 
 
 #define ADC_RESOLUTION 0x3FF
@@ -141,9 +152,15 @@
 0,\
 0,\
 1,\
-1}				
-					
-	
+1}			
+
+
+//DIP SW can address mask
+#define DIP_SW_CAN_ADDR_MASK 0x07
+				
+#define DIP_SW_IO_MASK 0x08
+
+
 
 #endif //HARDDEF_H_INCLUDED
 

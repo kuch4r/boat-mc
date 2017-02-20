@@ -17,6 +17,7 @@
 #include <inttypes.h>
 #include <util/delay.h>
 #include <avr/eeprom.h>
+#include <util/crc16.h>
 #include "CAN.h"
 #include "main.h"
 #include "harddef.h"
@@ -24,10 +25,13 @@
 #include "timer.h"
 #include "ADC.h"
 #include "PSC.h"
+#include "uart.h"
+#include "EEPROM.h"
 
 
 extern struct CAN_str CAN;
 extern struct PSC_str PSC;
+extern struct eeprom_struct non_volatile_data;
 
 volatile int8_t winch_state=OFF;
 volatile uint8_t power_up_source=SWITCH_ON;
@@ -35,18 +39,36 @@ volatile uint8_t winch_status=INIT;
 volatile uint16_t winch_timer=0;
 volatile uint16_t life_timer = 0;
 volatile uint16_t time_stamp = 0;
-
 volatile uint8_t adc_ready_to_send = 0;
+
+FILE uart_output = FDEV_SETUP_STREAM(uart_putc_s, NULL, _FDEV_SETUP_WRITE);
+FILE uart_input = FDEV_SETUP_STREAM(NULL, uart_getc_s, _FDEV_SETUP_READ);
 
 
 int main(void) {
-	Init_HAL();
+	
+	HAL_init();
 	timer_init();
-	CAN_init(Get_DIP_sw_word());
 	ADC_init();
-	Init_PSC();
+	PSC_init();
+	uart_init(BAUD);
+	CAN_init(GET_DIP_SW_CAN_ADDR);
+
+	stdout = &uart_output;
+	stdin  = &uart_input;
 	
 	sei();
+
+	uart_puts_P("Winch Controller\nCompilation date ");
+	uart_puts_P(__DATE__);
+	uart_puts_P("\n");
+	
+	//próba odczytu konfiguracji z EEPROMU, jeœli odczyt siê nie powiód³ przypisujemy wartoœci domyœlne
+	if(eeprom_read() == EEPROM_ERROR){
+		eeprom_restore_defaults();
+		uart_puts_P("Loading default values");
+	}
+	
 	
 	if( WINCH_UP_SET && WINCH_DOWN_SET ){
 		power_up_source = SWITCH_ON;
@@ -65,8 +87,9 @@ int main(void) {
 		power_up_source = SWITCH_ON;
 	}
 	
-	PWR_ON;
+	//PWR_ON;
 	LED_0_ON;
+	LED_1_OFF;
 	
 	ADC_start_conversion();
 	
@@ -82,8 +105,6 @@ int main(void) {
 
 void main_loop() {
 	uint16_t current = 0;
-	uint16_t water = 0;
-	uint16_t supply_voltage = 0;
 	
 	ADC_task();
 	PSC_Task();
@@ -91,14 +112,15 @@ void main_loop() {
 	CAN.state          = winch_status;
 	CAN.diag_1         = WINCH_SET;
 	CAN.current        = adc_results.current;
-	CAN.water          = adc_results.water;
+	CAN.board_position = adc_results.board_position;
 	CAN.supply_voltage = adc_results.voltage;
 	
-	CAN.water_raw = adc_results.raw_water;
+	CAN.board_position_raw = adc_results.raw_board_position;
 	CAN.current_raw = adc_results.raw_current;
 			
 	CAN_task();
-			
+	
+	#ifndef DEBUG
 	//gdy brak aktywnoœci przez okreœlony czas - wy³¹cz siê
 	if(timer_time_elapsed(life_timer) > TIME_TO_LIVE){
 		LED_0_OFF;
@@ -108,73 +130,74 @@ void main_loop() {
 		PWR_ON;
 		LED_0_ON;
 	}
+	#endif
 			
-			//wskazywanie stanu wyci¹garki
-			if(winch_state == UP || winch_state == DOWN){
-				//LED_0_ON;
-				if( BOARD_IS_ACTIVE ) {
-					LED_1_ON;
-					} else {
-					LED_1_OFF;
-				}
-			}
-			else if(winch_state == OVERLOAD){
-				//LED_0_OFF;
-				LED_1_ON;
-			}
-			else{
-				//LED_0_OFF;
-				LED_1_OFF;
-			}
+	//wskazywanie stanu wyci¹garki
+	if(winch_state == UP || winch_state == DOWN){
+		//LED_0_ON;
+		if( BOARD_IS_ACTIVE ) {
+			LED_1_ON;
+		} 
+		else {
+			LED_1_OFF;
+		}
+	}
+	else if(winch_state == OVERLOAD){
+		//LED_0_OFF;
+		LED_1_ON;
+	}
+	else{
+		//LED_0_OFF;
+		LED_1_OFF;
+	}
 		
-			if(winch_state == OVERLOAD){
-				//BUZZER_ON;
+	if(winch_state == OVERLOAD){
+		//BUZZER_ON;
 				
-			}
-			else if(winch_state == OFF){
-				//BUZZER_OFF;
-			}
-			//gdy wyci¹garka aktywna
-			else if(winch_state == UP || winch_state == DOWN){
+	}
+	else if(winch_state == OFF){
+		//BUZZER_OFF;
+	}
+	//gdy wyci¹garka aktywna
+	else if(winch_state == UP || winch_state == DOWN){
 				
-				if(((WINCH_IS_ACTIVE && current >= MAX_CURRENT_WINCH) || (BOARD_IS_ACTIVE && current >= MAX_CURRENT_BOARD)) && timer_time_elapsed(winch_timer) >= CURRENT_BLIND_TIME){ //zabezpiecznie nadpr¹dowe
-					winch_state=OVERLOAD;
-					Disable_PSC();
+		if(((WINCH_IS_ACTIVE && current >= non_volatile_data.winch_overcurrent_value) || (BOARD_IS_ACTIVE && current >= non_volatile_data.board_overcurrent_value)) && (timer_time_elapsed(winch_timer) >= CURRENT_BLIND_TIME)){ //zabezpiecznie nadpr¹dowe
+			winch_state=OVERLOAD;
+			Disable_PSC();
+		}
+				
+		life_timer = timer_get();//pobijanie timer-a od samowy³¹czenia
+				
+		if(winch_status == INIT){
+			time_stamp = timer_get();
+			winch_timer = timer_get();
+			winch_status = INIT_DELAY;
+		}
+		else if( winch_status == INIT_DELAY){ //poczatkowe opóŸnienie a¿ siê zamkn¹ styczniki
+			if(timer_time_elapsed(time_stamp) >= INITIAL_DELAY){
+				PSC.torque = GET_TORQUE_INIT_VAL;
+				winch_status = TORQUE_INCREASING;
+				time_stamp = timer_get();
+				winch_timer = timer_get();
+				Enable_PSC(GET_TORQUE_INIT_VAL);
+			}
+		}
+		else if( winch_status == TORQUE_INCREASING){
+			if(timer_time_elapsed(time_stamp) >= GET_TORQUE_RISING_SPEED_PERIOD){
+				time_stamp=timer_get();
+				if(PSC.torque <= (1000-GET_TORQUE_RISING_SPEED)){
+					PSC.torque += GET_TORQUE_RISING_SPEED;
+				}
+				else{
+					PSC.torque = 1000; //FULL POWER
+					winch_status = FULL_POWER;
+				}
+			}
+		}
+		else if(winch_status == FULL_POWER){//pe³na moc
 					
-				}
-				
-				life_timer = timer_get();//pobijanie timer-a od samowy³¹czenia
-				
-				if(winch_status == INIT){
-					time_stamp = timer_get();
-					winch_timer = timer_get();
-					winch_status = INIT_DELAY;
-				}
-				else if( winch_status == INIT_DELAY){ //poczatkowe opóŸnienie a¿ siê zamkn¹ styczniki
-					if(timer_time_elapsed(time_stamp) >= INITIAL_DELAY){
-						PSC.torque = GET_TORQUE_INIT_VAL;
-						winch_status = TORQUE_INCREASING;
-						time_stamp = timer_get();
-						winch_timer = timer_get();
-						Enable_PSC();
-					}
-				}
-				else if( winch_status == TORQUE_INCREASING){
-					if(timer_time_elapsed(time_stamp) >= GET_TORQUE_RISING_SPEED_PERIOD){
-						time_stamp=timer_get();
-						if(PSC.torque <= (1000-GET_TORQUE_RISING_SPEED)){
-							PSC.torque += GET_TORQUE_RISING_SPEED;
-						}
-						else{
-							PSC.torque = 1000; //FULL POWER
-							winch_status = FULL_POWER;
-						}
-					}
-				}
-				else if(winch_status == FULL_POWER){//pe³na moc
-					
-				}
-			}
+		}
+	}
 	
 }
 
@@ -210,7 +233,7 @@ void LEDs_OFF(void){
 	
 };
 
-void Init_HAL(void){
+void HAL_init(void){
 	
 	//w³¹czenie PLL na 64MHz
 	PLLCSR |= (1<PLLF) | (1<<PLLE);
@@ -218,11 +241,11 @@ void Init_HAL(void){
 	//ustawienie porty na wyjœciowe dla LED-ow
 	DDR(LED_0_PORT) |= (1<<LED_0);
 	DDR(LED_1_PORT) |= (1<<LED_1);
-	
-	//LED_0_ON;
+
+	LED_0_ON;
 	LED_1_ON;
 	
-	//podtrzymanie zasilania
+	//ustawienei podtrzymanie zasilania na wyjœcie
 	DDR(PWR_PORT) |= (1<<PWR);
 	
 	//Inicjalizacja DIP Switchy
@@ -248,7 +271,10 @@ void Init_HAL(void){
 	//Inicjalizacja wejœæ UP i DOWN
 	DDR(WINCH_UP_PORT) &= ~(1<<WINCH_UP);
 	DDR(WINCH_DOWN_PORT) &= ~(1<<WINCH_DOWN);
-	DDR(AIN_2_PORT) &= ~(1<<AIN_2);
+	DDR(WINCH_SET_PIN_PORT) &= ~(1<<WINCH_SET_PIN);
+	
+	//Inicjalizacja wyjœæ
+	DDR(BUZZER_PORT) |= (1<<BUZZER);
 	
 	//aktywacja przerwañ
 	PCICR |= (1<<PCIE0) | (1<<PCIE1);

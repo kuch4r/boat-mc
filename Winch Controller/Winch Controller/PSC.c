@@ -17,7 +17,7 @@ struct PSC_str PSC;
 extern struct CAN_str CAN;
 
 
-void Init_PSC(){
+void PSC_init(){
 	
 	//Inicjalizacja portów na wyjœciowe i ustawienie wyjœæ na 0
 	DDR(PSC0A_PORT) |= (1<<PSC0A_PIN);
@@ -59,8 +59,8 @@ void Init_PSC(){
 	
 }
 
-inline void Enable_PSC(){
-	POCR0RA = ((uint32_t)PSC_TOP*TORQUE_INIT_VAL)/1000;
+inline void Enable_PSC(uint16_t init_torque){
+	POCR0RA = ((uint32_t)PSC_TOP*init_torque)/1000;
 	PCTL |= (1<<PRUN);
 }
 

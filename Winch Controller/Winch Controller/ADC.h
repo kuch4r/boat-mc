@@ -22,11 +22,11 @@ void ADC_start_conversion();
 
 #define ADC_CHANNEL_CURRENT 0
 #define ADC_CHANNEL_VOLTAGE 1
-#define ADC_CHANNEL_WATER   2
+#define ADC_CHANNEL_BOARD_POSITION   2
 
 #define ADC_CHANNEL_CURRENT_NUM 10
 #define ADC_CHANNEL_VOLTAGE_NUM 9
-#define ADC_CHANNEL_WATER_NUM   4
+#define ADC_CHANNEL_BOARD_POSITION_NUM   4
 
 #define ADC_FLAG_CONV_COMPLETED 0
 #define ADC_FLAG_HAS_FULL_BUFF  1
@@ -41,10 +41,10 @@ struct adc_state {
 struct adc_data {
 	int16_t raw_current;
 	int16_t raw_voltage;
-	int16_t raw_water;
+	int16_t raw_board_position;
 	int16_t current;
 	int16_t voltage;
-	int16_t water;
+	int16_t board_position;
 };
 
 struct adc_data  adc_results;

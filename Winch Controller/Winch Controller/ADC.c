@@ -10,9 +10,12 @@
 #include "harddef.h"
 #include "main.h"
 #include "timer.h"
+#include "EEPROM.h"
 
 
 extern struct CAN_str CAN;
+extern struct eeprom_struct non_volatile_data;
+
 
 volatile uint8_t present_channel=0;
 volatile uint8_t active_channels[]=ADC_ACTIVE_CHANNELS;
@@ -49,7 +52,7 @@ void ADC_init(void){
 	adc_state.buffor_position = 0;
 	
 	//translate index to ADC channel num
-	channel_idx_to_num[ADC_CHANNEL_WATER]   = ADC_CHANNEL_WATER_NUM;
+	channel_idx_to_num[ADC_CHANNEL_BOARD_POSITION]   = ADC_CHANNEL_BOARD_POSITION_NUM;
 	channel_idx_to_num[ADC_CHANNEL_VOLTAGE] = ADC_CHANNEL_VOLTAGE_NUM;
 	channel_idx_to_num[ADC_CHANNEL_CURRENT] = ADC_CHANNEL_CURRENT_NUM;
 	
@@ -78,32 +81,31 @@ void ADC_task(void){
 	if( HAS_FLAG(adc_state.flags, ADC_FLAG_CONV_COMPLETED)) {
 		adc_results.raw_current = adc_state.sum[ADC_CHANNEL_CURRENT] / ADC_SAMPELS;
 		adc_results.raw_voltage = adc_state.sum[ADC_CHANNEL_VOLTAGE] / ADC_SAMPELS;
-		adc_results.raw_water   = adc_state.sum[ADC_CHANNEL_WATER]   / ADC_SAMPELS;		
+		adc_results.raw_board_position   = adc_state.sum[ADC_CHANNEL_BOARD_POSITION]   / ADC_SAMPELS;		
 		
 		/* voltage result */
-		if((adc_results.raw_voltage + ADC_VOLTAGE_OFFSET) < 1024 && (ADC_VOLTAGE_OFFSET+adc_results.raw_voltage) > 0){
-			adc_results.voltage = ((((uint32_t)adc_results.raw_voltage + ADC_VOLTAGE_OFFSET))*ADC_VOLTAGE_SCALE) / 1024;
+		if((adc_results.raw_voltage + non_volatile_data.adc_voltage_offset) < 1024 && (non_volatile_data.adc_voltage_offset + adc_results.raw_voltage) > 0){
+			adc_results.voltage = ((((uint32_t)adc_results.raw_voltage + non_volatile_data.adc_voltage_offset))*non_volatile_data.adc_voltage_scale) / 1024;
 		}
 		else {
 			adc_results.voltage = 0;
 		}
 		
 		/* current result */
-		if(((adc_results.raw_current + ADC_CURRENT_OFFSET) < 1024) && ((ADC_CURRENT_SCALE + adc_results.raw_current) > 0)){
-			adc_results.current=((((uint32_t)adc_results.raw_current + ADC_CURRENT_OFFSET))*ADC_CURRENT_SCALE) / 1024; //przeliczanie ADU na pr¹d (ADU*I_SCALE)/1024 i wyliczanie œredniej z poprzednim pomiarem
+		if(((adc_results.raw_current + non_volatile_data.adc_current_offset) < 1024) && ((non_volatile_data.adc_current_offset + adc_results.raw_current) > 0)){
+			adc_results.current=((((uint32_t)adc_results.raw_current + non_volatile_data.adc_current_offset))*non_volatile_data.adc_current_scale) / 1024; //przeliczanie ADU na pr¹d (ADU*I_SCALE)/1024 i wyliczanie œredniej z poprzednim pomiarem
 		} else {
 			adc_results.current = 0;
 		}
 		
-		/* water result */
-		if( adc_results.raw_water <= ADC_WATER_MIN) {
-			adc_results.water = 0;
-		} else if( adc_results.raw_water >= ADC_WATER_MAX ) {
-			adc_results.water = 100;
+		/* board position result */
+		if( adc_results.raw_board_position <= non_volatile_data.adc_board_position_min) {
+			adc_results.board_position = 0;
+		} else if( adc_results.raw_board_position >= non_volatile_data.adc_board_position_max ) {
+			adc_results.board_position = 100;
 		} else {
-			adc_results.water = (((uint16_t)adc_results.raw_water - ADC_WATER_MIN) * (ADC_WATER_MAX - ADC_WATER_MIN)) / 100;
+			adc_results.board_position = (((uint32_t)adc_results.raw_board_position - non_volatile_data.adc_board_position_min) * 100) / (non_volatile_data.adc_board_position_max - non_volatile_data.adc_board_position_min);
 		}
-		
 		
 		adc_ready_to_send++;
 		/* clearing flag for conversion resulsts */

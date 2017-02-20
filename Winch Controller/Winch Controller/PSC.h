@@ -29,8 +29,8 @@
 
 #define ADC_SYNCHRONIZATION_OFFSET 50	//15ns
 
-void Init_PSC();
-void Enable_PSC();
+void PSC_init();
+void Enable_PSC(uint16_t);
 void Disable_PSC();
 void PSC_Task();
 
