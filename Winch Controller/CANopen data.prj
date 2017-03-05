@@ -14,7 +14,7 @@ RxDLimit=0
 [MainWin]
 XPos=-8
 YPos=-8
-Width=1616
+Width=1612
 Height=876
 [MDIWin0]
 Type=TCanTxWin
@@ -23,12 +23,6 @@ YPos=309
 Width=880
 Height=254
 [MDIWin1]
-Type=TCanRxWin
-XPos=2
-YPos=0
-Width=794
-Height=305
-[MDIWin2]
 Type=TCanGaugeWin
 XPos=1307
 YPos=8
@@ -52,3 +46,9 @@ EnableMaxRange=1
 MinRangeColor=32768
 MidRangeColor=65535
 MaxRangeColor=255
+[MDIWin2]
+Type=TCanRxWin
+XPos=2
+YPos=0
+Width=794
+Height=305

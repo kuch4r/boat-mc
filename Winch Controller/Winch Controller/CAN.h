@@ -79,14 +79,15 @@ MOb_data[MOb_SDO_TX][7] = 0x00;
 
 struct CAN_str {
 	uint8_t current;
-	int8_t board_position;
-	int8_t supply_voltage;
+	uint8_t board_position;
+	uint8_t supply_voltage;
 	uint8_t state;
+	uint8_t function;
 	uint8_t diag_1;
 	uint8_t diag_2;	
 	
-	int16_t board_position_raw;
-	int16_t current_raw;
+	uint16_t board_position_raw;
+	uint16_t current_raw;
 };
 
 struct can_state {

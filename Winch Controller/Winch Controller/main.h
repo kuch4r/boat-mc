@@ -18,10 +18,7 @@ void main_loop(void);
 
 uint8_t Get_DIP_sw_word(void);
 
-#define INIT 0
-#define INV_INIT 1
-#define WAITING_FOR_ZERO 2
-#define RUN 3
+
 
 
 

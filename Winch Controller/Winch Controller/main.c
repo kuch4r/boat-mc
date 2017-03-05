@@ -104,13 +104,12 @@ int main(void) {
 };
 
 void main_loop() {
-	uint16_t current = 0;
 	
 	ADC_task();
 	PSC_Task();
 			
 	CAN.state          = winch_status;
-	CAN.diag_1         = WINCH_SET;
+	CAN.function       = WINCH_SET;
 	CAN.current        = adc_results.current;
 	CAN.board_position = adc_results.board_position;
 	CAN.supply_voltage = adc_results.voltage;
@@ -161,7 +160,7 @@ void main_loop() {
 	//gdy wyci¹garka aktywna
 	else if(winch_state == UP || winch_state == DOWN){
 				
-		if(((WINCH_IS_ACTIVE && current >= non_volatile_data.winch_overcurrent_value) || (BOARD_IS_ACTIVE && current >= non_volatile_data.board_overcurrent_value)) && (timer_time_elapsed(winch_timer) >= CURRENT_BLIND_TIME)){ //zabezpiecznie nadpr¹dowe
+		if(((WINCH_IS_ACTIVE && adc_results.current >= non_volatile_data.winch_overcurrent_value) || (BOARD_IS_ACTIVE && adc_results.current >= non_volatile_data.board_overcurrent_value)) && (timer_time_elapsed(winch_timer) >= CURRENT_BLIND_TIME)){ //zabezpiecznie nadpr¹dowe
 			winch_state=OVERLOAD;
 			Disable_PSC();
 		}
