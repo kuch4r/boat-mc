@@ -18,6 +18,8 @@ void ADC_start_conversion();
 
 #define ADC_SAMPELS 15
 
+#define ADC_RAW_MAX_VAL 0x3FF
+
 #define ADC_MAX_CHANNEL     3
 
 #define ADC_CHANNEL_CURRENT 0

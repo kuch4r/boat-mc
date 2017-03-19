@@ -2,8 +2,10 @@
 //struktura do przechowywania danych w eepromie
 struct eeprom_struct {
 	//0x2001
-	uint16_t adc_board_position_max; 
-	uint16_t adc_board_position_min;
+	int16_t adc_board_position_offset;
+	int16_t adc_board_position_scale;
+	int16_t adc_board_position_max; 
+	int16_t adc_board_position_min;
 	//0x2002
 	int16_t adc_current_offset;
 	uint16_t adc_current_scale;

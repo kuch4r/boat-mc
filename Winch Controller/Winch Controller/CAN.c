@@ -237,12 +237,23 @@ void CAN_task(){
 				case 0x2001:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_16);
 					switch(SDO_RX_SUBINDEX){
+						
 						case 0x00:
+							SDO_TX_DATA_1 = non_volatile_data.adc_board_position_offset;
+							SDO_TX_DATA_2 = non_volatile_data.adc_board_position_offset >> 8;
+						break;
+						
+						case 0x01:
+							SDO_TX_DATA_1 = non_volatile_data.adc_board_position_scale;
+							SDO_TX_DATA_2 = non_volatile_data.adc_board_position_scale >> 8;
+						break;
+						
+						case 0x02:
 							SDO_TX_DATA_1 = non_volatile_data.adc_board_position_max;
 							SDO_TX_DATA_2 = non_volatile_data.adc_board_position_max >> 8;
 						break;
 						
-						case 0x01:
+						case 0x03:
 							SDO_TX_DATA_1 = non_volatile_data.adc_board_position_min;
 							SDO_TX_DATA_2 = non_volatile_data.adc_board_position_min >> 8;
 						break;
