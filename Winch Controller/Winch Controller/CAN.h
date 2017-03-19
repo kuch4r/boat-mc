@@ -72,6 +72,16 @@ MOb_data[MOb_SDO_TX][7] = 0x00;
 #define MOb_SDO_TX MOb_4
 #define MOb_SDO_RX MOb_5
 
+#define SDO_RX_COMMAND MOb_data[MOb_SDO_RX][0]
+#define SDO_RX_INDEX ((((uint16_t)MOb_data[MOb_SDO_RX][1])) | (MOb_data[MOb_SDO_RX][2]<<8))
+#define SDO_RX_SUBINDEX MOb_data[MOb_SDO_RX][3]
+#define SDO_TX_DATA_1 MOb_data[MOb_SDO_TX][4]
+#define SDO_TX_DATA_2 MOb_data[MOb_SDO_TX][5]
+
+#define SDO_RX_DATA_1 MOb_data[MOb_SDO_RX][4]
+#define SDO_RX_DATA_2 MOb_data[MOb_SDO_RX][5]
+
+
 //Sync - odbiera
 #define SYNC_ID 0x080
 //id bazowe - mo¿na zwiêkszaæ DIP SW

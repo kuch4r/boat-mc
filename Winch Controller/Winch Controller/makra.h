@@ -53,14 +53,14 @@
 #define GET_TORQUE_INIT_VAL_DOWN (WINCH_IS_ACTIVE?non_volatile_data.torque_init_val_winch_down:non_volatile_data.torque_init_val_board_down)
 
 
-#define SW_1_SET bit_is_set(PIN(SW_1_PORT),SW_1)
-#define SW_2_SET bit_is_set(PIN(SW_2_PORT),SW_2)
-#define SW_3_SET bit_is_set(PIN(SW_3_PORT),SW_3)
-#define SW_4_SET bit_is_set(PIN(SW_4_PORT),SW_4)
-#define SW_5_SET bit_is_set(PIN(SW_5_PORT),SW_5)
-#define SW_6_SET bit_is_set(PIN(SW_6_PORT),SW_6)
-#define SW_7_SET bit_is_set(PIN(SW_7_PORT),SW_7)
-#define SW_8_SET bit_is_set(PIN(SW_8_PORT),SW_8)
+#define SW_1_SET bit_is_clear(PIN(SW_1_PORT),SW_1)
+#define SW_2_SET bit_is_clear(PIN(SW_2_PORT),SW_2)
+#define SW_3_SET bit_is_clear(PIN(SW_3_PORT),SW_3)
+#define SW_4_SET bit_is_clear(PIN(SW_4_PORT),SW_4)
+#define SW_5_SET bit_is_clear(PIN(SW_5_PORT),SW_5)
+#define SW_6_SET bit_is_clear(PIN(SW_6_PORT),SW_6)
+#define SW_7_SET bit_is_clear(PIN(SW_7_PORT),SW_7)
+#define SW_8_SET bit_is_clear(PIN(SW_8_PORT),SW_8)
 
 #define GET_DIP_SW_CAN_ADDR (Get_DIP_sw_word() & DIP_SW_CAN_ADDR_MASK)
 

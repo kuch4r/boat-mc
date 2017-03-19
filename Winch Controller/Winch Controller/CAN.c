@@ -208,25 +208,25 @@ void CAN_task(){
 	//obs³uga SDO
 	if( HAS_FLAG(can_state.flags, CAN_FLAG_SDO_RECEIVED) ){
 		
-		if(MOb_data[MOb_SDO_RX][0] == SDO_READ_COMMAND){//gdy komenda odczytu
-			switch ((((uint16_t)MOb_data[MOb_SDO_RX][1])<<8) | MOb_data[MOb_SDO_RX][2]){//sprawdzanie po indexie
+		if(SDO_RX_COMMAND == SDO_READ_COMMAND){//gdy komenda odczytu
+			switch (SDO_RX_INDEX){//sprawdzanie po indexie
 				
 				case 0x2000:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_16);
-					switch(MOb_data[MOb_SDO_RX][3]){ //sprawdzanie po subindexie
+					switch(SDO_RX_SUBINDEX){ //sprawdzanie po subindexie
 						case 0x00:
-							MOb_data[MOb_SDO_TX][4] = adc_results.raw_board_position;
-							MOb_data[MOb_SDO_TX][5] = adc_results.raw_board_position >> 8;
+							SDO_TX_DATA_1 = adc_results.raw_board_position;
+							SDO_TX_DATA_2 = adc_results.raw_board_position >> 8;
 						break;
 						
 						case 0x01:
-							MOb_data[MOb_SDO_TX][4] = adc_results.raw_current;
-							MOb_data[MOb_SDO_TX][5] = adc_results.raw_current >> 8;
+							SDO_TX_DATA_1 = adc_results.raw_current;
+							SDO_TX_DATA_2 = adc_results.raw_current >> 8;
 						break;
 						
 						case 0x02:
-							MOb_data[MOb_SDO_TX][4] = adc_results.raw_voltage;
-							MOb_data[MOb_SDO_TX][5] = adc_results.raw_voltage >> 8;
+							SDO_TX_DATA_1 = adc_results.raw_voltage;
+							SDO_TX_DATA_2 = adc_results.raw_voltage >> 8;
 						break;
 						
 						default:
@@ -236,15 +236,15 @@ void CAN_task(){
 				
 				case 0x2001:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_16);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.adc_board_position_max;
-							MOb_data[MOb_SDO_TX][5] = non_volatile_data.adc_board_position_max >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.adc_board_position_max;
+							SDO_TX_DATA_2 = non_volatile_data.adc_board_position_max >> 8;
 						break;
 						
 						case 0x01:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.adc_board_position_min;
-							MOb_data[MOb_SDO_TX][5] = non_volatile_data.adc_board_position_min >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.adc_board_position_min;
+							SDO_TX_DATA_2 = non_volatile_data.adc_board_position_min >> 8;
 						break;
 						
 						default:
@@ -254,15 +254,15 @@ void CAN_task(){
 				
 				case 0x2002:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_16);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.adc_current_offset;
-							MOb_data[MOb_SDO_TX][5] = non_volatile_data.adc_current_offset >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.adc_current_offset;
+							SDO_TX_DATA_2 = non_volatile_data.adc_current_offset >> 8;
 						break;
 					
 						case 0x01:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.adc_current_scale;
-							MOb_data[MOb_SDO_TX][5] = non_volatile_data.adc_current_scale >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.adc_current_scale;
+							SDO_TX_DATA_2 = non_volatile_data.adc_current_scale >> 8;
 						break;
 					
 						default:
@@ -272,15 +272,15 @@ void CAN_task(){
 				
 				case 0x2003:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_16);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.adc_voltage_offset;
-							MOb_data[MOb_SDO_TX][5] = non_volatile_data.adc_voltage_offset >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.adc_voltage_offset;
+							SDO_TX_DATA_2 = non_volatile_data.adc_voltage_offset >> 8;
 						break;
 					
 						case 0x01:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.adc_voltage_scale;
-							MOb_data[MOb_SDO_TX][5] = non_volatile_data.adc_voltage_scale >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.adc_voltage_scale;
+							SDO_TX_DATA_2 = non_volatile_data.adc_voltage_scale >> 8;
 						break;
 					
 						default:
@@ -290,13 +290,13 @@ void CAN_task(){
 				
 				case 0x2004:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_8);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.winch_overcurrent_value;
+							SDO_TX_DATA_1 = non_volatile_data.winch_overcurrent_value;
 						break;
 					
 						case 0x01:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.board_overcurrent_value;
+							SDO_TX_DATA_1 = non_volatile_data.board_overcurrent_value;
 						break;
 					
 						default:
@@ -306,25 +306,25 @@ void CAN_task(){
 				
 				case 0x2005:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_16);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_init_val_winch_up;
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_init_val_winch_up >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.torque_init_val_winch_up;
+							SDO_TX_DATA_2 = non_volatile_data.torque_init_val_winch_up >> 8;
 						break;
 					
 						case 0x01:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_init_val_winch_down;
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_init_val_winch_down >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.torque_init_val_winch_down;
+							SDO_TX_DATA_2 = non_volatile_data.torque_init_val_winch_down >> 8;
 						break;
 						
 						case 0x02:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_init_val_board_up;
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_init_val_board_up >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.torque_init_val_board_up;
+							SDO_TX_DATA_2 = non_volatile_data.torque_init_val_board_up >> 8;
 						break;
 					
 						case 0x03:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_init_val_board_down;
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_init_val_board_down >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.torque_init_val_board_down;
+							SDO_TX_DATA_2 = non_volatile_data.torque_init_val_board_down >> 8;
 						break;
 						
 						default:
@@ -334,21 +334,21 @@ void CAN_task(){
 				
 				case 0x2006:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_8);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_period_winch_up;
+							SDO_TX_DATA_1 = non_volatile_data.torque_rising_speed_period_winch_up;
 						break;
 					
 						case 0x01:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_period_winch_down;
+							SDO_TX_DATA_1 = non_volatile_data.torque_rising_speed_period_winch_down;
 						break;
 					
 						case 0x02:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_period_board_up;
+							SDO_TX_DATA_1 = non_volatile_data.torque_rising_speed_period_board_up;
 						break;
 					
 						case 0x03:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_period_board_down;
+							SDO_TX_DATA_1 = non_volatile_data.torque_rising_speed_period_board_down;
 						break;
 					
 						default:
@@ -358,25 +358,25 @@ void CAN_task(){
 				
 				case 0x2007:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_16);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_winch_up;
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_winch_up >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.torque_rising_speed_winch_up;
+							SDO_TX_DATA_2 = non_volatile_data.torque_rising_speed_winch_up >> 8;
 						break;
 					
 						case 0x01:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_winch_down;
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_winch_down >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.torque_rising_speed_winch_down;
+							SDO_TX_DATA_2 = non_volatile_data.torque_rising_speed_winch_down >> 8;
 						break;
 						
 						case 0x02:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_board_up;
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_board_up >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.torque_rising_speed_board_up;
+							SDO_TX_DATA_2 = non_volatile_data.torque_rising_speed_board_up >> 8;
 						break;
 					
 						case 0x03:
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_board_down;
-							MOb_data[MOb_SDO_TX][4] = non_volatile_data.torque_rising_speed_board_down >> 8;
+							SDO_TX_DATA_1 = non_volatile_data.torque_rising_speed_board_down;
+							SDO_TX_DATA_2 = non_volatile_data.torque_rising_speed_board_down >> 8;
 						break;
 						
 						default:
@@ -401,17 +401,17 @@ void CAN_task(){
 			}
 		}
 		/*--ZAPIS--*/
-		else if(MOb_data[MOb_SDO_RX][0] & SDO_WRITE_COMMAND){//gdy komenda zapisu
-			switch ((((uint16_t)MOb_data[MOb_SDO_RX][1])<<8) | MOb_data[MOb_SDO_RX][2]){
+		else if(SDO_RX_COMMAND & SDO_WRITE_COMMAND){//gdy komenda zapisu
+			switch (SDO_RX_INDEX){
 				
 				case 0x2001:
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							non_volatile_data.adc_board_position_max = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.adc_board_position_max = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 						
 						case 0x01:
-							non_volatile_data.adc_board_position_min = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.adc_board_position_min = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 						
 						default:
@@ -420,13 +420,13 @@ void CAN_task(){
 				break;
 				
 				case 0x2002:
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							non_volatile_data.adc_current_offset = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.adc_current_offset = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 					
 						case 0x01:
-							non_volatile_data.adc_current_scale = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.adc_current_scale = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 					
 						default:
@@ -435,13 +435,13 @@ void CAN_task(){
 				break;
 				
 				case 0x2003:
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							non_volatile_data.adc_voltage_offset = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.adc_voltage_offset = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 					
 						case 0x01:
-							non_volatile_data.adc_voltage_scale = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.adc_voltage_scale = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 					
 						default:
@@ -451,13 +451,13 @@ void CAN_task(){
 				
 				case 0x2004:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_8);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							non_volatile_data.winch_overcurrent_value = MOb_data[MOb_SDO_RX][4];
+							non_volatile_data.winch_overcurrent_value = SDO_RX_DATA_1;
 						break;
 					
 						case 0x01:
-							non_volatile_data.board_overcurrent_value = MOb_data[MOb_SDO_RX][4];
+							non_volatile_data.board_overcurrent_value = SDO_RX_DATA_1;
 						break;
 					
 						default:
@@ -467,21 +467,21 @@ void CAN_task(){
 				
 				case 0x2005:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_16);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							non_volatile_data.torque_init_val_winch_up = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.torque_init_val_winch_up = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 					
 						case 0x01:
-							non_volatile_data.torque_init_val_winch_down = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.torque_init_val_winch_down = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 						
 						case 0x02:
-							non_volatile_data.torque_init_val_board_up = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.torque_init_val_board_up = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 					
 						case 0x03:
-							non_volatile_data.torque_init_val_board_down = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.torque_init_val_board_down = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 						
 						default:
@@ -491,21 +491,21 @@ void CAN_task(){
 				
 				case 0x2006:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_8);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							non_volatile_data.torque_rising_speed_period_winch_up = MOb_data[MOb_SDO_RX][4];
+							non_volatile_data.torque_rising_speed_period_winch_up = SDO_RX_DATA_1;
 						break;
 					
 						case 0x01:
-							non_volatile_data.torque_rising_speed_period_winch_down = MOb_data[MOb_SDO_RX][4];
+							non_volatile_data.torque_rising_speed_period_winch_down = SDO_RX_DATA_1;
 						break;
 					
 						case 0x02:
-							non_volatile_data.torque_rising_speed_period_board_up = MOb_data[MOb_SDO_RX][4];
+							non_volatile_data.torque_rising_speed_period_board_up = SDO_RX_DATA_1;
 						break;
 					
 						case 0x03:
-							non_volatile_data.torque_rising_speed_period_board_down = MOb_data[MOb_SDO_RX][4];
+							non_volatile_data.torque_rising_speed_period_board_down = SDO_RX_DATA_1;
 						break;
 					
 						default:
@@ -515,21 +515,21 @@ void CAN_task(){
 				
 				case 0x2007:
 					SET_FLAG(can_state.flags, CAN_FLAG_DATA_LENGTH_16);
-					switch(MOb_data[MOb_SDO_RX][3]){
+					switch(SDO_RX_SUBINDEX){
 						case 0x00:
-							non_volatile_data.torque_rising_speed_winch_up = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.torque_rising_speed_winch_up = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 					
 						case 0x01:
-							non_volatile_data.torque_rising_speed_winch_down = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.torque_rising_speed_winch_down = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 						
 						case 0x02:
-							non_volatile_data.torque_rising_speed_board_up = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.torque_rising_speed_board_up = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 					
 						case 0x03:
-							non_volatile_data.torque_rising_speed_board_down = MOb_data[MOb_SDO_RX][4] | (MOb_data[MOb_SDO_RX][5] << 8);
+							non_volatile_data.torque_rising_speed_board_down = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 						
 						default:

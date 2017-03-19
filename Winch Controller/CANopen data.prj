@@ -13,7 +13,7 @@ RxDEnableDynamic=0
 RxDLimit=0
 [MainWin]
 XPos=-8
-YPos=-8
+YPos=0
 Width=1612
 Height=876
 [MDIWin0]
@@ -23,19 +23,32 @@ YPos=309
 Width=880
 Height=254
 [MDIWin1]
+Type=TCanValueWin
+XPos=1053
+YPos=65
+Width=242
+Height=90
+Name=Wert Anzeige
+CanId=407
+Formula=(((d1 << 8) + d0)*10)/16
+Unit=C
+BaseColor=16776960
+SizeType=1
+PrecDigits=0
+[MDIWin2]
 Type=TCanGaugeWin
 XPos=1307
 YPos=8
 Width=256
 Height=278
 Name=Board level
-CanId=400
+CanId=407
 Unit=x
-Formula=d1
+Formula=d4 + d5<<8
 BaseColor=16777215
 SizeType=1
 ScaleMin=0
-ScaleMax=100
+ScaleMax=1024
 NumberMainTicks=10
 NumberSubTicks=5
 IndMin=30
@@ -46,7 +59,7 @@ EnableMaxRange=1
 MinRangeColor=32768
 MidRangeColor=65535
 MaxRangeColor=255
-[MDIWin2]
+[MDIWin3]
 Type=TCanRxWin
 XPos=2
 YPos=0
