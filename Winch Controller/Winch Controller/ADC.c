@@ -85,8 +85,8 @@ void ADC_task(void){
 		
 		/* voltage result */
 		
-		adc_results.voltage = (((uint32_t)adc_results.raw_voltage * non_volatile_data.adc_voltage_scale) / ADC_RAW_MAX_VAL);
-		if(non_volatile_data.adc_voltage_offset < 0 && adc_results.voltage < -non_volatile_data.adc_voltage_offset){
+		adc_results.voltage = (((int32_t)adc_results.raw_voltage * non_volatile_data.adc_voltage_scale) / ADC_RAW_MAX_VAL);
+		if(non_volatile_data.adc_voltage_offset < 0 && adc_results.voltage > -non_volatile_data.adc_voltage_offset){
 			adc_results.voltage += non_volatile_data.adc_voltage_offset;
 		}
 		else {
@@ -94,8 +94,8 @@ void ADC_task(void){
 		}
 		
 		/* current result */
-		adc_results.current = (((uint32_t)adc_results.raw_current * non_volatile_data.adc_current_scale) / ADC_RAW_MAX_VAL);
-		if(non_volatile_data.adc_current_offset < 0 && adc_results.current < -non_volatile_data.adc_current_offset){
+		adc_results.current = (((int32_t)adc_results.raw_current * non_volatile_data.adc_current_scale) / ADC_RAW_MAX_VAL);
+		if(non_volatile_data.adc_current_offset < 0 && adc_results.current > -non_volatile_data.adc_current_offset){
 			adc_results.current += non_volatile_data.adc_current_offset;
 		}
 		else {
@@ -103,12 +103,12 @@ void ADC_task(void){
 		}
 		
 		/*board position results*/
-		adc_results.raw_board_position = (((uint32_t)adc_results.raw_board_position * non_volatile_data.adc_board_position_scale) / ADC_RAW_MAX_VAL) + non_volatile_data.adc_board_position_offset;
-		if(adc_results.raw_board_position > non_volatile_data.adc_board_position_max){
-			adc_results.raw_board_position = non_volatile_data.adc_board_position_max;
+		adc_results.board_position = (((int32_t)adc_results.raw_board_position * non_volatile_data.adc_board_position_scale) / ADC_RAW_MAX_VAL) + non_volatile_data.adc_board_position_offset;
+		if(adc_results.board_position > non_volatile_data.adc_board_position_max){
+			adc_results.board_position = non_volatile_data.adc_board_position_max;
 		}
-		else if(adc_results.raw_board_position < non_volatile_data.adc_board_position_min){
-			adc_results.raw_board_position = non_volatile_data.adc_board_position_min;
+		else if(adc_results.board_position < non_volatile_data.adc_board_position_min){
+			adc_results.board_position = non_volatile_data.adc_board_position_min;
 		}
 			
 		adc_ready_to_send++;

@@ -195,6 +195,7 @@ SIGNAL ( CAN_INT_vect ){              // use interrupts
 			CANCDMOB = 0x00;			//restart MOB-a
 			CANCDMOB |= RECEPTION;
 		}
+		
 
 } 
 
@@ -417,14 +418,24 @@ void CAN_task(){
 				
 				case 0x2001:
 					switch(SDO_RX_SUBINDEX){
+						
 						case 0x00:
-							non_volatile_data.adc_board_position_max = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
+							non_volatile_data.adc_board_position_offset = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 						
 						case 0x01:
+						non_volatile_data.adc_board_position_scale = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
+						break;
+						
+						case 0x02:
+							non_volatile_data.adc_board_position_max = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
+						break;
+						
+						case 0x03:
 							non_volatile_data.adc_board_position_min = SDO_RX_DATA_1 | (SDO_RX_DATA_2 << 8);
 						break;
 						
+												
 						default:
 							SET_FLAG(can_state.flags, CAN_FLAG_COMMAND_FAILED);
 					}

@@ -59,9 +59,9 @@ int main(void) {
 	
 	sei();
 
-	uart_puts_P("Winch Controller\nCompilation date ");
-	uart_puts_P(__DATE__);
-	uart_puts_P("\n");
+	//uart_puts_P("Winch Controller\nCompilation date ");
+	//uart_puts_P(__DATE__);
+	//uart_puts_P("\n");
 	
 	//próba odczytu konfiguracji z EEPROMU, jeœli odczyt siê nie powiód³ przypisujemy wartoœci domyœlne
 	if(eeprom_read() == EEPROM_ERROR){

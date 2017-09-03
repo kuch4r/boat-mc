@@ -3,7 +3,7 @@
 #define HARDDEF_H_INCLUDED
 
 //warning debug disables autopower off feature!!
-#define DEBUG
+//#define DEBUG
 
 //console baud	
 #define BAUD 57600
@@ -15,7 +15,7 @@
 
 //Wejœcia
 #define AIN_1_PORT B
-#define AIN_1 4
+#define AIN_1 7
 #define AIN_1_CHANNEL 4
 
 #define AIN_2_PORT B
@@ -109,25 +109,28 @@
 #define INITIAL_DELAY 15
 
 //maksymalna wartosæ pr¹du wyci¹graki [0,5A]
-#define OVERCURRENT_WINCH (52*2)
+#define OVERCURRENT_WINCH (66*2)
 
 //maksymalna wartosæ pr¹du wyci¹graki [0,5A]
-#define OVERCURRENT_BOARD (25*2)
+#define OVERCURRENT_BOARD (30*2)
 
 //czas nieczu³oœci [ms]
-#define CURRENT_BLIND_TIME 75
+#define CURRENT_BLIND_TIME 100
 
 //wsp napiêcia
 #define ADC_VOLTAGE_SCALE 170
 #define ADC_VOLTAGE_OFFSET 135
 
 //wsp pr¹du
-#define ADC_CURRENT_SCALE 800
-#define ADC_CURRENT_OFFSET (-511)
+#define ADC_CURRENT_SCALE 959
+#define ADC_CURRENT_OFFSET (-480)
 
 //wskazania miecza
-#define ADC_BOARD_POSITION_MAX 725
-#define ADC_BOARD_POSITION_MIN 7
+#define ADC_BOARD_POSITION_MAX 100
+#define ADC_BOARD_POSITION_MIN 0
+
+#define ADC_BOARD_POSITION_SCALE (-138)
+#define ADC_BOARD_POSITION_OFFSET 101
 
 
 #define ADC_RESOLUTION 0x3FF

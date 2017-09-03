@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BUSMASTER_CONFIGURATION>
   <Global_Configuration>
-    <BUSMASTER_Version>2.3.0</BUSMASTER_Version>
+    <BUSMASTER_Version>3.0.0</BUSMASTER_Version>
     <IsMsgFilterEnabled>FALSE</IsMsgFilterEnabled>
     <IsMsgFilterEnabledLin>FALSE</IsMsgFilterEnabledLin>
     <IsReplayFilterEnabled>FALSE</IsReplayFilterEnabled>
@@ -58,15 +58,16 @@
       <ControllerMode>Unknown</ControllerMode>
       <ControllerSettings>
         <Channel>
-          <BaudRate>125</BaudRate>
+          <BaudRate>500</BaudRate>
           <CNF1>7</CNF1>
           <CNF2>B8</CNF2>
           <CNF3>5</CNF3>
-          <BTR0>47</BTR0>
-          <BTR1>14</BTR1>
+          <BTR0>C0</BTR0>
+          <BTR1>3A</BTR1>
           <Clock>16</Clock>
           <SamplePerc>75</SamplePerc>
           <Sampling>1</Sampling>
+          <BTLCycles>10</BTLCycles>
           <Warning_Limit>96</Warning_Limit>
           <Propagation_Delay>ALL</Propagation_Delay>
           <SJW>4</SJW>
@@ -86,9 +87,9 @@
           <AccMaskByte3_1>FF</AccMaskByte3_1>
           <AccMaskByte4_0>FF</AccMaskByte4_0>
           <AccMaskByte4_1>FF</AccMaskByte4_1>
-          <HardwareDesc>PCAN-USB Device ID - FFh</HardwareDesc>
-          <ItemUnderFocus>28</ItemUnderFocus>
-          <BTR0BTR1>18196</BTR0BTR1>
+          <HardwareDesc>PCAN-USB Driver Id 16</HardwareDesc>
+          <ItemUnderFocus>64</ItemUnderFocus>
+          <BTR0BTR1>49210</BTR0BTR1>
           <AccFilterMode>0</AccFilterMode>
           <ControllerMode>1</ControllerMode>
           <SelfReception>1</SelfReception>
@@ -114,21 +115,26 @@
     <CAN_Signal_Watch>
       <Message>
         <Id>400</Id>
+        <Signal>Board_position</Signal>
         <Signal>Current</Signal>
       </Message>
+      <Message>
+        <Id>656</Id>
+        <Signal>current_raw</Signal>
+      </Message>
       <Window_Position>
-        <Visibility>SHOWMINIMIZED</Visibility>
+        <Visibility>SHOWNORMAL</Visibility>
         <WindowPlacement>HIDE</WindowPlacement>
-        <Top>430</Top>
-        <Left>108</Left>
-        <Right>618</Right>
-        <Bottom>755</Bottom>
+        <Top>525</Top>
+        <Left>839</Left>
+        <Right>1466</Right>
+        <Bottom>917</Bottom>
       </Window_Position>
       <COLUMN_WIDTH>
-        <MESSAGE_COLUMN>0</MESSAGE_COLUMN>
-        <Raw_Val_Column>0</Raw_Val_Column>
-        <Physical_Val_Column>0</Physical_Val_Column>
-        <Signal_Column>0</Signal_Column>
+        <MESSAGE_COLUMN>122</MESSAGE_COLUMN>
+        <Raw_Val_Column>122</Raw_Val_Column>
+        <Physical_Val_Column>244</Physical_Val_Column>
+        <Signal_Column>122</Signal_Column>
       </COLUMN_WIDTH>
     </CAN_Signal_Watch>
     <J1939_Signal_Watch>
@@ -180,10 +186,10 @@
         <Display_Type>NORMAL</Display_Type>
       </GRAPH_PARAMETERS>
       <GRAPH_ELEMENT>
-        <Message_ID>400</Message_ID>
-        <Message_Name>Paczka_nadawcza</Message_Name>
+        <Message_ID>656</Message_ID>
+        <Message_Name>wartosci_raw</Message_Name>
         <Frame_Format></Frame_Format>
-        <Element_Name>Current</Element_Name>
+        <Element_Name>current_raw</Element_Name>
         <Value_Type>Physical</Value_Type>
         <Line_Type>SOLID</Line_Type>
         <Line_Color>16711680</Line_Color>
@@ -193,34 +199,54 @@
         <Enable>TRUE</Enable>
         <Display_Type>NORMAL</Display_Type>
       </GRAPH_ELEMENT>
+      <GRAPH_ELEMENT>
+        <Message_ID>400</Message_ID>
+        <Message_Name>Paczka_nadawcza</Message_Name>
+        <Frame_Format></Frame_Format>
+        <Element_Name>Current</Element_Name>
+        <Value_Type>Physical</Value_Type>
+        <Line_Type>SOLID</Line_Type>
+        <Line_Color>16776960</Line_Color>
+        <Point_Type>3</Point_Type>
+        <Point_Color>32896</Point_Color>
+        <Visibility>TRUE</Visibility>
+        <Enable>TRUE</Enable>
+        <Display_Type>NORMAL</Display_Type>
+      </GRAPH_ELEMENT>
       <Window_Position>
-        <Visibility>SHOWMAXIMIZED</Visibility>
-        <Window_Position>SHOWMAXIMIZED</Window_Position>
-        <Top>-4</Top>
-        <Left>-46</Left>
-        <Bottom>614</Bottom>
-        <Right>1552</Right>
+        <Visibility>SHOWNORMAL</Visibility>
+        <Window_Position>SHOWNORMAL</Window_Position>
+        <Top>1</Top>
+        <Left>78</Left>
+        <Bottom>648</Bottom>
+        <Right>1676</Right>
       </Window_Position>
       <Splitter_Window_Col_0>
         <CxIdeal>291</CxIdeal>
         <CxMin>0</CxMin>
       </Splitter_Window_Col_0>
       <Splitter_Window_Col_1>
-        <CxIdeal>1218</CxIdeal>
+        <CxIdeal>1280</CxIdeal>
         <CxMin>0</CxMin>
       </Splitter_Window_Col_1>
       <Splitter_Window_Row_0>
-        <CxIdeal>502</CxIdeal>
+        <CxIdeal>445</CxIdeal>
         <CxMin>0</CxMin>
       </Splitter_Window_Row_0>
       <Splitter_Window_Row_1>
-        <CxIdeal>203</CxIdeal>
+        <CxIdeal>153</CxIdeal>
         <CxMin>0</CxMin>
       </Splitter_Window_Row_1>
     </CAN_Signal_Graph>
-    <CAN_Log/>
-    <J1939_Log/>
-    <LIN_Log/>
+    <CAN_Log>
+      <LogOnConnect>0</LogOnConnect>
+    </CAN_Log>
+    <J1939_Log>
+      <LogOnConnect>0</LogOnConnect>
+    </J1939_Log>
+    <LIN_Log>
+      <LogOnConnect>0</LogOnConnect>
+    </LIN_Log>
     <CAN_Simulated_Systems>
       <Window_Position>
         <Visibility>HIDE</Visibility>
@@ -286,7 +312,7 @@
         <ID>Message</ID>
         <Order>7</Order>
         <IsVisible>1</IsVisible>
-        <Width>143</Width>
+        <Width>167</Width>
       </COLUMN>
       <COLUMN>
         <ID>DLC</ID>
@@ -298,7 +324,7 @@
         <ID>Data Byte(s)</ID>
         <Order>9</Order>
         <IsVisible>1</IsVisible>
-        <Width>710</Width>
+        <Width>638</Width>
       </COLUMN>
       <IsHex>1</IsHex>
       <IsAppend>0</IsAppend>
@@ -315,10 +341,10 @@
       <Interpretation_Window_Position>
         <Visibility>SHOWNORMAL</Visibility>
         <WindowPlacement>RESTORETOMAXIMIZED</WindowPlacement>
-        <Top>238</Top>
-        <Left>90</Left>
-        <Bottom>515</Bottom>
-        <Right>439</Right>
+        <Top>164</Top>
+        <Left>94</Left>
+        <Bottom>441</Bottom>
+        <Right>443</Right>
       </Interpretation_Window_Position>
     </CAN_Message_Window>
     <J1939_Message_Window>
@@ -415,10 +441,10 @@
       <Interpretation_Window_Position>
         <Visibility>SHOWNORMAL</Visibility>
         <WindowPlacement>RESTORETOMAXIMIZED</WindowPlacement>
-        <Top>238</Top>
-        <Left>90</Left>
-        <Bottom>515</Bottom>
-        <Right>439</Right>
+        <Top>164</Top>
+        <Left>94</Left>
+        <Bottom>441</Bottom>
+        <Right>443</Right>
       </Interpretation_Window_Position>
     </J1939_Message_Window>
     <LIN_Message_Window>
@@ -500,10 +526,10 @@
       <Interpretation_Window_Position>
         <Visibility>SHOWNORMAL</Visibility>
         <WindowPlacement>RESTORETOMAXIMIZED</WindowPlacement>
-        <Top>238</Top>
-        <Left>90</Left>
-        <Bottom>515</Bottom>
-        <Right>439</Right>
+        <Top>164</Top>
+        <Left>94</Left>
+        <Bottom>441</Bottom>
+        <Right>443</Right>
       </Interpretation_Window_Position>
     </LIN_Message_Window>
     <CAN_Tx_Window>
@@ -515,146 +541,12 @@
         <Bottom>0</Bottom>
         <Right>0</Right>
       </Window_Position>
-      <IsAutoSaveEnabled>0</IsAutoSaveEnabled>
-      <Time_Delay_Blocks_Enabled>FALSE</Time_Delay_Blocks_Enabled>
-      <Time_Delay_Blocks>0</Time_Delay_Blocks>
-      <Splitter_Window_Root_0>
-        <CxIdeal>-1</CxIdeal>
-        <CxMin>0</CxMin>
-      </Splitter_Window_Root_0>
-      <Splitter_Window_Root_1>
-        <CxIdeal>0</CxIdeal>
-        <CxMin>0</CxMin>
-      </Splitter_Window_Root_1>
-      <Splitter_Window_Left_0>
-        <CxIdeal>0</CxIdeal>
-        <CxMin>0</CxMin>
-      </Splitter_Window_Left_0>
-      <Splitter_Window_Left_1>
-        <CxIdeal>0</CxIdeal>
-        <CxMin>0</CxMin>
-        <CxIdeal>0</CxIdeal>
-        <CxMin>0</CxMin>
-      </Splitter_Window_Left_1>
-      <Splitter_Window_Right_0>
-        <CxIdeal>0</CxIdeal>
-        <CxMin>0</CxMin>
-      </Splitter_Window_Right_0>
+      <Message_List/>
     </CAN_Tx_Window>
     <CAN_Wave_Form_Genarator>
       <Default_Sampling_Period>125</Default_Sampling_Period>
       <SignalDefiner_AutoCorrect>1</SignalDefiner_AutoCorrect>
     </CAN_Wave_Form_Genarator>
-    <FLEX_Tx_Window>
-      <Window_Position>
-        <Visibility>SHOWNORMAL</Visibility>
-        <WindowPlacement>SETMINPOSITION</WindowPlacement>
-        <Top>-1</Top>
-        <Left>4</Left>
-        <Bottom>661</Bottom>
-        <Right>864</Right>
-      </Window_Position>
-      <Channel_Msg_List>
-        <Index>0</Index>
-      </Channel_Msg_List>
-    </FLEX_Tx_Window>
-    <FlexRay_Message_Window>
-      <COLUMN>
-        <ID></ID>
-        <Order>1</Order>
-        <IsVisible>0</IsVisible>
-        <Width>0</Width>
-      </COLUMN>
-      <COLUMN>
-        <ID>Time</ID>
-        <Order>2</Order>
-        <IsVisible>1</IsVisible>
-        <Width>95</Width>
-      </COLUMN>
-      <COLUMN>
-        <ID>Tx/Rx</ID>
-        <Order>3</Order>
-        <IsVisible>1</IsVisible>
-        <Width>85</Width>
-      </COLUMN>
-      <COLUMN>
-        <ID>Frame Id</ID>
-        <Order>4</Order>
-        <IsVisible>1</IsVisible>
-        <Width>100</Width>
-      </COLUMN>
-      <COLUMN>
-        <ID>Frame Type</ID>
-        <Order>5</Order>
-        <IsVisible>1</IsVisible>
-        <Width>100</Width>
-      </COLUMN>
-      <COLUMN>
-        <ID>Slot Type</ID>
-        <Order>6</Order>
-        <IsVisible>1</IsVisible>
-        <Width>84</Width>
-      </COLUMN>
-      <COLUMN>
-        <ID>Description</ID>
-        <Order>7</Order>
-        <IsVisible>1</IsVisible>
-        <Width>117</Width>
-      </COLUMN>
-      <COLUMN>
-        <ID>Cycle No</ID>
-        <Order>8</Order>
-        <IsVisible>1</IsVisible>
-        <Width>81</Width>
-      </COLUMN>
-      <COLUMN>
-        <ID>Channel</ID>
-        <Order>9</Order>
-        <IsVisible>1</IsVisible>
-        <Width>76</Width>
-      </COLUMN>
-      <COLUMN>
-        <ID>DLC</ID>
-        <Order>10</Order>
-        <IsVisible>1</IsVisible>
-        <Width>50</Width>
-      </COLUMN>
-      <COLUMN>
-        <ID>Data Byte(s)</ID>
-        <Order>11</Order>
-        <IsVisible>1</IsVisible>
-        <Width>235</Width>
-      </COLUMN>
-      <IsHex>1</IsHex>
-      <IsAppend>0</IsAppend>
-      <IsInterpret>0</IsInterpret>
-      <Time_Mode>SYSTEM</Time_Mode>
-      <Window_Position>
-        <Visibility>SHOWNORMAL</Visibility>
-        <WindowPlacement>SETMINPOSITION</WindowPlacement>
-        <Top>0</Top>
-        <Left>0</Left>
-        <Bottom>449</Bottom>
-        <Right>1271</Right>
-      </Window_Position>
-      <Interpretation_Window_Position>
-        <Visibility>SHOWNORMAL</Visibility>
-        <WindowPlacement>RESTORETOMAXIMIZED</WindowPlacement>
-        <Top>238</Top>
-        <Left>90</Left>
-        <Bottom>515</Bottom>
-        <Right>439</Right>
-      </Interpretation_Window_Position>
-    </FlexRay_Message_Window>
-    <FLEX_Cluster_Config>
-      <CHANNEL>
-        <Index>0</Index>
-        <HWUri>Hardware</HWUri>
-        <DbPath></DbPath>
-        <ClusterId></ClusterId>
-        <ECU/>
-      </CHANNEL>
-    </FLEX_Cluster_Config>
     <LIN_Simulated_Systems>
       <Window_Position>
         <Visibility>HIDE</Visibility>
@@ -669,11 +561,10 @@
       <CHANNEL>
         <Index>0</Index>
         <HWUri>Hardware</HWUri>
-        <DbPath></DbPath>
-        <ClusterId></ClusterId>
         <BaudRate>19200</BaudRate>
         <ProtocolVersion>LIN 2.0</ProtocolVersion>
         <Overwrite_Settings>1</Overwrite_Settings>
+        <MasterMode>1</MasterMode>
         <ECU/>
       </CHANNEL>
     </LIN_Cluster_Config>
@@ -686,7 +577,20 @@
         <Bottom>0</Bottom>
         <Right>0</Right>
       </Window_Position>
-      <Channel_Msg_List/>
+      <Message_List/>
     </LIN_Tx_Window>
+    <LIN_Schedule_Table>
+      <Window_Position>
+        <Visibility>SHOWNORMAL</Visibility>
+        <WindowPlacement>SETMINPOSITION</WindowPlacement>
+        <Top>183</Top>
+        <Left>535</Left>
+        <Bottom>716</Bottom>
+        <Right>1185</Right>
+      </Window_Position>
+      <Channel>
+        <Index>1</Index>
+      </Channel>
+    </LIN_Schedule_Table>
   </Module_Configuration>
 </BUSMASTER_CONFIGURATION>

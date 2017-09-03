@@ -68,6 +68,9 @@ uint8_t eeprom_write(void)
 
 void eeprom_restore_defaults(void){
 	
+	non_volatile_data.adc_board_position_offset = ADC_BOARD_POSITION_OFFSET;
+	non_volatile_data.adc_board_position_scale = ADC_BOARD_POSITION_SCALE;
+	
 	non_volatile_data.adc_board_position_max = ADC_BOARD_POSITION_MAX;
 	non_volatile_data.adc_board_position_min = ADC_BOARD_POSITION_MIN;
 	
